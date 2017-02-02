@@ -20,6 +20,8 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "debug": "^2.2.0",
+    "engine.io": "^2.0.1",
+    "eureca.io": "^0.6.42",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.1.0",
