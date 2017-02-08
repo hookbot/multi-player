@@ -10,6 +10,7 @@
 
         <!-- Src Files -->
         <script src="src/states/loading.js" type="text/javascript"></script>
+        <script src="src/states/play_game.js" type="text/javascript"></script>
     </head>
     <body>
         <script type="text/javascript">
@@ -26,6 +27,7 @@
 
                 // states
                 game.state.add('Loading', App.LoadingState);
+                game.state.add('PlayGame', App.PlayGameState);
 
                 game.state.start('Loading');
             });
