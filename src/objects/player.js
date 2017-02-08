@@ -22,32 +22,38 @@ App.Player = (function () {
     fn.prototype = Object.create(Phaser.Sprite.prototype);
     fn.prototype.constructor = fn;
 	
-	fn.prototype.update = function () {
-		if (this.dpad.left.isDown) {
-			this.animations.play('left');
-			this.body.velocity.x = -70;
-			this.orient = 'left';
-			} 
-		else if (this.dpad.right.isDown) {
-			this.animations.play('right');
-			this.body.velocity.x = 70;
-			this.orient = 'right';
-			}
-		else if (this.dpad.up.isDown) {
-			this.animations.play(this.orient);
-			this.body.velocity.y = -70;
-			}
-		else if (this.dpad.down.isDown) {
-			this.animations.play(this.orient);
-			this.body.velocity.y = 70;
-			}
-		else {
-			this.animations.stop();
-			this.body.velocity.x = 0;
-			this.body.velocity.y = 0;
-			}
+    fn.prototype.update = function () {
+        var playerMoving = false;
+        if (this.dpad.left.isDown) {
+            this.animations.play('left');
+            this.body.velocity.x = -70;
+            this.orient = 'left';
+            playerMoving = true;
+        } 
+        else if (this.dpad.right.isDown) {
+            this.animations.play('right');
+            this.body.velocity.x = 70;
+            this.orient = 'right';
+            playerMoving = true;
+        }
+        if (this.dpad.up.isDown) {
+            this.animations.play(this.orient);
+            this.body.velocity.y = -70;
+            playerMoving = true;
+        }
+        else if (this.dpad.down.isDown) {
+            this.animations.play(this.orient);
+            this.body.velocity.y = 70;
+            playerMoving = true;
+        }
 
-	};
+        if (!playerMoving) {
+            this.animations.stop();
+            this.body.velocity.x = 0;
+            this.body.velocity.y = 0;
+        }
+
+    };
 	
     return fn;
 })();
