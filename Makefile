@@ -26,5 +26,5 @@ $(NPM):
 	make $*
 
 $(GULP):
-	@echo "Please run: npm install gulp -g" 
+	@echo "Please run: npm install gulp -g"
 	@exit 1
