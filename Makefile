@@ -1,10 +1,11 @@
 # multi-player
 
 NPM = $(shell which npm || echo "npm")
+GULP = $(shell which gulp || echo "gulp")
 
-all: node_modules
+all: node_modules $(GULP)
 
-start: gulpfile.js
+start: gulpfile.js node_modules $(GULP)
 	gulp </dev/null
 
 stop:
@@ -23,3 +24,7 @@ $(NPM):
 	@which npm || exit 1
 	@sleep 2
 	make $*
+
+$(GULP):
+	@echo "Please run: npm install gulp -g" 
+	@exit 1
