@@ -23,6 +23,7 @@
     "engine.io": "^2.0.1",
     "eureca.io": "^0.6.42",
     "express": "^4.14.0",
+    "firebase-admin": "^4.1.0",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.1.0",
     "path": "^0.12.7"

@@ -7,6 +7,7 @@ var app     = express();
 var path    = require("path");
 var debug   = require("debug")("express:server");
 var http    = require("http");
+var fbDb    = require("./firebaselogin.js");
 
 //get port from environment and store in Express.
 var port = normalizePort(process.env.PORT || 8888);
