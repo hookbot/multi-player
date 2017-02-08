@@ -7,7 +7,7 @@ var app     = express();
 var path    = require("path");
 var debug   = require("debug")("express:server");
 var http    = require("http");
-var fbDb    = require("./firebaselogin.js");
+var api     = require("./api.js");
 
 //get port from environment and store in Express.
 var port = normalizePort(process.env.PORT || 8888);
@@ -17,6 +17,10 @@ app.set("port", port);
 app.use("/src", express.static(path.join(__dirname, "../src")));
 app.use("/assets", express.static(path.join(__dirname, "../assets")));
 app.use("/vendor", express.static(path.join(__dirname, "../vendor")));
+
+//api
+app.get("/api/test", api.test);
+app.post("/api/create", api.create);
 
 //setup routing
 app.get('/', function(req, res) {

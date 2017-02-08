@@ -18,7 +18,4 @@ var app = admin.initializeApp({
   databaseURL: "https://ctf-multi-player.firebaseio.com/"
 });
 
-//remove later just for testing
-console.log(app.name)
-
 module.exports = app;
