@@ -22,12 +22,12 @@ App.Player = (function () {
             run : {
                 maxStamina: 100,
                 multiplier : 2.25,
-                recovery : 3,
-                cost: 10,
+                recovery : 8,
+                cost: 20,
                 stamina : 50,
                 staggered : false,
                 staggeredLowLimit : 5,
-                staggeredRecover: 50,
+                staggeredRecover: 20,
             }
         }
         this.debugText = this.game.add.text(20, 20, "", { font: "16px Arial", fill: "#ffffff", align: "center" });
