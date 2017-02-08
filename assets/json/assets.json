@@ -85,5 +85,5 @@
     "weapon_pick_up_sound": {
         "type": "sound",
         "file": "assets/sounds/weapon_pick_up.mp3"
-    },
+    }
 }

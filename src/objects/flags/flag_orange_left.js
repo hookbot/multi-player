@@ -5,6 +5,11 @@ App.FlagOrangeLeft = (function () {
     "use strict";
 
     var fn = function (game, x, y) {
+        var key   = 'flag_atlas';
+        var frame = 'flag_orange_left_1';
+
+        this.frames = ['flag_orange_left_1','flag_orange_left_2'];
+
         App.Flag.call(this, game, x, y, key, frame);
     };
 

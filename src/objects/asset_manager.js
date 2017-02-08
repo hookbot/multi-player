@@ -74,7 +74,7 @@ App.AssetManager = (function () {
 
     // image
     fn.prototype.load_image = function (key, data) {
-        this.game.load.image(data.key, data.file);
+        this.game.load.image(key, data.file);
     };
 
     fn.prototype.init_image = function (key, data) {
@@ -83,7 +83,7 @@ App.AssetManager = (function () {
 
     // sound
     fn.prototype.load_sound = function (key, data) {
-        this.game.load.sound(data.key, data.file);
+        this.game.load.audio(key, data.file);
     };
 
     fn.prototype.init_sound = function (key, data) {
