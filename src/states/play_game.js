@@ -13,6 +13,8 @@ App.PlayGameState = (function () {
 
     fn.prototype.init = function () {
         this.asset_manager = new App.AssetManager(this.game);
+
+        this.game.global = {};
     };
 
     fn.prototype.preload = function () {
@@ -34,7 +36,7 @@ App.PlayGameState = (function () {
         // resize world to fit the layers
         this.forest.layers.backgroundLayer.resizeWorld();
 
-        this.alienBlue = this.game.add.existing(new App.Player(this.game, 140, 160));
+        this.game.global.player = this.alienBlue = this.game.add.existing(new App.Player(this.game, 140, 160));
         this.game.world.bringToTop(this.forest.layers.foregroundLayer);
         this.key1 = game.input.keyboard.addKey(Phaser.Keyboard.BACKWARD_SLASH);
         this.key1.onDown.add(enterMessage, this);

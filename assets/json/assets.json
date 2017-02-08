@@ -32,25 +32,25 @@
         },
         "objects": {
             "Objects": {
-                "orange_flag_right": {
+                "flag_orange_right": {
                     "key": "flag_atlas",
                     "frame": "flag_orange_right_1",
-                    "class_name": "FlagOrangeRight"
+                    "class_name": "FlagOrange"
                 },
-                "orange_flag_left": {
+                "flag_orange_left": {
                     "key": "flag_atlas",
                     "frame": "flag_orange_left_1",
-                    "class_name": "FlagOrangeLeft"
+                    "class_name": "FlagOrange"
                 },
-                "green_flag_right": {
+                "flag_green_right": {
                     "key": "flag_atlas",
                     "frame": "flag_green_right_1",
-                    "class_name": "FlagGreenRight"
+                    "class_name": "FlagGreen"
                 },
-                "green_flag_left": {
+                "flag_green_left": {
                     "key": "flag_atlas",
                     "frame": "flag_green_left_1",
-                    "class_name": "FlagGreenLeft"
+                    "class_name": "FlagGreen"
                 }
             }
         }
