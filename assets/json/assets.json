@@ -1,3 +1,29 @@
 {
-    
+    "flag_atlas": {
+        "type": "atlas",
+        "file": "assets/images/flag_atlas.png",
+        "json": "assets/json/flag_atlas.json"
+    },
+    "forest": {
+        "type": "tilemap",
+        "json": "assets/json/Forest.json",
+        "tileset_image": {
+            "file": "assets/images/RPGpack_sheet_32.png",
+            "key": "RPG_32",
+            "tiled_set_name": "Kenny_terrain_32"
+        },
+        "layers": {
+            "backgroundLayer": {
+                "tiled_layer_name": "BackGround"
+            },
+            "collisionLayer": {
+                "tiled_layer_name": "Collisions",
+                "collision_id_first": 1,
+                "collision_id_last": 226
+            },
+            "foregroundLayer": {
+                "tiled_layer_name": "ForeGround"
+            }
+        }
+    }
 }

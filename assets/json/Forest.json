@@ -53,7 +53,7 @@
         {
          "columns":20,
          "firstgid":1,
-         "image":"Assets\/kenneyrpgpack\/Spritesheet\/RPGpack_sheet_32.png",
+         "image":"..\/images\/RPGpack_sheet_32.png",
          "imageheight":416,
          "imagewidth":640,
          "margin":0,

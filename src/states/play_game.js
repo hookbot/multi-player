@@ -12,34 +12,25 @@ App.PlayGameState = (function () {
     fn.prototype.constructor = fn;
 
     fn.prototype.init = function () {
-
+        this.asset_manager = new App.AssetManager(this.game);
     };
 
     fn.prototype.preload = function () {
-        // Load images and json level files
-        this.load.image('RPG_32', 'assets/images/RPGpack_sheet_32.png');
-        this.load.tilemap('forest', 'assets/json/Forest.json', null, Phaser.Tilemap.TILED_JSON);
+        // load assets
+        this.asset_manager.loadAssets();
     };
 
     fn.prototype.create = function () {
+        // init assets
+        this.asset_manager.initAssets();
 
-        // Create a tilemap object and link it to the tileset in the json
-        this.map = this.add.tilemap('forest');
-        this.map.addTilesetImage('Kenny_terrain_32', 'RPG_32');
+        // our forest tilemap
+        this.forest = this.asset_manager.get_tilemap('forest');
 
-        // Create tile layers (must be named what they are named in the json
-        this.backgroundLayer = this.map.createLayer('BackGround');
-        this.collisionLayer = this.map.createLayer('Collisions');
-        this.foregroundLayer = this.map.createLayer('ForeGround');
-
-        this.game.world.sendToBack(this.backgroundLayer);
-
-        // Turn on the collisions
-        this.map.setCollisionBetween(1, 226, true, 'Collisions');
+        this.game.world.sendToBack(this.forest.layers.backgroundLayer);
 
         // resize world to fit the layers
-        this.backgroundLayer.resizeWorld();
-
+        this.forest.layers.backgroundLayer.resizeWorld();
     };
 
     fn.prototype.update = function () {
