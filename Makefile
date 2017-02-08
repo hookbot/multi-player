@@ -26,8 +26,9 @@ $(NPM):
 	make $*
 
 $(GULP):
-	@echo "Please run: npm install gulp -g"
-	@exit 1
+	@which npm || (echo "Please install npm first!" && exit 1)
+	@echo "Installing gulp ...";
+	@which gulp || sudo npm install gulp -g
 
 INSTALL_CENTOS:
 	@echo Installing epel ...
@@ -38,3 +39,6 @@ INSTALL_CENTOS:
 INSTALL_OSX:
 	@echo Installing brew ...
 	@which brew || /usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	@which brew || exit 1
+	@echo Installing npm ...
+	@which npm || brew install node
