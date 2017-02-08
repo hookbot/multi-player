@@ -35,7 +35,7 @@ server.listen(port);
 
 // Attach Eureca to express server
 var Eureca = require('eureca.io');
-var eurecaServer = new Eureca.Server();
+var eurecaServer = new Eureca.Server({allow:['setId']});
 eurecaServer.attach(server);
 
 //add error handler
@@ -48,13 +48,20 @@ var connections = {};
 
 eurecaServer.onConnect(function (connection) {
     console.log('NEW Connection ', connection.id, connection.eureca.remoteAddress);
-    connections[connection.id] = { name:null, client:eurecaServer.getClient(connection.id) };
+    var client = eurecaServer.getClient(connection.id);
+    connections[connection.id] = { name:null, client:client };
+    // Run client.exports.setId function
+    client.setId(connection.id);
 });
 
 eurecaServer.onDisconnect(function (connection) {
     console.log('END Connection ', connection.id);
     delete connections[connection.id];
 });
+
+eurecaServer.exports.handshake = function(id) {
+    console.log('HANDSHAKE from Client ID ' + id);
+}
 
 /**
  * Normalize a port into a number, string, or false.
