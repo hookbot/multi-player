@@ -52,11 +52,13 @@ App.PlayGameState = (function () {
     };
 
     function enterMessage () {
+        //console.log(this.game.global.eurecaClient);
         var defaultPrompt = this.alienBlue.playerName ? 'talk' : '/login';
         var message = prompt("Type command or message", defaultPrompt);
         if (message) {
             var contents = message.split(" ");
             if (contents[0] == '/login') {
+                this.game.eurecaClient.
                 this.alienBlue.playerName = contents[1];
                 console.log("Logged in as "+this.alienBlue.playerName);
             }
