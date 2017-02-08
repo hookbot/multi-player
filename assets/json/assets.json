@@ -6,7 +6,7 @@
     },
     "forest": {
         "type": "tilemap",
-        "json": "assets/json/Forest.json",
+        "json": "assets/json/Forest-Big.json",
         "tilesets": {
             "RPG_32": {
                 "file": "assets/images/RPGpack_sheet_32.png",
@@ -36,6 +36,16 @@
                     "key": "flag_atlas",
                     "frame": "flag_orange_right_1",
                     "class_name": "FlagOrangeRight"
+                },
+                "orange_flag_left": {
+                    "key": "flag_atlas",
+                    "frame": "flag_orange_left_1",
+                    "class_name": "FlagOrangeLeft"
+                },
+                "green_flag_right": {
+                    "key": "flag_atlas",
+                    "frame": "flag_green_right_1",
+                    "class_name": "FlagGreenRight"
                 },
                 "green_flag_left": {
                     "key": "flag_atlas",
