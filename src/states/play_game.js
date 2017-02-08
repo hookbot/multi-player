@@ -50,20 +50,20 @@ App.PlayGameState = (function () {
     };
 
     function enterMessage () {
-        var defaultPrompt = this.alienBlue.playerName ? 'tell' : 'login';
-        var message = prompt("Please enter your message", defaultPrompt);
-        if(message) {
+        var defaultPrompt = this.alienBlue.playerName ? 'talk' : '/login';
+        var message = prompt("Type command or message", defaultPrompt);
+        if (message) {
             var contents = message.split(" ");
-            if (contents[0] == 'login') {
+            if (contents[0] == '/login') {
                 this.alienBlue.playerName = contents[1];
-                console.log("You are now known as "+this.alienBlue.playerName);
+                console.log("Logged in as "+this.alienBlue.playerName);
             }
-            else if (contents[0] == 'tell') {
-                var realMessage = message.replace(/^\w+\s\w+\s(.+)/gi, '$1');
+            else if (contents[0] == '/tell') {
+                var realMessage = message.replace(/^\/tell\s+(\S+)\s*(.+)/gi, '$1');
                 console.log(this.alienBlue.playerName+" tells "+contents[1]+" the message '"+realMessage+"'");
                 // Once Multiplayer is working, then pass the message to the other player's console
             }
-            if (contents[0] == 'logout') {
+            if (contents[0] == '/logout') {
                 this.alienBlue.playerName = '';
                 console.log("You are now logged out");
             }
