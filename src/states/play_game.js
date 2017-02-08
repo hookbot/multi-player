@@ -18,6 +18,8 @@ App.PlayGameState = (function () {
     fn.prototype.preload = function () {
         // load assets
         this.asset_manager.loadAssets();
+        this.game.load.spritesheet('alienBlue', 'assets/images/alienBlue_sheet.png', 66, 96);
+
     };
 
     fn.prototype.create = function () {
@@ -31,9 +33,14 @@ App.PlayGameState = (function () {
 
         // resize world to fit the layers
         this.forest.layers.backgroundLayer.resizeWorld();
+
+        this.alienBlue = this.game.add.existing(new App.Player(this.game, 140, 160));
+		this.game.world.bringToTop(this.forest.layers.foregroundLayer);
+
     };
 
     fn.prototype.update = function () {
+		this.game.physics.arcade.collide(this.alienBlue, this.forest.layers.collisionLayer);
 
     };
 
