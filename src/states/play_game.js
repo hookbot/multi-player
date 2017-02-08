@@ -1,7 +1,7 @@
 // namespace
 var App = App || {};
 
-App.LoadingState = (function () {
+App.PlayGameState = (function () {
     "use strict";
 
     var fn = function (game) {
@@ -16,15 +16,15 @@ App.LoadingState = (function () {
     };
 
     fn.prototype.preload = function () {
-        // load json configuration files
-        this.load.json('assetsConfig', 'assets/json/assets.json');
+
     };
 
     fn.prototype.create = function () {
-        // use arcade physics
-        this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        game.state.start('PlayGame');
+    };
+
+    fn.prototype.update = function () {
+
     };
 
     return fn;
