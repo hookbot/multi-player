@@ -26,8 +26,9 @@ $(NPM):
 	make $*
 
 $(GULP):
-	@echo "Please run: npm install gulp -g"
-	@exit 1
+	@which npm || (echo "Please install npm first!" && exit 1)
+	@echo "Installing gulp ...";
+	@which gulp || sudo npm install gulp -g
 
 INSTALL_CENTOS:
 	@echo Installing epel ...
