@@ -7,6 +7,7 @@
         <script src="vendor/phaser.js" type="text/javascript"></script>
         <script src="vendor/lodash.min.js" type="text/javascript"></script>
         <script src="vendor/webfontloader.js" type="text/javascript"></script>
+        <script src="/eureca.js"></script>
 
         <!-- Src Files -->
         <script src="src/objects/asset_manager.js" type="text/javascript"></script>
@@ -31,6 +32,16 @@
 
                 // setup global namespace under game for our global data
                 game.global = {};
+
+                // Connect to WebSocket server
+                console.log("Connecting to WebSocket server...");
+                game.global.readyWS = false;
+                game.global.eurecaClient = new Eureca.Client();
+                game.global.eurecaClient.ready(function (proxy) {
+                    console.log("WebSocket client is ready!");
+                    game.global.eurecaServer = proxy;
+                    game.global.readyWS = true;
+                });
 
                 // states
                 game.state.add('Loading', App.LoadingState);
