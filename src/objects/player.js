@@ -24,6 +24,9 @@ App.Player = (function () {
 	
     fn.prototype.update = function () {
         var playerMoving = false;
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
+
         if (this.dpad.left.isDown) {
             this.animations.play('left');
             this.body.velocity.x = -70;
@@ -49,8 +52,6 @@ App.Player = (function () {
 
         if (!playerMoving) {
             this.animations.stop();
-            this.body.velocity.x = 0;
-            this.body.velocity.y = 0;
         }
 
     };
