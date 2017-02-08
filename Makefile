@@ -19,8 +19,8 @@ clean:
 
 $(NPM):
 	@echo "Need to install npm!"
-	@[ ! -e /etc/centos-release ] || [ -e /etc/yum.repos.d/epel.repo ] || sudo yum install epel-release
-	@[ ! -e /etc/yum.repos.d/epel.repo ] || sudo yum install nodejs
+	@[ ! -e /etc/centos-release ] || make INSTALL_CENTOS
+	@uname -a | grep -vi darwin || make INSTALL_OSX
 	@which npm || exit 1
 	@sleep 2
 	make $*
@@ -28,3 +28,13 @@ $(NPM):
 $(GULP):
 	@echo "Please run: npm install gulp -g"
 	@exit 1
+
+INSTALL_CENTOS:
+	@echo Installing epel ...
+	@[ -e /etc/yum.repos.d/epel.repo ] || sudo yum install epel-release
+	@echo Installing nodejs ...
+	@[ ! -e /etc/yum.repos.d/epel.repo ] || sudo yum install nodejs
+
+INSTALL_OSX:
+	@echo Installing brew ...
+	@which brew || /usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"

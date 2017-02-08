@@ -34,8 +34,10 @@ App.PlayGameState = (function () {
         // resize world to fit the layers
         this.forest.layers.backgroundLayer.resizeWorld();
 
-        this.alienBlue = this.game.add.existing(new App.Player(this.game, 140, 160));
+		this.alienBlue = this.game.add.existing(new App.Player(this.game, 140, 160));
 		this.game.world.bringToTop(this.forest.layers.foregroundLayer);
+		this.key1 = game.input.keyboard.addKey(Phaser.Keyboard.BACKWARD_SLASH);
+		this.key1.onDown.add(enterMessage, this);
 
         /*this.game.add.existing(new App.FlagGreenLeft(this.game, 0, 0));
         this.game.add.existing(new App.FlagGreenRight(this.game, 100, 0));
@@ -45,8 +47,28 @@ App.PlayGameState = (function () {
 
     fn.prototype.update = function () {
 		this.game.physics.arcade.collide(this.alienBlue, this.forest.layers.collisionLayer);
-
     };
+
+	function enterMessage () {
+			var defaultPrompt = this.alienBlue.playerName ? 'tell' : 'login';
+			var message = prompt("Please enter your message", defaultPrompt);
+			if(message) {
+				var contents = message.split(" ");
+				if (contents[0] == 'login') {
+					this.alienBlue.playerName = contents[1];
+					console.log("You are now known as "+this.alienBlue.playerName);
+				}
+				else if (contents[0] == 'tell') {
+					var realMessage = message.replace(/^\w+\s\w+\s(.+)/gi, '$1');
+					console.log(this.alienBlue.playerName+" tells "+contents[1]+" the message '"+realMessage+"'");
+					// Once Multiplayer is working, then pass the message to the other player's console
+				}
+				if (contents[0] == 'logout') {
+					this.alienBlue.playerName = '';
+					console.log("You are now logged out");
+				}
+			}
+	}
 
     return fn;
 })();
