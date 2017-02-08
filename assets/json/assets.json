@@ -86,7 +86,7 @@
         "type": "sound",
         "file": "assets/sounds/weapon_pick_up.mp3"
     },
-    "hurt": {
+    "hurt_sound": {
         "type": "sound",
         "file": "assets/sounds/hurt.wav"
     }
