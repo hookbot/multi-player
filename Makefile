@@ -38,3 +38,5 @@ INSTALL_CENTOS:
 INSTALL_OSX:
 	@echo Installing brew ...
 	@which brew || /usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	@which brew || exit 1
+	@which npm || brew install node
