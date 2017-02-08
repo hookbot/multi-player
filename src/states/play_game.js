@@ -37,10 +37,10 @@ App.PlayGameState = (function () {
         this.alienBlue = this.game.add.existing(new App.Player(this.game, 140, 160));
 		this.game.world.bringToTop(this.forest.layers.foregroundLayer);
 
-        //this.game.add.existing(new App.FlagGreenLeft(this.game, 0, 0));
-        //this.game.add.existing(new App.FlagGreenRight(this.game, 100, 0));
-        //this.game.add.existing(new App.FlagOrangeLeft(this.game, 200, 0));
-        //this.game.add.existing(new App.FlagOrangeRight(this.game, 300, 0));
+        /*this.game.add.existing(new App.FlagGreenLeft(this.game, 0, 0));
+        this.game.add.existing(new App.FlagGreenRight(this.game, 100, 0));
+        this.game.add.existing(new App.FlagOrangeLeft(this.game, 200, 0));
+        this.game.add.existing(new App.FlagOrangeRight(this.game, 300, 0));*/
     };
 
     fn.prototype.update = function () {

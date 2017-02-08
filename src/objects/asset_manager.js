@@ -45,7 +45,10 @@ App.AssetManager = (function () {
 
     // tilemap
     fn.prototype.load_tilemap = function (key, data) {
-        this.game.load.image(data.tileset_image.key, data.tileset_image.file);
+        _.each(_.keys(data.tilesets), (function (tileset) {
+            this.game.load.image(tileset, data.tilesets[tileset].file);
+        }).bind(this));
+
         this.game.load.tilemap(key, data.json, null, Phaser.Tilemap.TILED_JSON);
     };
 
@@ -53,7 +56,10 @@ App.AssetManager = (function () {
         this.tilesets[key] = {};
 
         this.tilesets[key].map = this.game.add.tilemap(key);
-        this.tilesets[key].map.addTilesetImage(data.tileset_image.tiled_set_name, data.tileset_image.key);
+
+        _.each(_.keys(data.tilesets), (function (tileset) {
+            this.tilesets[key].map.addTilesetImage(data.tilesets[tileset].tiled_set_name, tileset);
+        }).bind(this));
 
         this.tilesets[key].layers = {};
 
@@ -67,6 +73,22 @@ App.AssetManager = (function () {
             if (collision_id_first && collision_id_last) {
                 this.tilesets[key].map.setCollisionBetween(collision_id_first, collision_id_last, true, tiled_layer_name);
             }
+        }).bind(this));
+
+        _.each(_.keys(data.objects), (function (object_group) {
+            _.each(_.keys(data.objects[object_group]), (function (gid) {
+                this.tilesets[key].map.createFromObjects(
+                    object_group,
+                    gid,
+                    data.objects[object_group][gid].key,
+                    data.objects[object_group][gid].frame,
+                    true,
+                    false,
+                    this.game.world,
+                    eval('App.' + data.objects[object_group][gid].class_name),
+                    true
+                );
+            }).bind(this));
         }).bind(this));
     };
 

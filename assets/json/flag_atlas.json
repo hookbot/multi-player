@@ -1,50 +1,50 @@
 {
 "frames": {
 	"flag_green_left_1": {
-		"frame": {"x":66, "y":0, "w":65, "h":70},
-		"spriteSourceSize": {"x":5,"y":0,"w":70,"h":70},
-		"sourceSize": {"w":70,"h":70}
+		"frame": {"x":32, "y":0, "w":31, "h":32},
+		"spriteSourceSize": {"x":1,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
 	},
 	"flag_green_left_2": {
-		"frame": {"x":132, "y":0, "w":65, "h":70},
-		"spriteSourceSize": {"x":5,"y":0,"w":70,"h":70},
-		"sourceSize": {"w":70,"h":70}
+		"frame": {"x":64, "y":0, "w":31, "h":32},
+		"spriteSourceSize": {"x":1,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
 	},
 	"flag_green_right_1": {
-		"frame": {"x":66, "y":142, "w":65, "h":70},
-		"spriteSourceSize": {"x":0,"y":0,"w":70,"h":70},
-		"sourceSize": {"w":70,"h":70}
+		"frame": {"x":32, "y":66, "w":31, "h":32},
+		"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
 	},
 	"flag_green_right_2": {
-		"frame": {"x":66, "y":71, "w":65, "h":70},
-		"spriteSourceSize": {"x":0,"y":0,"w":70,"h":70},
-		"sourceSize": {"w":70,"h":70}
+		"frame": {"x":32, "y":33, "w":31, "h":32},
+		"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
 	},
 	"flag_orange_left_1": {
-		"frame": {"x":132, "y":71, "w":65, "h":70},
-		"spriteSourceSize": {"x":5,"y":0,"w":70,"h":70},
-		"sourceSize": {"w":70,"h":70}
+		"frame": {"x":64, "y":33, "w":31, "h":32},
+		"spriteSourceSize": {"x":1,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
 	},
 	"flag_orange_left_2": {
-		"frame": {"x":0, "y":142, "w":65, "h":70},
-		"spriteSourceSize": {"x":5,"y":0,"w":70,"h":70},
-		"sourceSize": {"w":70,"h":70}
+		"frame": {"x":0, "y":66, "w":31, "h":32},
+		"spriteSourceSize": {"x":1,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
 	},
 	"flag_orange_right_1": {
-		"frame": {"x":0, "y":71, "w":65, "h":70},
-		"spriteSourceSize": {"x":0,"y":0,"w":70,"h":70},
-		"sourceSize": {"w":70,"h":70}
+		"frame": {"x":0, "y":33, "w":31, "h":32},
+		"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
 	},
 	"flag_orange_right_2": {
-		"frame": {"x":0, "y":0, "w":65, "h":70},
-		"spriteSourceSize": {"x":0,"y":0,"w":70,"h":70},
-		"sourceSize": {"w":70,"h":70}
+		"frame": {"x":0, "y":0, "w":31, "h":32},
+		"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+		"sourceSize": {"w":32,"h":32}
 	}
 
 },
 "meta": {
-	"image": "sprites.png",
-	"size": {"w": 198, "h": 213},
+	"image": "flag_atlas.png",
+	"size": {"w": 128, "h": 128},
 	"scale": "1"
 }
 }

@@ -7,10 +7,15 @@
     "forest": {
         "type": "tilemap",
         "json": "assets/json/Forest.json",
-        "tileset_image": {
-            "file": "assets/images/RPGpack_sheet_32.png",
-            "key": "RPG_32",
-            "tiled_set_name": "Kenny_terrain_32"
+        "tilesets": {
+            "RPG_32": {
+                "file": "assets/images/RPGpack_sheet_32.png",
+                "tiled_set_name": "Kenny_terrain_32"
+            },
+            "flag_atlas": {
+                "file": "assets/images/flag_atlas.png",
+                "tiled_set_name": "flag_atlas"
+            }
         },
         "layers": {
             "backgroundLayer": {
@@ -23,6 +28,20 @@
             },
             "foregroundLayer": {
                 "tiled_layer_name": "ForeGround"
+            }
+        },
+        "objects": {
+            "Objects": {
+                "orange_flag_right": {
+                    "key": "flag_atlas",
+                    "frame": "flag_orange_right_1",
+                    "class_name": "FlagOrangeRight"
+                },
+                "green_flag_left": {
+                    "key": "flag_atlas",
+                    "frame": "flag_green_left_1",
+                    "class_name": "FlagGreenLeft"
+                }
             }
         }
     },
