@@ -27,6 +27,11 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, "../", "index.html"));
 });
 
+//favico
+app.get('/favicon.ico', function(req, res) {
+  res.sendFile(path.join(__dirname, "../", "favicon.ico"));
+});
+
 //create http server
 var server = http.createServer(app);
 
