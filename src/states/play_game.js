@@ -55,9 +55,13 @@ App.PlayGameState = (function () {
         if (message) {
             var contents = message.split(" ");
             if (contents[0] == '/login') {
-                this.game.eurecaClient.
-                this.alienBlue.playerName = contents[1];
-                console.log("Logged in as "+this.alienBlue.playerName);
+                if (this.game.global.eurecaServer.login(contents[1])) {
+                    this.alienBlue.playerName = contents[1];
+                    console.log("Logged in as "+this.alienBlue.playerName);
+                }
+                else {
+                    console.log("FAILED TO LOGIN AS "+contents[1]);
+                }
             }
             else if (contents[0] == '/tell') {
                 var realMessage = message.replace(/^\/tell\s+(\S+)\s*(.+)/gi, '$1');

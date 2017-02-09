@@ -64,6 +64,21 @@ eurecaServer.exports.handshake = function() {
     console.log('HANDSHAKE from Client ID ' + id);
 };
 
+eurecaServer.exports.login = function(name) {
+    var id = this.user.clientId;
+    var conn = connections[id];
+    if (conn) {
+        var client = conn.client;
+        client.name = name;
+        console.log('ClientID ' + id + ' logged in as: ' + name);
+        return 1;
+    }
+    else {
+        console.log('ClientID ' + id + ' does not exist');
+        return 0;
+    }
+};
+
 /**
  * Normalize a port into a number, string, or false.
  */
