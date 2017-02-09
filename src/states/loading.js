@@ -42,7 +42,7 @@ App.LoadingState = (function () {
         game.global.eurecaClient.exports.setId = function(id) {
             console.log("Server assigned myID: " + id);
             game.global.myID = id;
-            game.global.eurecaServer.handshake(id);
+            game.global.eurecaServer.handshake();
             game.global.readyWS = true;
 
             // use arcade physics

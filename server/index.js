@@ -59,9 +59,10 @@ eurecaServer.onDisconnect(function (connection) {
     delete connections[connection.id];
 });
 
-eurecaServer.exports.handshake = function(id) {
+eurecaServer.exports.handshake = function() {
+    var id = this.user.clientId;
     console.log('HANDSHAKE from Client ID ' + id);
-}
+};
 
 /**
  * Normalize a port into a number, string, or false.
