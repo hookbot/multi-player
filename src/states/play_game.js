@@ -13,8 +13,6 @@ App.PlayGameState = (function () {
 
     fn.prototype.init = function () {
         this.asset_manager = new App.AssetManager(this.game);
-
-        this.game.global = {};
     };
 
     fn.prototype.preload = function () {
