@@ -43,6 +43,9 @@ App.LoadingState = (function () {
 
             game.state.start('PlayGame');
         };
+        game.global.eurecaClient.exports.message = function(str) {
+            console.log("<< " + str);
+        };
     };
 
     return fn;

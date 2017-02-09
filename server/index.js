@@ -35,7 +35,7 @@ server.listen(port);
 
 // Attach Eureca to express server
 var Eureca = require('eureca.io');
-var eurecaServer = new Eureca.Server({allow:['setId']});
+var eurecaServer = new Eureca.Server({allow:['setId','message']});
 eurecaServer.attach(server);
 
 //add error handler
@@ -61,6 +61,11 @@ eurecaServer.onDisconnect(function (connection) {
 
 eurecaServer.exports.handshake = function() {
     var id = this.user.clientId;
+    var conn = connections[id];
+    if (conn) {
+        var client = conn.client;
+        client.message("[SYSTEM] Handshake complete!");
+    }
     console.log('HANDSHAKE from Client ID ' + id);
 };
 
@@ -71,6 +76,7 @@ eurecaServer.exports.login = function(name) {
         var client = conn.client;
         client.name = name;
         console.log('ClientID ' + id + ' logged in as: ' + name);
+        client.message("[SYSTEM] Logged in as: " + name);
         return 1;
     }
     else {
