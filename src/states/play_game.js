@@ -50,8 +50,7 @@ App.PlayGameState = (function () {
     };
 
     function enterMessage () {
-        //console.log(this.game.global.eurecaClient);
-        var defaultPrompt = this.alienBlue.playerName ? 'talk' : '/login';
+        var defaultPrompt = this.alienBlue.playerName ? 'talk' : '/login ';
         var message = prompt("Type command or message", defaultPrompt);
         if (message) {
             var contents = message.split(" ");
