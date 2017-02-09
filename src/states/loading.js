@@ -31,29 +31,18 @@ App.LoadingState = (function () {
         game.global.eurecaClient.ready(function (proxy) {
             console.log("WebSocket client is ready!");
             game.global.eurecaServer = proxy;
-            console.log("WebSocket server:");
-            console.log(game.global.eurecaServer);
             game.global.readyWS = true;
         });
-        console.log("CLIENT!");
-        console.log(game.global.eurecaClient);
-        console.log("exports:");
-        console.log(game.global.eurecaClient.exports);
         game.global.eurecaClient.exports.setId = function(id) {
             console.log("Server assigned myID: " + id);
             game.global.myID = id;
             game.global.eurecaServer.handshake();
-            game.global.readyWS = true;
 
             // use arcade physics
             game.physics.startSystem(Phaser.Physics.ARCADE);
 
             game.state.start('PlayGame');
-
         };
-        console.log("SetID function:");
-        console.log(game.global.eurecaClient.exports.setId);
-
     };
 
     return fn;
