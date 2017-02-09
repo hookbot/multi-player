@@ -21,13 +21,16 @@
             "backgroundLayer": {
                 "tiled_layer_name": "BackGround"
             },
+            "foregroundLayerBot": {
+                "tiled_layer_name": "ForeGroundBot"
+            },
             "collisionLayer": {
                 "tiled_layer_name": "Collisions",
                 "collision_id_first": 1,
                 "collision_id_last": 226
             },
-            "foregroundLayer": {
-                "tiled_layer_name": "ForeGround"
+            "foregroundLayerTop": {
+                "tiled_layer_name": "ForeGroundTop"
             }
         },
         "objects": {

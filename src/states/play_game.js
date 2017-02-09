@@ -37,7 +37,7 @@ App.PlayGameState = (function () {
         this.forest.layers.backgroundLayer.resizeWorld();
 
         this.game.global.player = this.alienBlue = this.game.add.existing(new App.Player(this.game, 140, 160));
-        this.game.world.bringToTop(this.forest.layers.foregroundLayer);
+        this.game.world.bringToTop(this.forest.layers.foregroundLayerTop);
         this.key1 = game.input.keyboard.addKey(Phaser.Keyboard.BACKWARD_SLASH);
         this.key1.onDown.add(enterMessage, this);
 
