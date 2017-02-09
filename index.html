@@ -29,13 +29,13 @@
                 // ...
 
                 // setup global namespace under game for our global data
-                game.global = {};
+                this.game.global = {};
 
                 // states
-                game.state.add('Loading', App.LoadingState);
-                game.state.add('PlayGame', App.PlayGameState);
+                this.game.state.add('Loading', App.LoadingState);
+                this.game.state.add('PlayGame', App.PlayGameState);
 
-                game.state.start('Loading');
+                this.game.state.start('Loading');
             });
         </script>
     </body>
