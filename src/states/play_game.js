@@ -50,7 +50,7 @@ App.PlayGameState = (function () {
     };
 
     function enterMessage () {
-        var defaultPrompt = this.alienBlue.playerName ? 'talk' : '/login ';
+        var defaultPrompt = this.alienBlue.playerName ? 'blah' : '/login ';
         var message = prompt("Type command or message", defaultPrompt);
         if (message) {
             var contents = message.split(" ");
