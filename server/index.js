@@ -8,6 +8,7 @@ var path    = require("path");
 var debug   = require("debug")("express:server");
 var http    = require("http");
 var api     = require("./api.js");
+var hooks   = require("../src/hooks.js");
 
 //get port from environment and store in Express.
 var port = normalizePort(process.env.PORT || 8888);
@@ -38,9 +39,13 @@ var server = http.createServer(app);
 //listen on provided ports
 server.listen(port);
 
+// Spin through all hooks
+var allow = [];
+for (var hook in hooks) allow.push(hook);
+
 // Attach Eureca to express server
 var Eureca = require('eureca.io');
-var eurecaServer = new Eureca.Server({allow:['setId','message']});
+var eurecaServer = new Eureca.Server({allow:allow});
 eurecaServer.attach(server);
 
 //add error handler

@@ -28,24 +28,12 @@ App.LoadingState = (function () {
         console.log("Connecting to WebSocket server...");
         game.global.readyWS = false;
         game.global.eurecaClient = new Eureca.Client();
+        game.global.eurecaClient.exports = exports; // Defined in hooks.js
         game.global.eurecaClient.ready(function (proxy) {
             console.log("WebSocket client is ready!");
             game.global.eurecaServer = proxy;
             game.global.readyWS = true;
         });
-        game.global.eurecaClient.exports.setId = function(id) {
-            console.log("Server assigned myID: " + id);
-            game.global.myID = id;
-            game.global.eurecaServer.handshake();
-
-            // use arcade physics
-            game.physics.startSystem(Phaser.Physics.ARCADE);
-
-            game.state.start('PlayGame');
-        };
-        game.global.eurecaClient.exports.message = function(str) {
-            console.log("<< " + str);
-        };
     };
 
     return fn;
