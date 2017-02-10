@@ -55,8 +55,7 @@ server.on("error", onError);
 //start listening on port
 server.on("listening", onListening);
 
-eurecaServer.onConnect(ws._internal.onConnect);
-eurecaServer.onDisconnect(ws._internal.onDisconnect);
+for (var method in ws._internal) eurecaServer[method](ws._internal[method]);
 delete ws._internal;
 
 eurecaServer.exports = ws;
