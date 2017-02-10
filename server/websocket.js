@@ -56,16 +56,22 @@ exports.login = function(name) {
     return 0;
 };
 
+exports.broadcast = function(message) {
+    console.log('<BC> ' + message);
+    for (var c in connections) {
+        connections[c].client.message(message);
+    }
+    return 1;
+}
+
 exports.chat = function(message) {
     var id = this.user.clientId;
     var conn = connections[id];
     if (conn) {
         var client = conn.client;
         if (client.name) {
-            for (var c in connections) {
-                connections[c].client.message(client.name + " says: " + message);
-            }
             console.log('[' + id + '] ' + client.name + ' says: ' + message);
+            exports.broadcast(client.name + " says: " + message);
             return 1;
         }
     }
