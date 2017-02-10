@@ -55,3 +55,20 @@ exports.login = function(name) {
     }
     return 0;
 };
+
+exports.chat = function(message) {
+    var id = this.user.clientId;
+    var conn = connections[id];
+    if (conn) {
+        var client = conn.client;
+        if (client.name) {
+            for (var c in connections) {
+                connections[c].client.message(client.name + " says: " + message);
+            }
+            console.log('[' + id + '] ' + client.name + ' says: ' + message);
+            return 1;
+        }
+    }
+    console.log('[ClientID ' + id + '] BLOCKED FROM SAYING: ' + message);
+    return 0;
+};

@@ -62,6 +62,15 @@ App.PlayGameState = (function () {
         });
     };
 
+    fn.prototype.doChat = function (message) {
+        game.global.eurecaServer.chat(message).onReady(function (result) {
+            //console.log("[DEBUG] server.chat(" + message + ") = " + result);
+            if (!result) {
+                console.log("Please /login before chatting.");
+            }
+        });
+    };
+
     fn.prototype.enterMessage = function () {
         var defaultPrompt = this.game.global.player.playerName ? 'blah' : '/login ';
         var message = prompt("Type command or message", defaultPrompt);
@@ -81,6 +90,10 @@ App.PlayGameState = (function () {
             }
             else if (contents[0].substr(0,1) == '/') {
                 console.log("Unknown command: " + contents[0]);
+            }
+            else {
+                // Client is speaking. Send message to server.
+                fn.prototype.doChat(message);
             }
         }
     }
