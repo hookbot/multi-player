@@ -40,13 +40,18 @@ exports.login = function(name) {
     var conn = connections[id];
     if (conn) {
         var client = conn.client;
-        client.name = name;
-        console.log('ClientID ' + id + ' logged in as: ' + name);
-        client.message("[SYSTEM] Logged in as: " + name);
-        return 1;
+        if (name.match(/^\w+$/)) {
+            console.log('Name smells fine: ' + name);
+            client.name = name;
+            console.log('ClientID ' + id + ' logged in as: ' + name);
+            client.message("[SYSTEM] Logged in as: " + name);
+            return 1;
+        }
+        console.log('ClientID ' + id + ' attempted to login with stank name: ' + name);
+        client.message("[SYSTEM] Login name too stank: " + name);
     }
     else {
-        console.log('ClientID ' + id + ' does not exist');
-        return 0;
+        console.log('ClientID ' + id + ' does not exist?');
     }
+    return 0;
 };

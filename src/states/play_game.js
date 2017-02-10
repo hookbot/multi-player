@@ -37,7 +37,7 @@ App.PlayGameState = (function () {
         this.game.global.player = this.alienBlue = this.game.add.existing(new App.Player(this.game, 140, 160));
         this.game.world.bringToTop(this.forest.layers.foregroundLayerTop);
         this.key1 = game.input.keyboard.addKey(Phaser.Keyboard.BACKWARD_SLASH);
-        this.key1.onDown.add(enterMessage, this);
+        this.key1.onDown.add(fn.prototype.enterMessage, this);
 
         /*this.game.add.existing(new App.FlagGreenLeft(this.game, 0, 0));
         this.game.add.existing(new App.FlagGreenRight(this.game, 100, 0));
@@ -46,30 +46,37 @@ App.PlayGameState = (function () {
     };
 
     fn.prototype.update = function () {
-        this.game.physics.arcade.collide(this.alienBlue, this.forest.layers.collisionLayer);
+        this.game.physics.arcade.collide(this.game.global.player, this.forest.layers.collisionLayer);
     };
 
-    function enterMessage () {
-        var defaultPrompt = this.alienBlue.playerName ? 'blah' : '/login ';
+    fn.prototype.doLogin = function (name) {
+        game.global.eurecaServer.login(name).onReady(function (result) {
+            console.log("[DEBUG] server.login(" + name + ") = " + result);
+            if (result) {
+                game.global.player.playerName = name;
+                console.log("Logged in as: " + name);
+            }
+            else {
+                console.log("FAILED TO LOGIN AS " + name);
+            }
+        });
+    };
+
+    fn.prototype.enterMessage = function () {
+        var defaultPrompt = this.game.global.player.playerName ? 'blah' : '/login ';
         var message = prompt("Type command or message", defaultPrompt);
         if (message) {
             var contents = message.split(" ");
             if (contents[0] == '/login') {
-                if (this.game.global.eurecaServer.login(contents[1])) {
-                    this.alienBlue.playerName = contents[1];
-                    console.log("Logged in as "+this.alienBlue.playerName);
-                }
-                else {
-                    console.log("FAILED TO LOGIN AS "+contents[1]);
-                }
+                fn.prototype.doLogin(contents[1]);
             }
             else if (contents[0] == '/tell') {
                 var realMessage = message.replace(/^\/tell\s+(\S+)\s*(.+)/gi, '$1');
-                console.log(this.alienBlue.playerName+" tells "+contents[1]+" the message '"+realMessage+"'");
+                console.log(this.game.global.player.playerName+" tells "+contents[1]+" the message '"+realMessage+"'");
                 // Once Multiplayer is working, then pass the message to the other player's console
             }
-            if (contents[0] == '/logout') {
-                this.alienBlue.playerName = '';
+            else if (contents[0] == '/logout') {
+                this.game.global.player.playerName = '';
                 console.log("You are now logged out");
             }
         }
