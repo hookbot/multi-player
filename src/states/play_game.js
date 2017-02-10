@@ -51,13 +51,13 @@ App.PlayGameState = (function () {
 
     fn.prototype.doLogin = function (name) {
         game.global.eurecaServer.login(name).onReady(function (result) {
-            console.log("[DEBUG] server.login(" + name + ") = " + result);
+            //console.log("[DEBUG] server.login(" + name + ") = " + result);
             if (result) {
                 game.global.player.playerName = name;
                 console.log("Logged in as: " + name);
             }
             else {
-                console.log("FAILED TO LOGIN AS " + name);
+                console.log("FAILED TO LOGIN AS: " + name);
             }
         });
     };
