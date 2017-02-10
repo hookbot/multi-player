@@ -9,6 +9,7 @@ var debug   = require("debug")("express:server");
 var http    = require("http");
 var api     = require("./api.js");
 var hooks   = require("../src/hooks.js");
+var ws      = require("./websocket.js");
 
 //get port from environment and store in Express.
 var port = normalizePort(process.env.PORT || 8888);
@@ -54,46 +55,11 @@ server.on("error", onError);
 //start listening on port
 server.on("listening", onListening);
 
-var connections = {};
+eurecaServer.onConnect(ws._internal.onConnect);
+eurecaServer.onDisconnect(ws._internal.onDisconnect);
+delete ws._internal;
 
-eurecaServer.onConnect(function (connection) {
-    console.log('NEW Connection ', connection.id, connection.eureca.remoteAddress);
-    var client = eurecaServer.getClient(connection.id);
-    connections[connection.id] = { name:null, client:client };
-    // Run client.exports.setId function
-    client.setId(connection.id);
-});
-
-eurecaServer.onDisconnect(function (connection) {
-    console.log('END Connection ', connection.id);
-    delete connections[connection.id];
-});
-
-eurecaServer.exports.handshake = function() {
-    var id = this.user.clientId;
-    var conn = connections[id];
-    if (conn) {
-        var client = conn.client;
-        client.message("[SYSTEM] Handshake complete!");
-    }
-    console.log('HANDSHAKE from Client ID ' + id);
-};
-
-eurecaServer.exports.login = function(name) {
-    var id = this.user.clientId;
-    var conn = connections[id];
-    if (conn) {
-        var client = conn.client;
-        client.name = name;
-        console.log('ClientID ' + id + ' logged in as: ' + name);
-        client.message("[SYSTEM] Logged in as: " + name);
-        return 1;
-    }
-    else {
-        console.log('ClientID ' + id + ' does not exist');
-        return 0;
-    }
-};
+eurecaServer.exports = ws;
 
 /**
  * Normalize a port into a number, string, or false.
