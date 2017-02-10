@@ -79,6 +79,9 @@ App.PlayGameState = (function () {
                 this.game.global.player.playerName = '';
                 console.log("You are now logged out");
             }
+            else if (contents[0].substr(0,1) == '/') {
+                console.log("Unknown command: " + contents[0]);
+            }
         }
     }
 
