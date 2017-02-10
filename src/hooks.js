@@ -9,10 +9,20 @@ exports.setId = function(id) {
     game.global.myID = id;
     game.global.eurecaServer.handshake();
 
-    // use arcade physics
-    game.physics.startSystem(Phaser.Physics.ARCADE);
+    var p = game.global.player;
+    if (p) {
+        var name = p.playerName;
+        if (name) {
+            p.playerName = '';
+            App.PlayGameState.prototype.doLogin(name);
+        }
+    }
+    else {
+        // use arcade physics
+        game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    game.state.start('PlayGame');
+        game.state.start('PlayGame');
+    }
 };
 
 exports.message = function(str) {
