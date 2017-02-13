@@ -3,10 +3,13 @@
 Multi-Player game including network framework for clients to communicate with each other via WebSocket
 
 1. Checkout repo:
-```$ git clone ssh://git@ssh.github.com/hookbot/multi-player```
-1. Enter checkout: ```$ cd multi-player```
-1. Build dependencies: ```$ make```
-1. Launch server: ```$ make start```
+  ```$ git clone ssh://git@ssh.github.com/hookbot/multi-player```
+1. Enter checkout:
+  ```$ cd multi-player```
+1. Build dependencies:
+```$ make```
+1. Launch server:
+```$ make start```
 
 Hit CTRL-C to stop if you launch in the foreground.
 
