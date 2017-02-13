@@ -7,17 +7,17 @@ App.Player = (function () {
     var fn = function (game, x, y) {
 
         Phaser.Sprite.call(this, game, x, y, 'alienBlue');
-		this.game.physics.arcade.enable(this);
+        this.game.physics.arcade.enable(this);
         this.frame = 0;
         this.scale.setTo(.7, .7);
         this.animations.add('right', [0, 4, 2], 8, true);
         this.animations.add('left', [1, 5, 3], 8, true);
-		this.dpad = this.game.input.keyboard.createCursorKeys();
+        this.dpad = this.game.input.keyboard.createCursorKeys();
         this.runKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-		this.collideWorldBounds = true;
-//		this.game.world.bringToTop(this.foregroundLayer);
-		this.collideWorldBounds = true;
-		this.speed = 150;
+        this.collideWorldBounds = true;
+        //this.game.world.bringToTop(this.foregroundLayer);
+        this.collideWorldBounds = true;
+        this.speed = 150;
         this.ability = {
             run : {
                 maxStamina: 100,
@@ -36,7 +36,7 @@ App.Player = (function () {
 
     fn.prototype = Object.create(Phaser.Sprite.prototype);
     fn.prototype.constructor = fn;
-	
+
     fn.prototype.update = function () {
         var playerMoving = false;
         var speed = this.speed;
@@ -60,7 +60,7 @@ App.Player = (function () {
 
         this.debugText.text += Math.floor( (this.ability.run.stamina/this.ability.run.maxStamina) *100) + "% ";
 
-		this.game.camera.follow(this);
+        this.game.camera.follow(this);
         this.body.velocity.x = 0;
         this.body.velocity.y = 0;
 
@@ -78,7 +78,7 @@ App.Player = (function () {
             this.body.velocity.x = -speed;
             this.orient = 'left';
             playerMoving = true;
-        } 
+        }
         else if (this.dpad.right.isDown) {
             this.animations.play('right');
             this.body.velocity.x = speed;
@@ -100,6 +100,6 @@ App.Player = (function () {
             this.animations.stop();
         }
     };
-	
+
     return fn;
 })();
