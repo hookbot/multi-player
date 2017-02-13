@@ -13,11 +13,17 @@ exports._internal.onConnect = function (connection) {
     connections[connection.id] = { name:null, client:client };
     // Run client.exports.setId function
     client.setId(connection.id);
+    exports.broadcast('[DEBUG] NEW connection from [' + connection.eureca.remoteAddress.ip + ']');
 };
 
 exports._internal.onDisconnect = function (connection) {
     console.log('END Connection ', connection.id);
+    var conn = connections[connection.id];
+    console.log('[DEBUG] Ending obj',conn);
+    var who = (conn && conn.name) ? conn.name : '[Never logged in]';
+    var ip = connection.eureca.remoteAddress.ip;
     delete connections[connection.id];
+    exports.broadcast('[DEBUG] END connection from [' + ip + '] ' + who);
 };
 
 // These other callbacks hooks can use "this" to access client Socket object.
