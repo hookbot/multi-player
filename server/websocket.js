@@ -44,7 +44,8 @@ exports.login = function(name) {
             console.log('Name smells fine: ' + name);
             client.name = name;
             console.log('ClientID ' + id + ' logged in as: ' + name);
-            client.message("[SYSTEM] Logged in as: " + name);
+            client.message("[SYSTEM] You logged in as: " + name);
+            exports.broadcast(name + ' just logged in');
             return 1;
         }
         console.log('ClientID ' + id + ' attempted to login with stank name: ' + name);
