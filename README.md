@@ -7,7 +7,6 @@ Multi-Player game including network framework for clients to communicate with ea
 $ git clone ssh://git@ssh.github.com/hookbot/multi-player
 $ cd multi-player
 ```
-
 2. Build dependencies:
 
 ```
