@@ -42,7 +42,7 @@ exports.login = function(name) {
         var client = conn.client;
         if (name.match(/^\w+$/)) {
             console.log('Name smells fine: ' + name);
-            client.name = name;
+            conn.name = client.name = name;
             console.log('ClientID ' + id + ' logged in as: ' + name);
             client.message("[SYSTEM] You logged in as: " + name);
             exports.broadcast(name + ' just logged in');
