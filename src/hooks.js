@@ -1,4 +1,19 @@
 // Export all Client callback routines here for the WebSocket Server to use.
+// In order for the Server to run these callbacks, they must be defined here.
+// For example:
+// exports.FUNCTION_NAME = function (arg1, arg2) {
+//   ...
+//   return result;
+// };
+//
+// and can be invoked from the Server:
+// var f = connections[this.user.clientId].client.FUNCTION_NAME(arg1,arg2);
+//
+// The Server can (optionally) operate on the return result using the onReady
+// hook, which will be executed once the result is sent back from the Client:
+// f.onReady(function (result) {
+//   console.log("Got result: FUNCTION_NAME(" + arg1 + ", " + arg2 + ") = " + result);
+// });
 
 var exports = exports || {};
 

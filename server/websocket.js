@@ -1,4 +1,19 @@
 // Export all Server callback routines here for the WebSocket Client to use.
+// In order for the client to run these callbacks, they must be defined here.
+// For example:
+// exports.FUNCTION_NAME = function (arg1, arg2) {
+//   ...
+//   return result;
+// };
+//
+// and can be invoked from the Client:
+// var f = game.global.eurecaServer.FUNCTION_NAME(arg1,arg2);
+//
+// The Client can (optionally) operate on the return result using the onReady
+// hook, which will be executed once the result is sent back from the Server:
+// f.onReady(function (result) {
+//   console.log("Got result: FUNCTION_NAME(" + arg1 + ", " + arg2 + ") = " + result);
+// });
 
 var exports = exports || {};
 
