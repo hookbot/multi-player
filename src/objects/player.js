@@ -46,6 +46,8 @@ App.Player = (function () {
 
         if (this.ability.run.stamina < this.ability.run.maxStamina) {
             this.ability.run.stamina += this.ability.run.recovery * (this.game.time.elapsedMS / 1000);
+            if (this.ability.run.stamina > this.ability.run.maxStamina)
+                this.ability.run.stamina = this.ability.run.maxStamina;
         }
 
         if (this.ability.run.stamina > this.ability.run.staggeredRecover) {
