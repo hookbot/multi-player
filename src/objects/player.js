@@ -71,6 +71,7 @@ App.Player = (function () {
                 this.ability.run.staggered = true;
             }
             this.ability.run.stamina -= this.ability.run.cost * (this.game.time.elapsedMS / 1000);
+            if (this.ability.run.stamina < 0) this.ability.run.stamina = 0;
             speed *= this.ability.run.multiplier;
             this.debugText.text += "Running ";
         }
