@@ -16,7 +16,6 @@ App.Player = (function () {
         this.runKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         this.collideWorldBounds = true;
         //this.game.world.bringToTop(this.foregroundLayer);
-        this.collideWorldBounds = true;
         this.speed = 150;
         this.ability = {
             run : {
@@ -31,6 +30,7 @@ App.Player = (function () {
             }
         }
         this.debugText = this.game.add.text(20, 20, "", { font: "16px Arial", fill: "#ffffff", align: "center" });
+        this.usernameText = this.game.add.text(20, 20, "", { font: "16px Arial", fill: "#ffffff", align: "center" });
     };
 
 
@@ -43,6 +43,8 @@ App.Player = (function () {
         this.debugText.text = "";
         this.debugText.x = this.x;
         this.debugText.y = this.y - 20;
+        this.usernameText.x = this.x;
+        this.usernameText.y = this.y + 60;
 
         if (this.ability.run.stamina < this.ability.run.maxStamina) {
             this.ability.run.stamina += this.ability.run.recovery * (this.game.time.elapsedMS / 1000);

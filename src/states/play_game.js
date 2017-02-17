@@ -65,6 +65,7 @@ App.PlayGameState = (function () {
             //console.log("[DEBUG] server.login(" + name + ") = " + result);
             if (result) {
                 game.global.player.playerName = name;
+                game.global.player.usernameText.text = name;
                 console.log("Logged in as: " + name);
             }
             else {
