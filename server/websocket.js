@@ -61,6 +61,17 @@ exports.login = function(name) {
     var conn = connections[id];
     if (conn) {
         var client = conn.client;
+        for (var c in connections) {
+            if (c != id &&
+                connections[c].name &&
+                connections[c].name == name) {
+                // This user is already online.
+                // XXX: Should the old user get booted once we honor password authentication?
+                console.log('Name [' + name + '] already used for Client ID [' + c + ']');
+                client.message('[SYSTEM] User is already logged in: ' + name);
+                return 0;
+            }
+        }
         if (name.match(/^\w+$/)) {
             console.log('Name smells fine: ' + name);
             conn.name = client.name = name;
@@ -71,11 +82,12 @@ exports.login = function(name) {
         }
         console.log('ClientID ' + id + ' attempted to login with stank name: ' + name);
         client.message("[SYSTEM] Login name too stank: " + name);
+        return 0;
     }
     else {
         console.log('ClientID ' + id + ' does not exist?');
+        return 0;
     }
-    return 0;
 };
 
 exports.broadcast = function(message) {
