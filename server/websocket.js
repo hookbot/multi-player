@@ -100,3 +100,9 @@ exports.chat = function(message) {
     console.log('[ClientID ' + id + '] BLOCKED FROM SAYING: ' + message);
     return 0;
 };
+
+exports.updatePlayer = function(args) {
+    var id = this.user.clientId;
+    var conn = connections[id];
+    console.log("ClientID", id, "updatePlayer", args);
+};
