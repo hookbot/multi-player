@@ -48,9 +48,9 @@ App.PlayGameState = (function () {
     };
 
     fn.prototype.update = function () {
-        var g = game.global;
+        var g = this.game.global;
         var p = g.player.body;
-        if (p.playerName && (g.vx != p.velocity.x || g.vy != p.velocity.y)) {
+        if (g.player.playerName && (g.vx != p.velocity.x || g.vy != p.velocity.y)) {
             // Already logged in and my Velocity changed.
             // Inform the server.
             g.vx = p.velocity.x;
@@ -88,6 +88,7 @@ App.PlayGameState = (function () {
         if (message) {
             var contents = message.split(" ");
             if (contents[0] == '/login') {
+                // XXX: Should we require a password too?
                 fn.prototype.doLogin(contents[1]);
             }
             else if (contents[0] == '/tell') {
