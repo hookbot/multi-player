@@ -61,11 +61,12 @@ App.PlayGameState = (function () {
     };
 
     fn.prototype.doLogin = function (name) {
+        var p = game.global.player;
         game.global.eurecaServer.login(name).onReady(function (result) {
             //console.log("[DEBUG] server.login(" + name + ") = " + result);
             if (result) {
-                game.global.player.playerName = name;
-                game.global.player.usernameText.text = name;
+                p.playerName = name;
+                p.usernameText.text = name;
                 console.log("Logged in as: " + name);
             }
             else {
