@@ -104,7 +104,7 @@ App.Player = (function () {
         if (!playerMoving) {
             this.animations.stop();
         }
-        this.game.physics.arcade.collide(this.game.global.player, this.game.global.forest.layers.collisionLayer);
+        this.game.physics.arcade.collide(this, this.game.global.forest.layers.collisionLayer);
     };
 
     return fn;
