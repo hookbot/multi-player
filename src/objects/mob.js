@@ -24,6 +24,16 @@ App.Mob = (function () {
     fn.prototype.update = function () {
         this.usernameText.x = this.x;
         this.usernameText.y = this.y + 60;
+        if (this.body.velocity.x < 0) {
+            this.animations.play(this.orient = 'left');
+        }
+        else if (this.body.velocity.x > 0) {
+            this.animations.play(this.orient = 'right');
+        }
+        var playerMoving = this.body.velocity.x != 0 || this.body.velocity.y != 0;
+        if (!playerMoving) {
+            this.animations.stop();
+        }
         if (this.game.global.forest) {
             this.game.physics.arcade.collide(this, this.game.global.forest.layers.collisionLayer);
         }
