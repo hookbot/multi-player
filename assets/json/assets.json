@@ -58,68 +58,54 @@
             }
         }
     },
-    "1_sound": {
-        "type": "sound",
-        "file": "assets/sounds/1.ogg"
-    },
-    "2_sound": {
-        "type": "sound",
-        "file": "assets/sounds/2.ogg"
-    },
-    "3_sound": {
-        "type": "sound",
-        "file": "assets/sounds/3.ogg"
-    },
-    "congratulations_sound": {
-        "type": "sound",
-        "file": "assets/sounds/congratulations.ogg"
-    },
-    "drop_flag_sound": {
-        "type": "sound",
-        "file": "assets/sounds/drop_flag.mp3"
-    },
-    "final_round_sound": {
-        "type": "sound",
-        "file": "assets/sounds/final_round.ogg"
-    },
-    "game_over_sound": {
-        "type": "sound",
-        "file": "assets/sounds/game_over.ogg"
-    },
-    "out_of_ammo_sound": {
-        "type": "sound",
-        "file": "assets/sounds/out_of_ammo.wav"
-    },
-    "pick_up_flag_sound": {
-        "type": "sound",
-        "file": "assets/sounds/pick_up_flag.mp3"
-    },
-    "pistol1_sound": {
-        "type": "sound",
-        "file": "assets/sounds/pistol1.wav"
-    },
-    "pistol2_sound": {
-        "type": "sound",
-        "file": "assets/sounds/pistol2.wav"
-    },
-    "rifle_sound": {
-        "type": "sound",
-        "file": "assets/sounds/rifle.wav"
-    },
-    "shotgun_sound": {
-        "type": "sound",
-        "file": "assets/sounds/shotgun.wav"
-    },
-    "war_go_go_go_sound": {
-        "type": "sound",
-        "file": "assets/sounds/war_go_go_go.ogg"
-    },
-    "weapon_pick_up_sound": {
-        "type": "sound",
-        "file": "assets/sounds/weapon_pick_up.mp3"
-    },
-    "hurt_sound": {
-        "type": "sound",
-        "file": "assets/sounds/hurt.wav"
+    "sound": {
+        "1_sound": {
+            "file": "assets/sounds/1.ogg"
+        },
+        "2_sound": {
+            "file": "assets/sounds/2.ogg"
+        },
+        "3_sound": {
+            "file": "assets/sounds/3.ogg"
+        },
+        "congratulations_sound": {
+            "file": "assets/sounds/congratulations.ogg"
+        },
+        "drop_flag_sound": {
+            "file": "assets/sounds/drop_flag.mp3"
+        },
+        "final_round_sound": {
+            "file": "assets/sounds/final_round.ogg"
+        },
+        "game_over_sound": {
+            "file": "assets/sounds/game_over.ogg"
+        },
+        "out_of_ammo_sound": {
+            "file": "assets/sounds/out_of_ammo.wav"
+        },
+        "pick_up_flag_sound": {
+            "file": "assets/sounds/pick_up_flag.mp3"
+        },
+        "pistol1_sound": {
+            "file": "assets/sounds/pistol1.wav"
+        },
+        "pistol2_sound": {
+            "file": "assets/sounds/pistol2.wav"
+        },
+        "rifle_sound": {
+            "file": "assets/sounds/rifle.wav"
+        },
+        "shotgun_sound": {
+            "file": "assets/sounds/shotgun.wav"
+        },
+        "war_go_go_go_sound": {
+            "file": "assets/sounds/war_go_go_go.ogg"
+        },
+        "weapon_pick_up_sound": {
+            "file": "assets/sounds/weapon_pick_up.mp3"
+        },
+        "hurt_sound": {
+            "file": "assets/sounds/hurt.wav"
+        }
     }
 }

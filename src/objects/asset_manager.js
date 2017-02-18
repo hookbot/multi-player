@@ -20,9 +20,10 @@ App.AssetManager = (function () {
 
     // run a load or init...
     fn.prototype._process = function (action) {
-        if (!action.match(/^(load|init)$/)) return;
+        if ( ! ['load', 'init'].includes(action) ) return;
 
-        _.each(_.keys(this.config.assets), (function (key) {
+       //  _.each(_.keys(this.config.assets), (function (key) {
+        this.config.assets.keys.forEach(function (key) {
             var asset_data = this.config.assets[key];
             var asset_type = asset_data.type;
             if (asset_type && "function" === typeof this[action + '_' + asset_type]) {
@@ -32,6 +33,7 @@ App.AssetManager = (function () {
                 console.log('Asset handler of type "' + asset_type + '" not found for key "' + key + '" while trying to "' + action + '"');
             }
         }).bind(this));
+        // }, this);
     };
 
     // atlas
@@ -105,7 +107,9 @@ App.AssetManager = (function () {
 
     // sound
     fn.prototype.load_sound = function (key, data) {
-        this.game.load.audio(key, data.file);
+        Object.keys(data).forEach( function(key) {
+            this.game.load.audio(key, data[key].file);
+        });
     };
 
     fn.prototype.init_sound = function (key, data) {
