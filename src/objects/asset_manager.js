@@ -22,8 +22,8 @@ App.AssetManager = (function () {
     fn.prototype._process = function (action) {
         if ( ! ['load', 'init'].includes(action) ) return;
 
-       //  _.each(_.keys(this.config.assets), (function (key) {
-        this.config.assets.keys.forEach(function (key) {
+        _.each(_.keys(this.config.assets), (function (key) {
+        // this.config.assets.keys.forEach(function (key) {
             var asset_data = this.config.assets[key];
             var asset_type = asset_data.type;
             if (asset_type && "function" === typeof this[action + '_' + asset_type]) {
@@ -32,8 +32,8 @@ App.AssetManager = (function () {
             else {
                 console.log('Asset handler of type "' + asset_type + '" not found for key "' + key + '" while trying to "' + action + '"');
             }
-        }).bind(this));
         // }, this);
+        }).bind(this));
     };
 
     // atlas
