@@ -25,7 +25,7 @@ exports._internal.onConnect = function (connection) {
     console.log('NEW Connection ', connection.id, connection.eureca.remoteAddress);
     var client = connection.clientProxy; //this.getClient(connection.id);
     //console.log("REAL CLIENT",client);
-    connections[connection.id] = { name:null, client:client };
+    connections[connection.id] = { name:null, x:0, y:0, client:client };
     // Run client.exports.setId function
     client.setId(connection.id);
     exports.broadcast('[DEBUG] NEW connection from [' + connection.eureca.remoteAddress.ip + ']');
@@ -60,8 +60,9 @@ exports.handshake = function() {
         var client = conn.client;
         for (var c in connections) {
             if (c != id) {
-                if (connections[c].name) {
-                    client.spawn(connections[c].name,0,0);
+                var o = connections[c];
+                if (o.name) {
+                    client.spawn(o.name,o.x,o.y);
                 }
             }
         }
@@ -70,7 +71,7 @@ exports.handshake = function() {
     console.log('HANDSHAKE from Client ID ' + id);
 };
 
-exports.login = function(name) {
+exports.login = function(name, x, y) {
     var id = this.user.clientId;
     var conn = connections[id];
     if (conn) {
@@ -89,12 +90,14 @@ exports.login = function(name) {
         if (name.match(/^\w+$/)) {
             console.log('Name smells fine: ' + name);
             conn.name = client.name = name;
-            console.log('ClientID ' + id + ' logged in as: ' + name);
+            conn.x = x;
+            conn.y = y;
+            console.log('ClientID ' + id + ' logged in as: ' + name + ' @ (' + x + ',' + y + ')');
             client.message("[SYSTEM] You logged in as: " + name);
             exports.broadcast(name + ' just logged in');
             for (var c in connections) {
                 if (c != id) {
-                    connections[c].client.spawn(name);
+                    connections[c].client.spawn(name, x, y);
                 }
             }
             return 1;

@@ -62,7 +62,7 @@ App.PlayGameState = (function () {
 
     fn.prototype.doLogin = function (name) {
         var p = game.global.player;
-        game.global.eurecaServer.login(name).onReady(function (result) {
+        game.global.eurecaServer.login(name,p.body.position.x,p.body.position.y).onReady(function (result) {
             //console.log("[DEBUG] server.login(" + name + ") = " + result);
             if (result) {
                 p.playerName = name;

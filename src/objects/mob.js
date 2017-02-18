@@ -4,8 +4,8 @@ var App = App || {};
 App.Mob = (function () {
     "use strict";
 
-    var fn = function (game, username) {
-        Phaser.Sprite.call(this, game, 0, 0, 'alienBlue');
+    var fn = function (game, username, x, y) {
+        Phaser.Sprite.call(this, game, x, y, 'alienBlue');
         this.game.physics.arcade.enable(this);
         this.frame = 0;
         this.scale.setTo(.7, .7);
@@ -14,6 +14,8 @@ App.Mob = (function () {
         this.collideWorldBounds = true;
         this.playerName = username;
         this.usernameText = game.add.text(20, 20, username, { font: "16px Arial", fill: "#ffffff", align: "center" });
+        this.usernameText.x = this.x;
+        this.usernameText.y = this.y + 60;
     };
 
     fn.prototype = Object.create(Phaser.Sprite.prototype);
