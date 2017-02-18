@@ -71,6 +71,7 @@ exports.updateMob = function(username, args) {
         o.y = args.y;
         o.body.velocity.x = args.vx;
         o.body.velocity.y = args.vy;
+        o.update();
         console.log("UPDATE MOB [" + username + "] SUCCESS", args);
     }
     else {
