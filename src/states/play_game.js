@@ -18,8 +18,6 @@ App.PlayGameState = (function () {
     fn.prototype.preload = function () {
         // load assets
         this.asset_manager.loadAssets();
-        this.game.load.spritesheet('alienBlue', 'assets/images/alienBlue_sheet.png', 66, 96);
-
     };
 
     fn.prototype.create = function () {
