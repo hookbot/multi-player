@@ -25,17 +25,17 @@ App.PlayGameState = (function () {
         this.asset_manager.initAssets();
 
         // our forest tilemap
-        this.forest = this.asset_manager.get_tilemap('forest');
+        this.game.global.forest = this.asset_manager.get_tilemap('forest');
 
-        this.game.world.sendToBack(this.forest.layers.backgroundLayer);
+        this.game.world.sendToBack(this.game.global.forest.layers.backgroundLayer);
 
         // resize world to fit the layers
-        this.forest.layers.backgroundLayer.resizeWorld();
+        this.game.global.forest.layers.backgroundLayer.resizeWorld();
 
         this.game.global.player = this.alienBlue = this.game.add.existing(new App.Player(this.game, 140, 160));
         this.game.global.vx = 0;
         this.game.global.vy = 0;
-        this.game.world.bringToTop(this.forest.layers.foregroundLayerTop);
+        this.game.world.bringToTop(this.game.global.forest.layers.foregroundLayerTop);
         this.key1 = game.input.keyboard.addKey(Phaser.Keyboard.BACKWARD_SLASH);
         this.key1.onDown.add(fn.prototype.enterMessage, this);
 
@@ -55,7 +55,6 @@ App.PlayGameState = (function () {
             g.vy = p.velocity.y;
             g.eurecaServer.updatePlayer({ x: p.position.x, y: p.position.y, vx: g.vx, vy: g.vy });
         }
-        this.game.physics.arcade.collide(this.game.global.player, this.forest.layers.collisionLayer);
     };
 
     fn.prototype.doLogin = function (name) {
