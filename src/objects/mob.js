@@ -24,7 +24,9 @@ App.Mob = (function () {
     fn.prototype.update = function () {
         this.usernameText.x = this.x;
         this.usernameText.y = this.y + 60;
-        this.game.physics.arcade.collide(this, this.game.global.forest.layers.collisionLayer);
+        if (this.game.global.forest) {
+            this.game.physics.arcade.collide(this, this.game.global.forest.layers.collisionLayer);
+        }
     };
 
     return fn;
