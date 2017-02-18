@@ -76,6 +76,11 @@ exports.login = function(name, x, y) {
     var conn = connections[id];
     if (conn) {
         var client = conn.client;
+        if (conn.name) {
+            console.log('Player [' + conn.name + '] tried to login again as [' + name + ']?');
+            client.message('[SYSTEM] Sorry! You are already logged in as ' + conn.name);
+            return 0;
+        }
         for (var c in connections) {
             if (c != id &&
                 connections[c].name &&
