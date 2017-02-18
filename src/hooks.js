@@ -22,6 +22,10 @@ var exports = exports || {};
 exports.setId = function(id) {
     console.log("Server assigned myID: " + id);
     game.global.myID = id;
+    for (var c in game.global.mob) {
+        // Clear out any old mobs before handshake() reloads them all back
+        exports.unspawn(c);
+    }
     game.global.eurecaServer.handshake();
 
     var p = game.global.player;
