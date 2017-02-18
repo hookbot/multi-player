@@ -1,59 +1,62 @@
 {
-    "flag_atlas": {
-        "type": "atlas",
-        "file": "assets/images/flag_atlas.png",
-        "json": "assets/json/flag_atlas.json"
+    "atlas": { 
+        "flag_atlas": {
+            "file": "assets/images/flag_atlas.png",
+            "json": "assets/json/flag_atlas.json"
+        }
     },
-    "forest": {
-        "type": "tilemap",
-        "json": "assets/json/Forest-Big.json",
-        "tilesets": {
-            "RPG_32": {
-                "file": "assets/images/RPGpack_sheet_32.png",
-                "tiled_set_name": "Kenny_terrain_32"
-            },
-            "flag_atlas": {
-                "file": "assets/images/flag_atlas.png",
-                "tiled_set_name": "flag_atlas"
-            }
-        },
-        "layers": {
-            "backgroundLayer": {
-                "tiled_layer_name": "BackGround"
-            },
-            "foregroundLayerBot": {
-                "tiled_layer_name": "ForeGroundBot"
-            },
-            "collisionLayer": {
-                "tiled_layer_name": "Collisions",
-                "collision_id_first": 1,
-                "collision_id_last": 226
-            },
-            "foregroundLayerTop": {
-                "tiled_layer_name": "ForeGroundTop"
-            }
-        },
-        "objects": {
-            "Objects": {
-                "flag_orange_right": {
-                    "key": "flag_atlas",
-                    "frame": "flag_orange_right_1",
-                    "class_name": "FlagOrange"
+
+    "tilemap" : {
+        "forest": {
+            "json": "assets/json/Forest-Big.json",
+            "tilesets": {
+                "RPG_32": {
+                    "file": "assets/images/RPGpack_sheet_32.png",
+                    "tiled_set_name": "Kenny_terrain_32"
                 },
-                "flag_orange_left": {
-                    "key": "flag_atlas",
-                    "frame": "flag_orange_left_1",
-                    "class_name": "FlagOrange"
+                "flag_atlas": {
+                    "file": "assets/images/flag_atlas.png",
+                    "tiled_set_name": "flag_atlas"
+                }
+            },
+            "layers": {
+                "backgroundLayer": {
+                    "tiled_layer_name": "BackGround"
                 },
-                "flag_green_right": {
-                    "key": "flag_atlas",
-                    "frame": "flag_green_right_1",
-                    "class_name": "FlagGreen"
+                "foregroundLayerBot": {
+                    "tiled_layer_name": "ForeGroundBot"
                 },
-                "flag_green_left": {
-                    "key": "flag_atlas",
-                    "frame": "flag_green_left_1",
-                    "class_name": "FlagGreen"
+                "collisionLayer": {
+                    "tiled_layer_name": "Collisions",
+                    "collision_id_first": 1,
+                    "collision_id_last": 226
+                },
+                "foregroundLayerTop": {
+                    "tiled_layer_name": "ForeGroundTop"
+                }
+            },
+            "objects": {
+                "Objects": {
+                    "flag_orange_right": {
+                        "key": "flag_atlas",
+                        "frame": "flag_orange_right_1",
+                        "class_name": "FlagOrange"
+                    },
+                    "flag_orange_left": {
+                        "key": "flag_atlas",
+                        "frame": "flag_orange_left_1",
+                        "class_name": "FlagOrange"
+                    },
+                    "flag_green_right": {
+                        "key": "flag_atlas",
+                        "frame": "flag_green_right_1",
+                        "class_name": "FlagGreen"
+                    },
+                    "flag_green_left": {
+                        "key": "flag_atlas",
+                        "frame": "flag_green_left_1",
+                        "class_name": "FlagGreen"
+                    }
                 }
             }
         }

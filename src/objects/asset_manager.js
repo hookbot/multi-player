@@ -22,18 +22,17 @@ App.AssetManager = (function () {
     fn.prototype._process = function (action) {
         if ( ! ['load', 'init'].includes(action) ) return;
 
-        _.each(_.keys(this.config.assets), (function (key) {
-        // this.config.assets.keys.forEach(function (key) {
-            var asset_data = this.config.assets[key];
-            var asset_type = asset_data.type;
-            if (asset_type && "function" === typeof this[action + '_' + asset_type]) {
-                this[action + '_' + asset_type](key, asset_data);
+        for (var type in this.config.assets) {
+            for (var key in this.config.assets[type]) {
+                var asset_data = this.config.assets[type][key];
+                if (key && "function" === typeof this[action + '_' + type]) {
+                    this[action + '_' + type](key, asset_data);
+                }
+                else {
+                    console.log('Asset handler of type "' + type + '" not found while trying to "' + action + '"');
+                }
             }
-            else {
-                console.log('Asset handler of type "' + asset_type + '" not found for key "' + key + '" while trying to "' + action + '"');
-            }
-        // }, this);
-        }).bind(this));
+        }
     };
 
     // atlas
@@ -109,7 +108,7 @@ App.AssetManager = (function () {
     fn.prototype.load_sound = function (key, data) {
         Object.keys(data).forEach( function(key) {
             this.game.load.audio(key, data[key].file);
-        });
+        }, this);
     };
 
     fn.prototype.init_sound = function (key, data) {
