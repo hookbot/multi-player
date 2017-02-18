@@ -63,3 +63,18 @@ exports.unspawn = function(username) {
     }
     return 1;
 };
+
+exports.updateMob = function(username, args) {
+    if (game.global.mob[username]) {
+        var o = game.global.mob[username];
+        o.x = args.x;
+        o.y = args.y;
+        o.body.velocity.x = args.vx;
+        o.body.velocity.y = args.vy;
+        console.log("UPDATE MOB [" + username + "] SUCCESS", args);
+    }
+    else {
+        console.log("UPDATE MOB [" + username + "] FAILED");
+    }
+    return 1;
+};

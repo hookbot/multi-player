@@ -139,4 +139,15 @@ exports.updatePlayer = function(args) {
     var id = this.user.clientId;
     var conn = connections[id];
     console.log("ClientID", id, "updatePlayer", args);
+    if (conn.name) {
+        // Player is logged in so update coords in memory
+        conn.x = args.x;
+        conn.y = args.y;
+        // Notify other clients of the move
+        for (var c in connections) {
+            if (c != id) {
+                connections[c].client.updateMob(conn.name,args);
+            }
+        }
+    }
 };
