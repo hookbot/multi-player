@@ -43,3 +43,23 @@ exports.setId = function(id) {
 exports.message = function(str) {
     console.log("<< " + str);
 };
+
+exports.spawn = function(username) {
+    console.log("PRE MOB",game.global.mob);
+    console.log("CREATE MOB [" + username + "]");
+    game.global.mob[username] = game.add.existing(new App.Mob(game, username));
+    return 1;
+};
+
+exports.unspawn = function(username) {
+    if (game.global.mob[username]) {
+        game.global.mob[username].usernameText.kill();
+        game.global.mob[username].kill();
+        console.log("DESTROY MOB [" + username + "] SUCCESS");
+        delete game.global.mob[username];
+    }
+    else {
+        console.log("DESTROY MOB [" + username + "] FAILED");
+    }
+    return 1;
+};

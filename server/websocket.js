@@ -35,6 +35,13 @@ exports._internal.onDisconnect = function (connection) {
     console.log('END Connection ', connection.id);
     var conn = connections[connection.id];
     console.log('[DEBUG] Ending obj',conn);
+    if (conn.name) {
+        for (var c in connections) {
+            if (c != connection.id) {
+                connections[c].client.unspawn(conn.name);
+            }
+        }
+    }
     var who = (conn && conn.name) ? conn.name : '[Never logged in]';
     var ip = connection.eureca.remoteAddress.ip;
     delete connections[connection.id];
@@ -51,6 +58,13 @@ exports.handshake = function() {
     var conn = connections[id];
     if (conn) {
         var client = conn.client;
+        for (var c in connections) {
+            if (c != id) {
+                if (connections[c].name) {
+                    client.spawn(connections[c].name,0,0);
+                }
+            }
+        }
         client.message("[SYSTEM] Handshake complete!");
     }
     console.log('HANDSHAKE from Client ID ' + id);
@@ -78,6 +92,11 @@ exports.login = function(name) {
             console.log('ClientID ' + id + ' logged in as: ' + name);
             client.message("[SYSTEM] You logged in as: " + name);
             exports.broadcast(name + ' just logged in');
+            for (var c in connections) {
+                if (c != id) {
+                    connections[c].client.spawn(name);
+                }
+            }
             return 1;
         }
         console.log('ClientID ' + id + ' attempted to login with stank name: ' + name);
