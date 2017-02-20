@@ -38,6 +38,9 @@
                 this.game.state.add('Loading',   App.LoadingState);
                 this.game.state.add('WebSocket', App.WebSocketState);
                 this.game.state.add('PlayGame',  App.PlayGameState);
+                this.game.state.add('AssetManagerLoadConfig', App.AssetManager.LoadConfigState);
+                this.game.state.add('AssetManagerLoadAssets', App.AssetManager.LoadAssetsState);
+                this.game.state.add('AssetManagerProcessTilemaps', App.AssetManager.ProcessTilemapsState);
 
                 this.game.state.start('Loading');
             });

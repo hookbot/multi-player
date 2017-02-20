@@ -10,7 +10,7 @@
         "forest": {
             "json": "assets/json/Forest-Big.json",
             "tilesets": {
-                "RPG_32": {
+                "Kenny_terrain_32": {
                     "file": "assets/images/RPGpack_sheet_32.png",
                     "tiled_set_name": "Kenny_terrain_32"
                 },
