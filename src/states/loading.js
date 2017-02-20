@@ -22,18 +22,7 @@ App.LoadingState = (function () {
     };
 
     fn.prototype.create = function () {
-        var game = this.game;
-
-        // Connect to WebSocket server
-        console.log("Connecting to WebSocket server...");
-        game.global.readyWS = false;
-        game.global.eurecaClient = new Eureca.Client();
-        game.global.eurecaClient.exports = exports; // Defined in hooks.js
-        game.global.eurecaClient.ready(function (proxy) {
-            console.log("WebSocket client is ready!");
-            game.global.eurecaServer = proxy;
-            game.global.readyWS = true;
-        });
+        this.game.state.start('WebSocket');
     };
 
     return fn;
