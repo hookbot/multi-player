@@ -49,7 +49,6 @@ exports.message = function(str) {
 };
 
 exports.spawn = function(username, x, y) {
-    console.log("PRE MOB",game.global.mob);
     console.log("CREATE MOB [" + username + "] @ (" + x + "," + y + ")");
     game.global.mob[username] = game.add.existing(new App.Mob(game, username, x, y));
     return 1;

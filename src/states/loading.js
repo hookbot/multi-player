@@ -22,7 +22,6 @@ App.LoadingState = (function () {
     };
 
     fn.prototype.create = function () {
-
         var game = this.game;
 
         // Connect to WebSocket server

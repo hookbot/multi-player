@@ -12,20 +12,20 @@ App.PlayGameState = (function () {
     fn.prototype.constructor = fn;
 
     fn.prototype.init = function () {
-        this.asset_manager = new App.AssetManager(this.game);
+        this.game.asset_manager = new App.AssetManager(this.game);
     };
 
     fn.prototype.preload = function () {
         // load assets
-        this.asset_manager.loadAssets();
+        this.game.asset_manager.loadAssets();
     };
 
     fn.prototype.create = function () {
         // init assets
-        this.asset_manager.initAssets();
+        this.game.asset_manager.initAssets();
 
         // our forest tilemap
-        this.game.global.forest = this.asset_manager.get_tilemap('forest');
+        this.game.global.forest = this.game.asset_manager.get_tilemap('forest');
 
         this.game.world.sendToBack(this.game.global.forest.layers.backgroundLayer);
 
