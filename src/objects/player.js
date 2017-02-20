@@ -17,6 +17,8 @@ App.Player = (function () {
         this.collideWorldBounds = true;
         //this.game.world.bringToTop(this.foregroundLayer);
         this.speed = 150;
+        this.game.global.vx = 0;
+        this.game.global.vy = 0;
         this.ability = {
             run : {
                 maxStamina: 100,
@@ -105,6 +107,15 @@ App.Player = (function () {
             this.animations.stop();
         }
         this.game.physics.arcade.collide(this, this.game.global.forest.layers.collisionLayer);
+        var g = this.game.global;
+        var p = g.player.body;
+        if (g.player.playerName && (g.vx != p.velocity.x || g.vy != p.velocity.y)) {
+            // Already logged in and my Velocity changed.
+            // Inform the server.
+            g.vx  = p.velocity.x;
+            g.vy  = p.velocity.y;
+            g.eurecaServer.updatePlayer({ x: p.position.x, y: p.position.y, vx: g.vx, vy: g.vy });
+        }
     };
 
     return fn;

@@ -33,8 +33,6 @@ App.PlayGameState = (function () {
         this.game.global.forest.layers.backgroundLayer.resizeWorld();
 
         this.game.global.player = this.alienBlue = this.game.add.existing(new App.Player(this.game, 140, 160));
-        this.game.global.vx = 0;
-        this.game.global.vy = 0;
         this.game.world.bringToTop(this.game.global.forest.layers.foregroundLayerTop);
         this.key1 = game.input.keyboard.addKey(Phaser.Keyboard.BACKWARD_SLASH);
         this.key1.onDown.add(fn.prototype.enterMessage, this);
@@ -46,15 +44,7 @@ App.PlayGameState = (function () {
     };
 
     fn.prototype.update = function () {
-        var g = this.game.global;
-        var p = g.player.body;
-        if (g.player.playerName && (g.vx != p.velocity.x || g.vy != p.velocity.y)) {
-            // Already logged in and my Velocity changed.
-            // Inform the server.
-            g.vx = p.velocity.x;
-            g.vy = p.velocity.y;
-            g.eurecaServer.updatePlayer({ x: p.position.x, y: p.position.y, vx: g.vx, vy: g.vy });
-        }
+
     };
 
     fn.prototype.doLogin = function (name) {
