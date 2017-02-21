@@ -106,9 +106,7 @@ App.AssetManager = (function () {
 
     // sound
     fn.prototype.load_sound = function (key, data) {
-        Object.keys(data).forEach( function(key) {
-            this.game.load.audio(key, data[key].file);
-        }, this);
+        this.game.load.audio(key, data.file);
     };
 
     fn.prototype.init_sound = function (key, data) {
