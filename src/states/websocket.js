@@ -19,6 +19,8 @@ App.WebSocketState = (function () {
 
     fn.prototype.preload = function () {
         console.log("WebSocketState.preload Running...");
+        // load assets
+        this.game.asset_manager.loadAssets();
     };
 
     fn.prototype.create = function () {

@@ -12,17 +12,14 @@ App.PlayGameState = (function () {
     fn.prototype.constructor = fn;
 
     fn.prototype.init = function () {
-        this.game.asset_manager = new App.AssetManager(this.game);
+        // init assets
+        this.game.asset_manager.initAssets();
     };
 
     fn.prototype.preload = function () {
-        // load assets
-        this.game.asset_manager.loadAssets();
     };
 
     fn.prototype.create = function () {
-        // init assets
-        this.game.asset_manager.initAssets();
 
         // Clean up mob objects, if needed
         // XXX: This stupid hacking is needed because I can't figure out how to force the Objects to be good at the time the WebSocket is connected:
@@ -47,7 +44,7 @@ App.PlayGameState = (function () {
         // resize world to fit the layers
         this.game.global.forest.layers.backgroundLayer.resizeWorld();
 
-        this.game.global.player = this.alienBlue = this.game.add.existing(new App.Player(this.game, 140, 160));
+        this.game.global.player = this.game.add.existing(new App.Player(this.game, 140, 160));
         this.game.world.bringToTop(this.game.global.forest.layers.foregroundLayerTop);
         this.key1 = game.input.keyboard.addKey(Phaser.Keyboard.BACKWARD_SLASH);
         this.key1.onDown.add(fn.prototype.enterMessage, this);
