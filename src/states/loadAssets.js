@@ -142,5 +142,14 @@ App.LoadAssetsState = (function () {
         // nothing to do yet
     };
 
+    // preload_image
+    fn.prototype.preload_image = function (key, data) {
+        this.game.load.image(key, data.file);
+    };
+
+    fn.prototype.process_image = function (key, data) {
+        // nothing to do yet
+    };
+
     return fn;
 })();
