@@ -118,6 +118,19 @@ App.LoadAssetsState = (function () {
         //this.game.assets[key] = Object.create(Phaser.Sprite.prototype);
     };
 
+    // preload_atlas
+    fn.prototype.preload_atlas = function(key, data) {
+        console.log("loadAssets.preload_atlas",key,data)
+        this.game.load.atlas(key, data.file, data.json, Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+        return data;
+    };
+
+    // process_assets
+    fn.prototype.process_atlas = function(key, data) {
+        console.log("loadAssets.process_atlas",key,data)
+        // nothing to do yet
+    };
+
     // preload_sound
     fn.prototype.preload_sound = function(key, data) {
         this.game.load.audio(key, data.file);
