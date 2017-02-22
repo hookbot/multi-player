@@ -27,7 +27,12 @@ App.LoadingState = (function () {
     fn.prototype.create = function () {
         console.log("LoadingState.create Running...");
         this.game.asset_manager = new App.AssetManager(this.game);
-        this.game.state.start('WebSocket');
+        this.game.assetsMustLoad = {
+            "assets" : {"assetsConfig":"assets/json/assets.json"}
+        };
+        console.log("LoadingState Jumping to LoadAssets state ...");
+        this.game.assetsNextState = 'WebSocket';
+        this.game.state.start('LoadAssets');
     };
 
     return fn;
