@@ -50,15 +50,18 @@ App.LoadAssetsState = (function () {
             var handler = this["process_" + type];
             if (handler && "function" === typeof handler) {
                 for (var key in this.game.assetsPreLoad[type]) {
-                    this.game.assetsLoaded[type][key] = 1;
-                    var preload_data = this.game.assetsPreLoad[type][key];
+                    if (!this.game.assetsLoaded[type][key]) {
+                        this.game.assetsLoaded[type][key] = 1;
+                        var preload_data = this.game.assetsPreLoad[type][key];
+                        this["process_" + type](key,preload_data);
+                    }
                     delete this.game.assetsPreLoad[type][key];
-                    this["process_" + type](key,preload_data);
                 }
             }
             else {
-                console.log('Asset handler "process_' + type + '" not defined');
+                console.log('WARNING: Asset handler "process_' + type + '" not defined');
             }
+            delete this.game.assetsPreLoad[type];
         }
 
         if (_.keys(this.game.assetsMustLoad).length) {
