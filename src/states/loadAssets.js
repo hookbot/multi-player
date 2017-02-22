@@ -84,14 +84,14 @@ App.LoadAssetsState = (function () {
     // spawn: Call "spawn_TYPE" routine on each asset once State is launched
     fn.prototype.spawn = function (configName) {
         console.log("LoadAssetsState.spawn: Running with [" + configName + "] ...");
-        if (this.game.assets[configName]) {
-            for (var type in this.game.assets[configName]) {
-                var handler = this["spawn_" + type];
+        if (game.assets[configName]) {
+            for (var type in game.assets[configName]) {
+                var handler = fn.prototype["spawn_" + type];
                 if (handler && "function" === typeof handler) {
-                    for (var key in this.game.assets[configName][type]) {
-                        if (this.game.assets[key]) {
-                            var loaded_data = this.game.assets[key];
-                            this["spawn_" + type](key,loaded_data);
+                    for (var key in game.assets[configName][type]) {
+                        if (game.assets[key]) {
+                            var loaded_data = game.assets[key];
+                            fn.prototype["spawn_" + type](key,loaded_data);
                         }
                     }
                 }
@@ -262,7 +262,7 @@ App.LoadAssetsState = (function () {
         this.tilesets = {};
         this.tilesets[key] = {};
 
-        this.tilesets[key].map = this.game.add.tilemap(key);
+        this.tilesets[key].map = game.add.tilemap(key);
 
         _.each(_.keys(data.tilesets), (function (tileset) {
             this.tilesets[key].map.addTilesetImage(data.tilesets[tileset].tiled_set_name, tileset);
@@ -291,13 +291,13 @@ App.LoadAssetsState = (function () {
                     data.objects[object_group][gid].frame,
                     true,
                     false,
-                    this.game.world,
+                    game.world,
                     eval('App.' + data.objects[object_group][gid].class_name),
                     true
                 );
             }).bind(this));
         }).bind(this));
-        this.game.assets[key] = this.tilesets[key];
+        game.assets[key] = this.tilesets[key];
         delete this.tilesets[key];
         delete this.tilesets;
     };
