@@ -243,9 +243,9 @@ App.LoadAssetsState = (function () {
     // preload_tilemap
     fn.prototype.preload_tilemap = function (key, data) {
         console.log("loadAssets.preload_tilemap",key,data.file)
-        _.each(_.keys(data.tilesets), (function (tileset) {
+        for (var tileset in data.tilesets) {
             this.game.load.image(tileset, data.tilesets[tileset].file);
-        }).bind(this));
+        }
         this.game.load.tilemap(key, data.json, null, Phaser.Tilemap.TILED_JSON);
         return data;
     };
@@ -259,32 +259,31 @@ App.LoadAssetsState = (function () {
     // spawn_tilemap
     fn.prototype.spawn_tilemap = function(key, data) {
         console.log("loadAssets.spawn_tilemap",key,data)
-        this.tilesets = {};
-        this.tilesets[key] = {};
+        var tilemap = {};
 
-        this.tilesets[key].map = game.add.tilemap(key);
+        tilemap.map = game.add.tilemap(key);
 
-        _.each(_.keys(data.tilesets), (function (tileset) {
-            this.tilesets[key].map.addTilesetImage(data.tilesets[tileset].tiled_set_name, tileset);
-        }).bind(this));
+        for (var tileset in data.tilesets) {
+            tilemap.map.addTilesetImage(data.tilesets[tileset].tiled_set_name, tileset);
+        }
 
-        this.tilesets[key].layers = {};
+        tilemap.layers = {};
 
-        _.each(_.keys(data.layers), (function (layer) {
+        for (var layer in data.layers) {
             var tiled_layer_name = data.layers[layer].tiled_layer_name;
 
-            this.tilesets[key].layers[layer] = this.tilesets[key].map.createLayer(tiled_layer_name);
+            tilemap.layers[layer] = tilemap.map.createLayer(tiled_layer_name);
 
             var collision_id_first = data.layers[layer].collision_id_first;
             var collision_id_last  = data.layers[layer].collision_id_last;
             if (collision_id_first && collision_id_last) {
-                this.tilesets[key].map.setCollisionBetween(collision_id_first, collision_id_last, true, tiled_layer_name);
+                tilemap.map.setCollisionBetween(collision_id_first, collision_id_last, true, tiled_layer_name);
             }
-        }).bind(this));
+        }
 
-        _.each(_.keys(data.objects), (function (object_group) {
-            _.each(_.keys(data.objects[object_group]), (function (gid) {
-                this.tilesets[key].map.createFromObjects(
+        for (var object_group in data.objects) {
+            for (var gid in data.objects[object_group]) {
+                tilemap.map.createFromObjects(
                     object_group,
                     gid,
                     data.objects[object_group][gid].key,
@@ -295,11 +294,9 @@ App.LoadAssetsState = (function () {
                     eval('App.' + data.objects[object_group][gid].class_name),
                     true
                 );
-            }).bind(this));
-        }).bind(this));
-        game.assets[key] = this.tilesets[key];
-        delete this.tilesets[key];
-        delete this.tilesets;
+            }
+        }
+        game.assets[key] = tilemap;
     };
 
     return fn;
