@@ -18,10 +18,13 @@ App.LoadAssetsState = (function () {
         this.game.assetsPreLoad = this.game.assetsPreLoad || {};
         this.game.assetsLoaded = this.game.assetsLoaded || {};
         this.game.assetsNextState = this.game.assetsNextState || "DefaultNextState";
+        // Intended to run game.assetsSpawn() within init() of the State world to Spawn the assets:
+        this.game.assetsSpawn = fn.prototype.spawn;
     };
 
     // preload: Call "preload_TYPE" routine on each asset
     fn.prototype.preload = function () {
+        console.log("LoadAssetsState.preload: Running ...");
         for (var type in this.game.assetsMustLoad) {
             this.game.assetsLoaded[type] = this.game.assetsLoaded[type] || {};
             var handler = this["preload_" + type];
@@ -45,6 +48,7 @@ App.LoadAssetsState = (function () {
 
     // create: Call "process_TYPE" routine on each asset once preload is complete
     fn.prototype.create = function () {
+        console.log("LoadAssetsState.create: Running ...");
         for (var type in this.game.assetsPreLoad) {
             this.game.assetsLoaded[type] = this.game.assetsLoaded[type] || {};
             var handler = this["process_" + type];
@@ -77,12 +81,41 @@ App.LoadAssetsState = (function () {
         }
     };
 
+    // spawn: Call "spawn_TYPE" routine on each asset once State is launched
+    fn.prototype.spawn = function (configName) {
+        console.log("LoadAssetsState.spawn: Running with [" + configName + "] ...");
+        if (this.game.assets[configName]) {
+            for (var type in this.game.assets[configName]) {
+                var handler = this["spawn_" + type];
+                if (handler && "function" === typeof handler) {
+                    for (var key in this.game.assets[configName][type]) {
+                        if (this.game.assets[key]) {
+                            var loaded_data = this.game.assets[key];
+                            this["spawn_" + type](key,loaded_data);
+                        }
+                    }
+                }
+                else {
+                    console.log('WARNING: Asset handler "spawn_' + type + '" not defined');
+                }
+            }
+        }
+        else {
+            console.log("LoadAssetsState.spawn: Implementation Crash! No assets definition named [" + configName + "]");
+        }
+    };
+
     // preload_TYPE(KEY,DATA):
     //   Define how to preload TYPE asset into KEY from DATA
-    // process_TYPE:
-    //   Now that asset has been loaded, populate final Object into game.assets.KEY, if appropriate
+    // process_TYPE(KEY,DATA):
+    //   Now that asset has been loaded, populate any final data into game.assets.KEY
     //   If other assets are required to be loaded, then also populate
     //   this.game.assetsMustLoad.<NEWTYPE>.<NEWKEY> with more dependency DATA assets
+    // spawn_TYPE(KEY,DATA):
+    //   Use game.assets.KEY to Spawn and generate all State dependent Objects,
+    //   such as sprites or anything that relies on the current game.world.
+
+    // ==== assets ====
 
     // preload_assets
     fn.prototype.preload_assets = function(key, data) {
@@ -105,6 +138,13 @@ App.LoadAssetsState = (function () {
         this.game.assets[key] = assetsRequire;
     };
 
+    // spawn_assets
+    fn.prototype.spawn_assets = function(key, data) {
+        // nothing to do
+    };
+
+    // ==== spritesheet ====
+
     // preload_spritesheet
     fn.prototype.preload_spritesheet = function(key, data) {
         console.log("loadAssets.preload_spritesheet",key,data)
@@ -118,6 +158,13 @@ App.LoadAssetsState = (function () {
         //this.game.assets[key] = Object.create(Phaser.Sprite.prototype);
     };
 
+    // spawn_spritesheet
+    fn.prototype.spawn_spritesheet = function(key, data) {
+        // nothing to do
+    };
+
+    // ==== atlas ====
+
     // preload_atlas
     fn.prototype.preload_atlas = function(key, data) {
         console.log("loadAssets.preload_atlas",key,data)
@@ -125,11 +172,18 @@ App.LoadAssetsState = (function () {
         return data;
     };
 
-    // process_assets
+    // process_atlas
     fn.prototype.process_atlas = function(key, data) {
         console.log("loadAssets.process_atlas",key,data)
         // nothing to do yet
     };
+
+    // spawn_atlas
+    fn.prototype.spawn_atlas = function(key, data) {
+        // nothing to do
+    };
+
+    // ==== sound ====
 
     // preload_sound
     fn.prototype.preload_sound = function(key, data) {
@@ -143,6 +197,13 @@ App.LoadAssetsState = (function () {
         // nothing to do yet
     };
 
+    // spawn_sound
+    fn.prototype.spawn_sound = function(key, data) {
+        // nothing to do
+    };
+
+    // ==== image ====
+
     // preload_image
     fn.prototype.preload_image = function (key, data) {
         console.log("loadAssets.preload_image",key,data.file)
@@ -154,6 +215,13 @@ App.LoadAssetsState = (function () {
         // nothing to do yet
     };
 
+    // spawn_image
+    fn.prototype.spawn_image = function(key, data) {
+        // nothing to do
+    };
+
+    // ==== json ====
+
     // preload_json
     fn.prototype.preload_json = function (key, data) {
         console.log("loadAssets.preload_json",key,data.file)
@@ -163,6 +231,11 @@ App.LoadAssetsState = (function () {
     // process_json
     fn.prototype.process_json = function (key, data) {
         this.game.assets[key] = this.game.cache.getJSON(key);
+    };
+
+    // spawn_json
+    fn.prototype.spawn_json = function(key, data) {
+        // nothing to do
     };
 
     return fn;
