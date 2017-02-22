@@ -133,6 +133,7 @@ App.LoadAssetsState = (function () {
 
     // preload_sound
     fn.prototype.preload_sound = function(key, data) {
+        console.log("loadAssets.preload_sound",key,data.file)
         this.game.load.audio(key, data.file);
         return data;
     };
@@ -144,11 +145,24 @@ App.LoadAssetsState = (function () {
 
     // preload_image
     fn.prototype.preload_image = function (key, data) {
+        console.log("loadAssets.preload_image",key,data.file)
         this.game.load.image(key, data.file);
     };
 
+    // process_image
     fn.prototype.process_image = function (key, data) {
         // nothing to do yet
+    };
+
+    // preload_json
+    fn.prototype.preload_json = function (key, data) {
+        console.log("loadAssets.preload_json",key,data.file)
+        this.game.load.json(key, data);
+    };
+
+    // process_json
+    fn.prototype.process_json = function (key, data) {
+        this.game.assets[key] = this.game.cache.getJSON(key);
     };
 
     return fn;
