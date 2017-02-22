@@ -7,7 +7,7 @@
         <script src="vendor/phaser.js" type="text/javascript"></script>
         <script src="vendor/lodash.min.js" type="text/javascript"></script>
         <script src="vendor/webfontloader.js" type="text/javascript"></script>
-        <script src="/eureca.js"></script>
+        <script src="eureca.js"></script>
 
         <!-- Src Files -->
         <script src="src/objects/asset_manager.js" type="text/javascript"></script>
@@ -19,6 +19,7 @@
         <script src="src/hooks.js" type="text/javascript"></script>
         <script src="src/states/loading.js" type="text/javascript"></script>
         <script src="src/states/websocket.js" type="text/javascript"></script>
+        <script src="src/states/loadAssets.js" type="text/javascript"></script>
         <script src="src/states/play_game.js" type="text/javascript"></script>
     </head>
     <body>
@@ -36,11 +37,9 @@
 
                 // states
                 this.game.state.add('Loading',   App.LoadingState);
+                this.game.state.add('LoadAssets',App.LoadAssetsState);
                 this.game.state.add('WebSocket', App.WebSocketState);
                 this.game.state.add('PlayGame',  App.PlayGameState);
-                this.game.state.add('AssetManagerLoadConfig', App.AssetManager.LoadConfigState);
-                this.game.state.add('AssetManagerLoadAssets', App.AssetManager.LoadAssetsState);
-                this.game.state.add('AssetManagerProcessTilemaps', App.AssetManager.ProcessTilemapsState);
 
                 this.game.state.start('Loading');
             });
