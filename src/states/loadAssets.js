@@ -38,7 +38,7 @@ App.LoadAssetsState = (function () {
                 }
             }
             else {
-                console.log('Asset handler "preload_' + type + '" not found for key "' + key + '"');
+                console.log('Asset handler "preload_' + type + '" not defined');
             }
             delete this.game.assetsMustLoad[type];
         }
@@ -59,7 +59,7 @@ App.LoadAssetsState = (function () {
                 }
             }
             else {
-                console.log('Asset handler "process_' + type + '" not found for key "' + key + '"');
+                console.log('Asset handler "process_' + type + '" not defined');
             }
         }
 
