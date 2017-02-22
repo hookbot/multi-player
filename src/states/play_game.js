@@ -15,7 +15,7 @@ App.PlayGameState = (function () {
 
     fn.prototype.init = function () {
         console.log("PlayGameState.init Running ...");
-        this.game.assetsSpawn('assetsConfig');
+        this.game.assetsSpawn(this.game.assets.Config);
     };
 
     fn.prototype.preload = function () {

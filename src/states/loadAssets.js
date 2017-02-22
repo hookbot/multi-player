@@ -82,26 +82,21 @@ App.LoadAssetsState = (function () {
     };
 
     // spawn: Call "spawn_TYPE" routine on each asset once State is launched
-    fn.prototype.spawn = function (configName) {
-        console.log("LoadAssetsState.spawn: Running with [" + configName + "] ...");
-        if (game.assets[configName]) {
-            for (var type in game.assets[configName]) {
-                var handler = fn.prototype["spawn_" + type];
-                if (handler && "function" === typeof handler) {
-                    for (var key in game.assets[configName][type]) {
-                        if (game.assets[key]) {
-                            var loaded_data = game.assets[key];
-                            fn.prototype["spawn_" + type](key,loaded_data);
-                        }
+    fn.prototype.spawn = function (config) {
+        console.log("LoadAssetsState.spawn: Running ...");
+        for (var type in config) {
+            var handler = fn.prototype["spawn_" + type];
+            if (handler && "function" === typeof handler) {
+                for (var key in config[type]) {
+                    if (game.assets[key]) {
+                        var loaded_data = game.assets[key];
+                        handler(key,loaded_data);
                     }
                 }
-                else {
-                    console.log('WARNING: Asset handler "spawn_' + type + '" not defined');
-                }
             }
-        }
-        else {
-            console.log("LoadAssetsState.spawn: Implementation Crash! No assets definition named [" + configName + "]");
+            else {
+                console.log('WARNING: Asset handler "spawn_' + type + '" not defined');
+            }
         }
     };
 
