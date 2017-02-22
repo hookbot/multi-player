@@ -4,10 +4,10 @@ var App = App || {};
 App.WebSocketState = (function () {
     "use strict";
 
-    console.log("WebSocketState.create Compiling ...");
+    console.log("WebSocketState Compiling ...");
     var fn = function (game) {
-        Phaser.State.call(this, game);
         console.log("WebSocketState.constructor Running...");
+        Phaser.State.call(this, game);
     };
 
     fn.prototype = Object.create(Phaser.State.prototype);
