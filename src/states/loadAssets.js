@@ -104,5 +104,18 @@ App.LoadAssetsState = (function () {
         this.game.assets[key] = assetsRequire;
     };
 
+    // preload_spritesheet
+    fn.prototype.preload_spritesheet = function(key, data) {
+        console.log("loadAssets.preload_spritesheet",key,data)
+        this.game.load.spritesheet(key, data.file, data.frameWidth, data.frameHeight);
+        return data;
+    };
+
+    // process_spritesheet
+    fn.prototype.process_spritesheet = function(key, data) {
+        console.log("loadAssets.process_spritesheet",key,data)
+        //this.game.assets[key] = Object.create(Phaser.Sprite.prototype);
+    };
+
     return fn;
 })();

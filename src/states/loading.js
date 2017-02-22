@@ -21,7 +21,6 @@ App.LoadingState = (function () {
         console.log("LoadingState.preload Running...");
         // load json configuration files
         this.game.load.json('assetsConfig', 'assets/json/assets.json');
-        this.game.load.spritesheet('alienBlue', 'assets/images/alienBlue_sheet.png', 66, 96);
     };
 
     fn.prototype.create = function () {
