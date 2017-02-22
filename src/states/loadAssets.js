@@ -238,5 +238,69 @@ App.LoadAssetsState = (function () {
         // nothing to do
     };
 
+    // ==== tilemap ====
+
+    // preload_tilemap
+    fn.prototype.preload_tilemap = function (key, data) {
+        console.log("loadAssets.preload_tilemap",key,data.file)
+        _.each(_.keys(data.tilesets), (function (tileset) {
+            this.game.load.image(tileset, data.tilesets[tileset].file);
+        }).bind(this));
+        this.game.load.tilemap(key, data.json, null, Phaser.Tilemap.TILED_JSON);
+        return data;
+    };
+
+    // process_tilemap
+    fn.prototype.process_tilemap = function (key, data) {
+        console.log("loadAssets.process_tilemap",key)
+        this.game.assets[key] = data;
+    };
+
+    // spawn_tilemap
+    fn.prototype.spawn_tilemap = function(key, data) {
+        console.log("loadAssets.spawn_tilemap",key,data)
+        this.tilesets = {};
+        this.tilesets[key] = {};
+
+        this.tilesets[key].map = this.game.add.tilemap(key);
+
+        _.each(_.keys(data.tilesets), (function (tileset) {
+            this.tilesets[key].map.addTilesetImage(data.tilesets[tileset].tiled_set_name, tileset);
+        }).bind(this));
+
+        this.tilesets[key].layers = {};
+
+        _.each(_.keys(data.layers), (function (layer) {
+            var tiled_layer_name = data.layers[layer].tiled_layer_name;
+
+            this.tilesets[key].layers[layer] = this.tilesets[key].map.createLayer(tiled_layer_name);
+
+            var collision_id_first = data.layers[layer].collision_id_first;
+            var collision_id_last  = data.layers[layer].collision_id_last;
+            if (collision_id_first && collision_id_last) {
+                this.tilesets[key].map.setCollisionBetween(collision_id_first, collision_id_last, true, tiled_layer_name);
+            }
+        }).bind(this));
+
+        _.each(_.keys(data.objects), (function (object_group) {
+            _.each(_.keys(data.objects[object_group]), (function (gid) {
+                this.tilesets[key].map.createFromObjects(
+                    object_group,
+                    gid,
+                    data.objects[object_group][gid].key,
+                    data.objects[object_group][gid].frame,
+                    true,
+                    false,
+                    this.game.world,
+                    eval('App.' + data.objects[object_group][gid].class_name),
+                    true
+                );
+            }).bind(this));
+        }).bind(this));
+        this.game.assets[key] = this.tilesets[key];
+        delete this.tilesets[key];
+        delete this.tilesets;
+    };
+
     return fn;
 })();
