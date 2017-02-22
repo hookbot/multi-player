@@ -4,7 +4,9 @@ var App = App || {};
 App.PlayGameState = (function () {
     "use strict";
 
+    console.log("PlayGameState Compiling ...");
     var fn = function (game) {
+        console.log("PlayGameState.constructor Running...");
         Phaser.State.call(this, game);
     };
 
@@ -12,14 +14,21 @@ App.PlayGameState = (function () {
     fn.prototype.constructor = fn;
 
     fn.prototype.init = function () {
-        // init assets
-        this.game.asset_manager.initAssets();
+        console.log("PlayGameState.init Running ...");
+        this.game.asset_manager = new App.AssetManager(this.game);
     };
 
     fn.prototype.preload = function () {
+        console.log("PlayGameState.preload Running ...");
+        // load assets
+        this.game.asset_manager.loadAssets();
     };
 
     fn.prototype.create = function () {
+        console.log("PlayGameState.create Running ...");
+
+        // init assets
+        this.game.asset_manager.initAssets();
 
         // Clean up mob objects, if needed
         // XXX: This stupid hacking is needed because I can't figure out how to force the Objects to be good at the time the WebSocket is connected:

@@ -25,7 +25,6 @@ App.LoadingState = (function () {
 
     fn.prototype.create = function () {
         console.log("LoadingState.create Running...");
-        this.game.asset_manager = new App.AssetManager(this.game);
         this.game.assetsMustLoad = {
             "assets" : {"assetsConfig":"assets/json/assets.json"}
         };

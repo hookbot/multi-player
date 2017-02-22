@@ -19,20 +19,17 @@ App.WebSocketState = (function () {
 
     fn.prototype.preload = function () {
         console.log("WebSocketState.preload Running...");
-        // load assets
-        this.game.asset_manager.loadAssets();
     };
 
     fn.prototype.create = function () {
         console.log("WebSocketState.create Running...");
-        var game = this.game;
 
         // Connect to WebSocket server
         console.log("Connecting to WebSocket server...");
-        game.global.readyWS = false;
-        game.global.eurecaClient = new Eureca.Client();
-        game.global.eurecaClient.exports = exports; // Defined in hooks.js
-        game.global.eurecaClient.ready(function (proxy) {
+        this.game.global.readyWS = false;
+        this.game.global.eurecaClient = new Eureca.Client();
+        this.game.global.eurecaClient.exports = exports; // Defined in hooks.js
+        this.game.global.eurecaClient.ready(function (proxy) {
             console.log("WebSocket client is ready!");
             game.global.eurecaServer = proxy;
             game.global.readyWS = true;
