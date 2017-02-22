@@ -117,5 +117,16 @@ App.LoadAssetsState = (function () {
         //this.game.assets[key] = Object.create(Phaser.Sprite.prototype);
     };
 
+    // preload_sound
+    fn.prototype.preload_sound = function(key, data) {
+        this.game.load.audio(key, data.file);
+        return data;
+    };
+
+    // process_sound
+    fn.prototype.process_sound = function(key, data) {
+        // nothing to do yet
+    };
+
     return fn;
 })();
