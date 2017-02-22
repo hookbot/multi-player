@@ -83,5 +83,26 @@ App.LoadAssetsState = (function () {
     //   If other assets are required to be loaded, then also populate
     //   this.game.assetsMustLoad.<NEWTYPE>.<NEWKEY> with more dependency DATA assets
 
+    // preload_assets
+    fn.prototype.preload_assets = function(key, data) {
+        console.log("loadAssets.preload_assets",key,data)
+        game.load.json(key, data);
+        return data;
+    };
+
+    // process_assets
+    fn.prototype.process_assets = function(key, data) {
+        var assetsRequire = this.game.cache.getJSON(key);
+        console.log("Must Load More Assets:",assetsRequire);
+        // Merge assetsRequire into assetsMustLoad
+        for (var type in assetsRequire) {
+            this.game.assetsMustLoad[type] = this.game.assetsMustLoad[type] || {};
+            for (var k in assetsRequire[type]) {
+                this.game.assetsMustLoad[type][k] = assetsRequire[type][k];
+            }
+        }
+        this.game.assets[key] = assetsRequire;
+    };
+
     return fn;
 })();
