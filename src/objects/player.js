@@ -15,7 +15,6 @@ App.Player = (function () {
         this.dpad = this.game.input.keyboard.createCursorKeys();
         this.runKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         this.collideWorldBounds = true;
-        //this.game.world.bringToTop(this.foregroundLayer);
         this.speed = 150;
         this.game.global.vx = 0;
         this.game.global.vy = 0;
@@ -106,7 +105,7 @@ App.Player = (function () {
         if (!playerMoving) {
             this.animations.stop();
         }
-        this.game.physics.arcade.collide(this, this.game.global.forest.layers.collisionLayer);
+        this.game.physics.arcade.collide(this, this.game.global.forest.layers.Collisions);
         var g = this.game.global;
         var p = g.player.body;
         if (g.player.playerName && (g.vx != p.velocity.x || g.vy != p.velocity.y)) {

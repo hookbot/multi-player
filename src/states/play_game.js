@@ -43,13 +43,13 @@ App.PlayGameState = (function () {
         // our forest tilemap
         this.game.global.forest = this.game.assets.forest;
 
-        this.game.world.sendToBack(this.game.global.forest.layers.backgroundLayer);
+        this.game.world.sendToBack(this.game.global.forest.layers.BackGround);
 
         // resize world to fit the layers
-        this.game.global.forest.layers.backgroundLayer.resizeWorld();
+        this.game.global.forest.layers.BackGround.resizeWorld();
 
         this.game.global.player = this.game.add.existing(new App.Player(this.game, 140, 160));
-        this.game.world.bringToTop(this.game.global.forest.layers.foregroundLayerTop);
+        this.game.world.bringToTop(this.game.global.forest.layers.ForeGroundTop);
         this.key1 = game.input.keyboard.addKey(Phaser.Keyboard.BACKWARD_SLASH);
         this.key1.onDown.add(fn.prototype.enterMessage, this);
 

@@ -35,7 +35,7 @@ App.Mob = (function () {
             this.animations.stop();
         }
         if (this.game.global.forest) {
-            this.game.physics.arcade.collide(this, this.game.global.forest.layers.collisionLayer);
+            this.game.physics.arcade.collide(this, this.game.global.forest.layers.Collisions);
         }
     };
 

@@ -28,18 +28,18 @@
                 }
             },
             "layers": {
-                "backgroundLayer": {
+                "BackGround": {
                     "tiled_layer_name": "BackGround"
                 },
-                "foregroundLayerBot": {
+                "ForeGroundBot": {
                     "tiled_layer_name": "ForeGroundBot"
                 },
-                "collisionLayer": {
+                "Collisions": {
                     "tiled_layer_name": "Collisions",
                     "collision_id_first": 1,
                     "collision_id_last": 226
                 },
-                "foregroundLayerTop": {
+                "ForeGroundTop": {
                     "tiled_layer_name": "ForeGroundTop"
                 }
             },
