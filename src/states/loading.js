@@ -19,8 +19,6 @@ App.LoadingState = (function () {
 
     fn.prototype.preload = function () {
         console.log("LoadingState.preload Running...");
-        // load json configuration files
-        this.game.load.json('assetsConfig', 'assets/json/assets.json');
     };
 
     fn.prototype.create = function () {

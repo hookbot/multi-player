@@ -15,20 +15,15 @@ App.PlayGameState = (function () {
 
     fn.prototype.init = function () {
         console.log("PlayGameState.init Running ...");
-        this.game.asset_manager = new App.AssetManager(this.game);
+        this.game.assetsSpawn('assetsConfig');
     };
 
     fn.prototype.preload = function () {
         console.log("PlayGameState.preload Running ...");
-        // load assets
-        this.game.asset_manager.loadAssets();
     };
 
     fn.prototype.create = function () {
         console.log("PlayGameState.create Running ...");
-
-        // init assets
-        this.game.asset_manager.initAssets();
 
         // Clean up mob objects, if needed
         // XXX: This stupid hacking is needed because I can't figure out how to force the Objects to be good at the time the WebSocket is connected:
@@ -46,7 +41,7 @@ App.PlayGameState = (function () {
         }
 
         // our forest tilemap
-        this.game.global.forest = this.game.asset_manager.get_tilemap('forest');
+        this.game.global.forest = this.game.assets.forest;
 
         this.game.world.sendToBack(this.game.global.forest.layers.backgroundLayer);
 
