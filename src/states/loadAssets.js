@@ -114,7 +114,7 @@ App.LoadAssetsState = (function () {
 
     // preload_assets
     fn.prototype.preload_assets = function(key, data) {
-        console.log("loadAssets.preload_assets",key,data)
+        console.log("loadAssets.preload_assets",key,data);
         game.load.json(key, data);
         return data;
     };
@@ -142,14 +142,14 @@ App.LoadAssetsState = (function () {
 
     // preload_spritesheet
     fn.prototype.preload_spritesheet = function(key, data) {
-        console.log("loadAssets.preload_spritesheet",key,data)
+        console.log("loadAssets.preload_spritesheet",key,data);
         this.game.load.spritesheet(key, data.file, data.frameWidth, data.frameHeight);
         return data;
     };
 
     // process_spritesheet
     fn.prototype.process_spritesheet = function(key, data) {
-        console.log("loadAssets.process_spritesheet",key,data)
+        console.log("loadAssets.process_spritesheet",key,data);
         //this.game.assets[key] = Object.create(Phaser.Sprite.prototype);
     };
 
@@ -162,14 +162,14 @@ App.LoadAssetsState = (function () {
 
     // preload_atlas
     fn.prototype.preload_atlas = function(key, data) {
-        console.log("loadAssets.preload_atlas",key,data)
+        console.log("loadAssets.preload_atlas",key,data);
         this.game.load.atlas(key, data.file, data.json, Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
         return data;
     };
 
     // process_atlas
     fn.prototype.process_atlas = function(key, data) {
-        console.log("loadAssets.process_atlas",key,data)
+        console.log("loadAssets.process_atlas",key,data);
         // nothing to do yet
     };
 
@@ -182,7 +182,7 @@ App.LoadAssetsState = (function () {
 
     // preload_sound
     fn.prototype.preload_sound = function(key, data) {
-        console.log("loadAssets.preload_sound",key,data.file)
+        console.log("loadAssets.preload_sound",key,data.file);
         this.game.load.audio(key, data.file);
         return data;
     };
@@ -201,7 +201,7 @@ App.LoadAssetsState = (function () {
 
     // preload_image
     fn.prototype.preload_image = function (key, data) {
-        console.log("loadAssets.preload_image",key,data.file)
+        console.log("loadAssets.preload_image",key,data.file);
         this.game.load.image(key, data.file);
     };
 
@@ -219,7 +219,7 @@ App.LoadAssetsState = (function () {
 
     // preload_json
     fn.prototype.preload_json = function (key, data) {
-        console.log("loadAssets.preload_json",key,data.file)
+        console.log("loadAssets.preload_json",key,data.file);
         this.game.load.json(key, data);
     };
 
@@ -237,7 +237,7 @@ App.LoadAssetsState = (function () {
 
     // preload_tilemap
     fn.prototype.preload_tilemap = function (key, data) {
-        console.log("loadAssets.preload_tilemap",key,data.file)
+        console.log("loadAssets.preload_tilemap",key,data.file);
         for (var tileset in data.tilesets) {
             this.game.load.image(tileset, data.tilesets[tileset].file);
         }
@@ -247,13 +247,13 @@ App.LoadAssetsState = (function () {
 
     // process_tilemap
     fn.prototype.process_tilemap = function (key, data) {
-        console.log("loadAssets.process_tilemap",key)
+        console.log("loadAssets.process_tilemap",key);
         this.game.assets[key] = data;
     };
 
     // spawn_tilemap
     fn.prototype.spawn_tilemap = function(key, data) {
-        console.log("loadAssets.spawn_tilemap",key,data)
+        console.log("loadAssets.spawn_tilemap",key,data);
         var tilemap = {};
 
         tilemap.map = game.add.tilemap(key);
