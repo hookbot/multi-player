@@ -23,15 +23,14 @@ App.LoadAssetsState = (function () {
     // preload: Call "preload_TYPE" routine on each asset
     fn.prototype.preload = function () {
         for (var type in this.game.assetsMustLoad) {
-            this.game.assetsPreLoad[type] = this.game.assetsPreLoad[type] || {};
             this.game.assetsLoaded[type] = this.game.assetsLoaded[type] || {};
             var handler = this["preload_" + type];
             if (handler && "function" === typeof handler) {
+                this.game.assetsPreLoad[type] = this.game.assetsPreLoad[type] || {};
                 for (var key in this.game.assetsMustLoad[type]) {
                     if (!this.game.assetsLoaded[type][key] &&
                         !this.game.assetsPreLoad[type][key]) {
                         var data = this.game.assetsMustLoad[type][key];
-                        //this.game.assetsPreLoad[type][key] = handler(key,data);
                         this.game.assetsPreLoad[type][key] = this["preload_" + type](key,data);
                     }
                     delete this.game.assetsMustLoad[type][key];
@@ -55,7 +54,6 @@ App.LoadAssetsState = (function () {
                     var preload_data = this.game.assetsPreLoad[type][key];
                     delete this.game.assetsPreLoad[type][key];
                     this["process_" + type](key,preload_data);
-                    //handler(key,preload_data);
                 }
             }
             else {
