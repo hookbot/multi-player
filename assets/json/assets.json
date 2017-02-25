@@ -17,22 +17,6 @@
     "tilemap" : {
         "forest": {
             "json": "assets/json/Forest-Big.json",
-            "layers": {
-                "BackGround": {
-                    "tiled_layer_name": "BackGround"
-                },
-                "ForeGroundBot": {
-                    "tiled_layer_name": "ForeGroundBot"
-                },
-                "Collisions": {
-                    "tiled_layer_name": "Collisions",
-                    "collision_id_first": 1,
-                    "collision_id_last": 226
-                },
-                "ForeGroundTop": {
-                    "tiled_layer_name": "ForeGroundTop"
-                }
-            },
             "objects": {
                 "Objects": {
                     "FlagOrange:flag_orange_right": {
