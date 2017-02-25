@@ -100,6 +100,17 @@ App.LoadAssetsState = (function () {
         }
     };
 
+    // ==== HELPER FUNCTIONS ====
+    fn.prototype.dirname = function (filename) {
+        return filename.match( /.*\// );
+        //return filename.replace(/^(.*\/)[^\/]*/,'$1');
+    };
+
+    fn.prototype.basename = function (filename) {
+        return filename.replace( /.*\//, "" );
+    };
+
+    // ==== ASSET TYPE DEFINITIONS ====
     // preload_TYPE(KEY,DATA):
     //   Define how to preload TYPE asset into KEY from DATA
     // process_TYPE(KEY,DATA):
@@ -121,6 +132,7 @@ App.LoadAssetsState = (function () {
 
     // process_assets
     fn.prototype.process_assets = function(key, data) {
+        console.log("loadAssets.process_assets",key);
         var assetsRequire = this.game.cache.getJSON(key);
         console.log("Must Load More Assets:",assetsRequire);
         // Merge assetsRequire into assetsMustLoad
@@ -237,7 +249,20 @@ App.LoadAssetsState = (function () {
 
     // preload_tilemap
     fn.prototype.preload_tilemap = function (key, data) {
-        console.log("loadAssets.preload_tilemap",key,data.file);
+        console.log("loadAssets.preload_tilemap",key,data.json);
+        return data;
+    };
+
+    // process_tilemap
+    fn.prototype.process_tilemap = function (key, data) {
+        console.log("loadAssets.process_tilemap",key,data);
+        this.game.assetsMustLoad.tilemap2 = this.game.assetsMustLoad.tilemap2 || {};
+        this.game.assetsMustLoad.tilemap2[key] = data;
+    };
+
+    // preload_tilemap2
+    fn.prototype.preload_tilemap2 = function (key, data) {
+        console.log("loadAssets.preload_tilemap2",key,data.json);
         for (var tileset in data.tilesets) {
             this.game.load.image(tileset, data.tilesets[tileset].file);
         }
@@ -245,9 +270,9 @@ App.LoadAssetsState = (function () {
         return data;
     };
 
-    // process_tilemap
-    fn.prototype.process_tilemap = function (key, data) {
-        console.log("loadAssets.process_tilemap",key);
+    // process_tilemap2
+    fn.prototype.process_tilemap2 = function (key, data) {
+        console.log("loadAssets.process_tilemap2",key);
         this.game.assets[key] = data;
     };
 
