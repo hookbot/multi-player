@@ -27,6 +27,14 @@
          "height":20,
          "name":"Collisions",
          "opacity":1,
+         "properties":
+            {
+             "isCollisionLayer":true
+            },
+         "propertytypes":
+            {
+             "isCollisionLayer":"bool"
+            },
          "type":"tilelayer",
          "visible":true,
          "width":40,
