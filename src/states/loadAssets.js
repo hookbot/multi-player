@@ -126,7 +126,7 @@ App.LoadAssetsState = (function () {
     // preload_assets
     fn.prototype.preload_assets = function(key, data) {
         console.log("loadAssets.preload_assets",key,data);
-        game.load.json(key, data);
+        this.game.load.json(key, data);
         return data;
     };
 
@@ -250,22 +250,29 @@ App.LoadAssetsState = (function () {
     // preload_tilemap
     fn.prototype.preload_tilemap = function (key, data) {
         console.log("loadAssets.preload_tilemap",key,data.json);
+        this.game.load.json("tilemap_json_" + key, data.json);
         return data;
     };
 
     // process_tilemap
     fn.prototype.process_tilemap = function (key, data) {
         console.log("loadAssets.process_tilemap",key,data);
+        var tilemap_data = this.game.cache.getJSON("tilemap_json_" + key);
+        var tilesets = tilemap_data.tilesets || [];
+        for (var tileset in tilesets) {
+            var fullpath = fn.prototype.dirname(data.json) + tilesets[tileset].image;
+            this.game.assetsMustLoad.image = this.game.assetsMustLoad.image || {};
+            this.game.assetsMustLoad.image[tilesets[tileset].name] = {"file":fullpath};
+        }
         this.game.assetsMustLoad.tilemap2 = this.game.assetsMustLoad.tilemap2 || {};
         this.game.assetsMustLoad.tilemap2[key] = data;
+        this.game.assets.tilemap_json = this.game.assets.tilemap || {};
+        this.game.assets.tilemap_json[key] = tilemap_data;
     };
 
     // preload_tilemap2
     fn.prototype.preload_tilemap2 = function (key, data) {
         console.log("loadAssets.preload_tilemap2",key,data.json);
-        for (var tileset in data.tilesets) {
-            this.game.load.image(tileset, data.tilesets[tileset].file);
-        }
         this.game.load.tilemap(key, data.json, null, Phaser.Tilemap.TILED_JSON);
         return data;
     };
