@@ -12,12 +12,20 @@ App.LoadAssetsState = (function () {
     fn.prototype.constructor = fn;
 
     // init: Run every time this state is started or restart:
-    fn.prototype.init = function () {
+    fn.prototype.init = function (args) {
+        console.debug("loadAssets.init",args);
+        args = args || {};
+        if (args.assetsConfig) {
+            var must = args.assetsConfig;
+            if (typeof must === 'string') must = {'Config':must};
+            this.game.assetsMustLoad = {"assets":must};
+        }
+        if (args.nextState) this.game.assetsNextState = args.nextState;
+        if (!this.game.assetsNextState || !this.game.assetsMustLoad) console.error("SYNTAX: state.start('loadAssets',undefined,undefined,{'assetsConfig':ASSETS_JSON_FILE},'nextState':STATE_KEY})");
         this.game.assets = this.game.assets || {};
         this.game.assetsMustLoad = this.game.assetsMustLoad || {};
         this.game.assetsPreLoad = this.game.assetsPreLoad || {};
         this.game.assetsLoaded = this.game.assetsLoaded || {};
-        this.game.assetsNextState = this.game.assetsNextState || "DefaultNextState";
         // Intended to run game.assetsSpawn() within init() of the State world to Spawn the assets:
         this.game.assetsSpawn = fn.prototype.spawn;
     };
