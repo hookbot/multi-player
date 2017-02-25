@@ -21,10 +21,6 @@
                 "Kenny_terrain_32": {
                     "file": "assets/images/RPGpack_sheet_32.png",
                     "tiled_set_name": "Kenny_terrain_32"
-                },
-                "flag_atlas": {
-                    "file": "assets/images/flag_atlas.png",
-                    "tiled_set_name": "flag_atlas"
                 }
             },
             "layers": {
