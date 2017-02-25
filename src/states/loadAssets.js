@@ -306,15 +306,19 @@ App.LoadAssetsState = (function () {
 
         tilemap.layers = {};
 
-        for (var layer in data.layers) {
-            var tiled_layer_name = data.layers[layer].tiled_layer_name;
+        for (var layer in tilemap_data.layers) {
+            var tiled_layer_name = tilemap_data.layers[layer].name;
 
-            tilemap.layers[layer] = tilemap.map.createLayer(tiled_layer_name);
+            tilemap.layers[tiled_layer_name] = tilemap.map.createLayer(tiled_layer_name);
 
-            var collision_id_first = data.layers[layer].collision_id_first;
-            var collision_id_last  = data.layers[layer].collision_id_last;
-            if (collision_id_first && collision_id_last) {
-                tilemap.map.setCollisionBetween(collision_id_first, collision_id_last, true, tiled_layer_name);
+            if (tilemap_data.layers[layer].properties && tilemap_data.layers[layer].properties.isCollisionLayer) {
+                var collision_id_last  = 1;
+                for (var id in tilemap_data.layers[layer].data) {
+                    if (tilemap_data.layers[layer].data[id] > collision_id_last) {
+                        collision_id_last = tilemap_data.layers[layer].data[id];
+                    }
+                }
+                tilemap.map.setCollisionBetween(1, collision_id_last + 1, true, tiled_layer_name);
             }
         }
 
