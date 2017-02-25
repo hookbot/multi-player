@@ -41,9 +41,9 @@
             },
             "objects": {
                 "Objects": {
-                    "flag_orange_right": {
+                    "FlagOrange:flag_orange_right": {
                         "key": "flag_atlas",
-                        "frame": "flag_orange_right_1",
+                        "frame": "FlagOrange:flag_orange_right_1",
                         "class_name": "FlagOrange"
                     },
                     "flag_orange_left": {
