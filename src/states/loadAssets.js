@@ -298,8 +298,10 @@ App.LoadAssetsState = (function () {
 
         tilemap.map = game.add.tilemap(key);
 
-        for (var tileset in data.tilesets) {
-            tilemap.map.addTilesetImage(data.tilesets[tileset].tiled_set_name, tileset);
+        var tilemap_data = game.assets.tilemap_json[key];
+        var tilesets = tilemap_data.tilesets || [];
+        for (var tileset in tilesets) {
+            tilemap.map.addTilesetImage(tilesets[tileset].name, tilesets[tileset].name);
         }
 
         tilemap.layers = {};
