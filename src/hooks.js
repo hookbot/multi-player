@@ -40,7 +40,7 @@ exports.setId = function(id) {
         // use arcade physics
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        game.state.start('PlayGame');
+        game.state.start('PlayGame',false,false);
     }
 };
 

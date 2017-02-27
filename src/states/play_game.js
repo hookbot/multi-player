@@ -25,21 +25,6 @@ App.PlayGameState = (function () {
     fn.prototype.create = function () {
         console.log("PlayGameState.create Running ...");
 
-        // Clean up mob objects, if needed
-        // XXX: This stupid hacking is needed because I can't figure out how to force the Objects to be good at the time the WebSocket is connected:
-        for (var c in this.game.global.mob) {
-            if (!this.game.global.mob[c].body) {
-                // Found broken mob?
-                console.log("[DEBUG] REPAIRING HORKED USER OBJECT",c);
-                var mobx = this.game.global.mob[c].x;
-                var moby = this.game.global.mob[c].y;
-                // Wipe
-                exports.unspawn(c);
-                // Re-add fresh
-                exports.spawn(c,mobx,moby);
-            }
-        }
-
         // our forest tilemap
         this.game.global.forest = this.game.assetManager.assets.tilemap.forest;
 
