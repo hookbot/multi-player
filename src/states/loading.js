@@ -14,7 +14,7 @@ App.LoadingState = (function () {
     fn.prototype.constructor = fn;
 
     fn.prototype.init = function () {
-        this.game.global.mob = {};
+
     };
 
     fn.prototype.preload = function () {
