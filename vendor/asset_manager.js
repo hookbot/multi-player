@@ -374,23 +374,24 @@ App.AssetManager = (function () {
                     tilemap.map.setCollisionBetween(1, collision_id_last + 1, true, tiled_layer_name);
                 }
             }
-        }
-
-        for (var object_group in data.objects) {
-            for (var gid in data.objects[object_group]) {
-                tilemap.map.createFromObjects(
-                    object_group,
-                    gid,
-                    data.objects[object_group][gid].key,
-                    data.objects[object_group][gid].frame,
-                    true,
-                    false,
-                    this.game.world,
-                    eval('App.' + data.objects[object_group][gid].class_name),
-                    true
-                );
+            else if (tilemap_data.layers[layer].type == "objectgroup") {
+                var objects = tilemap_data.layers[layer].objects;
+                for (var i in objects) {
+                    tilemap.map.createFromObjects(
+                        tilemap_data.layers[layer].name,
+                        objects[i].name,
+                        objects[i].properties.key,
+                        objects[i].properties.frame,
+                        true,
+                        false,
+                        this.game.world,
+                        eval(objects[i].properties.class),
+                        true
+                    );
+                }
             }
         }
+
         this.assets.tilemap = this.assets.tilemap || {};
         this.assets.tilemap[key] = tilemap;
     };
