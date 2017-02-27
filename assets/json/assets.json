@@ -19,9 +19,9 @@
             "json": "assets/json/Forest-Big.json",
             "objects": {
                 "Objects": {
-                    "FlagOrange:flag_orange_right": {
+                    "flag_orange_right": {
                         "key": "flag_atlas",
-                        "frame": "FlagOrange:flag_orange_right_1",
+                        "frame": "flag_orange_right_1",
                         "class_name": "FlagOrange"
                     },
                     "flag_orange_left": {

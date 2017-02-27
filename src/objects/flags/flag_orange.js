@@ -10,7 +10,7 @@ App.FlagOrange = (function () {
 
         this.frame_legend = {
             "flag_orange_left": ['flag_orange_left_1','flag_orange_left_2'],
-            "FlagOrange:flag_orange_right": ['FlagOrange:flag_orange_right_1','FlagOrange:flag_orange_right_2']
+            "flag_orange_right": ['flag_orange_right_1','flag_orange_right_2']
         };
 
         App.Flag.call(this, game, x, y, key, frame);
