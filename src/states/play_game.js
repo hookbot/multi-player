@@ -15,7 +15,7 @@ App.PlayGameState = (function () {
 
     fn.prototype.init = function () {
         console.log("PlayGameState.init Running ...");
-        this.game.assetsSpawn(this.game.assets.Config);
+        this.game.assetManager.spawn(this.game.assetManager.assets.Config);
     };
 
     fn.prototype.preload = function () {
@@ -41,7 +41,7 @@ App.PlayGameState = (function () {
         }
 
         // our forest tilemap
-        this.game.global.forest = this.game.assets.forest;
+        this.game.global.forest = this.game.assetManager.assets.tilemap.forest;
 
         this.game.world.sendToBack(this.game.global.forest.layers.BackGround);
 
