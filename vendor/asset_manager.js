@@ -362,18 +362,20 @@ App.AssetManager = (function () {
         tilemap.layers = {};
 
         for (var layer in tilemap_data.layers) {
-            var tiled_layer_name = tilemap_data.layers[layer].name;
+            if (tilemap_data.layers[layer].type == "tilelayer") {
+                var tiled_layer_name = tilemap_data.layers[layer].name;
 
-            tilemap.layers[tiled_layer_name] = tilemap.map.createLayer(tiled_layer_name);
+                tilemap.layers[tiled_layer_name] = tilemap.map.createLayer(tiled_layer_name);
 
-            if (tilemap_data.layers[layer].properties && tilemap_data.layers[layer].properties.isCollisionLayer) {
-                var collision_id_last  = 1;
-                for (var id in tilemap_data.layers[layer].data) {
-                    if (tilemap_data.layers[layer].data[id] > collision_id_last) {
-                        collision_id_last = tilemap_data.layers[layer].data[id];
+                if (tilemap_data.layers[layer].properties && tilemap_data.layers[layer].properties.isCollisionLayer) {
+                    var collision_id_last  = 1;
+                    for (var id in tilemap_data.layers[layer].data) {
+                        if (tilemap_data.layers[layer].data[id] > collision_id_last) {
+                            collision_id_last = tilemap_data.layers[layer].data[id];
+                        }
                     }
+                    tilemap.map.setCollisionBetween(1, collision_id_last + 1, true, tiled_layer_name);
                 }
-                tilemap.map.setCollisionBetween(1, collision_id_last + 1, true, tiled_layer_name);
             }
         }
 
