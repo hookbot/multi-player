@@ -35,6 +35,7 @@ App.LoadAssetsState = (function () {
     return fn;
 })();
 
+// SYNTAX: this.game.assetManager = new App.AssetManager(this.game,{{'assetsConfig':ASSETS_JSON_FILE},'nextState':STATE_KEY});
 App.AssetManager = (function () {
     "use strict";
 
@@ -71,10 +72,6 @@ App.AssetManager = (function () {
         // Launch the state loop passing myself, the Asset Manager object
         this.game.state.start('LoadAssets', undefined, undefined, this);
     };
-
-    // Allow this Object to be created using "new"
-    // XXX: Is this explicit constructor method setting required?
-    fn.prototype.constructor = fn;
 
     // init: Run every time this state is started or restart:
     fn.prototype.initState = function () {
