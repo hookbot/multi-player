@@ -235,7 +235,12 @@ App.AssetManager = (function () {
     // preload_atlas
     fn.prototype.preload_atlas = function(key, data) {
         console.log("AssetManager.preload_atlas",key,data);
-        this.game.load.atlas(key, data.file, data.json, Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+        if (data.json) {
+            this.game.load.atlas(key, data.file, data.json, undefined, Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+        }
+        else {
+            this.game.load.atlas(key, data.file, undefined, data.data, Phaser.Loader.TEXTURE_ATLAS_JSON_ARRAY);
+        }
         return data;
     };
 
