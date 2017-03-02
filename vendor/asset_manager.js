@@ -315,14 +315,14 @@ App.AssetManager = (function () {
     // preload_tilemap
     fn.prototype.preload_tilemap = function (key, data) {
         console.log("AssetManager.preload_tilemap",key,data.json);
-        this.game.load.json("tilemap_json_" + key, data.json);
+        this.game.load.tilemap(key, data.json, null, Phaser.Tilemap.TILED_JSON);
         return data;
     };
 
     // process_tilemap
     fn.prototype.process_tilemap = function (key, data) {
         console.log("AssetManager.process_tilemap",key,data);
-        var tilemap_data = this.game.cache.getJSON("tilemap_json_" + key);
+        var tilemap_data = this.game.cache.getTilemapData(key).data;
         var tilesets = tilemap_data.tilesets || [];
         for (var tileset in tilesets) {
             var fullpath = fn.prototype.dirname(data.json) + tilesets[tileset].image;
@@ -338,7 +338,6 @@ App.AssetManager = (function () {
     // preload_tilemap2
     fn.prototype.preload_tilemap2 = function (key, data) {
         console.log("AssetManager.preload_tilemap2",key,data.json);
-        this.game.load.tilemap(key, data.json, null, Phaser.Tilemap.TILED_JSON);
         return data;
     };
 
