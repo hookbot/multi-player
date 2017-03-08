@@ -10,7 +10,7 @@ App.Flag = (function () {
 
         Phaser.Sprite.call(this, game, x, y, key, frame);
 
-        this.animations.add('wave', this.frames, 8, true);
+        this.animations.add('wave', this.frames, 4, true);
 
         this.animations.play('wave');
 
