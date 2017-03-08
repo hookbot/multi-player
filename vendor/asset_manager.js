@@ -352,7 +352,7 @@ App.AssetManager = (function () {
 
         tilemap.map = this.game.add.tilemap(key);
 
-        var tilemap_data = this.assets.tilemap_json[key];
+        var tilemap_data = this.game.cache.getTilemapData(key).data;
         var tilesets = tilemap_data.tilesets || [];
         for (var tileset in tilesets) {
             tilemap.map.addTilesetImage(tilesets[tileset].name, tilesets[tileset].name);
