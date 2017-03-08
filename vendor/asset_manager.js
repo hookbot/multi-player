@@ -329,19 +329,6 @@ App.AssetManager = (function () {
             this.mustLoad.image = this.mustLoad.image || {};
             this.mustLoad.image[tilesets[tileset].name] = {"file":fullpath};
         }
-        this.mustLoad.tilemap2 = this.mustLoad.tilemap2 || {};
-        this.mustLoad.tilemap2[key] = data;
-    };
-
-    // preload_tilemap2
-    fn.prototype.preload_tilemap2 = function (key, data) {
-        console.log("AssetManager.preload_tilemap2",key,data.json);
-        return data;
-    };
-
-    // process_tilemap2
-    fn.prototype.process_tilemap2 = function (key, data) {
-        console.log("AssetManager.process_tilemap2",key);
         this.assets[key] = data;
     };
 
