@@ -58,7 +58,7 @@
          "name":"Objects",
          "objects":[
                 {
-                 "gid":261,
+                 "gid":273,
                  "height":32,
                  "id":2,
                  "name":"flag_orange_right",
@@ -82,7 +82,7 @@
                  "y":314
                 }, 
                 {
-                 "gid":262,
+                 "gid":276,
                  "height":32,
                  "id":3,
                  "name":"flag_green_left",
@@ -146,109 +146,61 @@
          "imagewidth":128,
          "margin":0,
          "name":"flag_atlas_TILED",
-         "spacing":0,
+         "spacing":1,
          "tilecount":16,
          "tileheight":32,
          "tiles":
             {
-             "0":
+             "12":
                 {
                  "animation":[
                         {
-                         "duration":175,
+                         "duration":250,
                          "tileid":0
                         }, 
                         {
-                         "duration":175,
+                         "duration":250,
                          "tileid":4
                         }]
                 },
-             "1":
+             "13":
                 {
                  "animation":[
                         {
-                         "duration":175,
-                         "tileid":1
-                        }, 
-                        {
-                         "duration":175,
-                         "tileid":2
-                        }]
-                },
-             "2":
-                {
-                 "animation":[
-                        {
-                         "duration":175,
-                         "tileid":1
-                        }, 
-                        {
-                         "duration":175,
-                         "tileid":2
-                        }]
-                },
-             "4":
-                {
-                 "animation":[
-                        {
-                         "duration":175,
-                         "tileid":0
-                        }, 
-                        {
-                         "duration":175,
-                         "tileid":4
-                        }]
-                },
-             "5":
-                {
-                 "animation":[
-                        {
-                         "duration":175,
-                         "tileid":5
-                        }, 
-                        {
-                         "duration":175,
-                         "tileid":9
-                        }]
-                },
-             "6":
-                {
-                 "animation":[
-                        {
-                         "duration":175,
+                         "duration":250,
                          "tileid":6
                         }, 
                         {
-                         "duration":175,
+                         "duration":250,
                          "tileid":8
                         }]
                 },
-             "8":
+             "14":
                 {
                  "animation":[
                         {
-                         "duration":175,
-                         "tileid":6
-                        }, 
-                        {
-                         "duration":175,
-                         "tileid":8
-                        }]
-                },
-             "9":
-                {
-                 "animation":[
-                        {
-                         "duration":175,
+                         "duration":250,
                          "tileid":5
                         }, 
                         {
-                         "duration":175,
+                         "duration":250,
                          "tileid":9
+                        }]
+                },
+             "15":
+                {
+                 "animation":[
+                        {
+                         "duration":250,
+                         "tileid":1
+                        }, 
+                        {
+                         "duration":250,
+                         "tileid":2
                         }]
                 }
             },
-         "tilewidth":32
+         "tilewidth":31
         }],
  "tilewidth":32,
  "version":1,
