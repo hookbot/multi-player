@@ -331,8 +331,6 @@ App.AssetManager = (function () {
         }
         this.mustLoad.tilemap2 = this.mustLoad.tilemap2 || {};
         this.mustLoad.tilemap2[key] = data;
-        this.assets.tilemap_json = this.assets.tilemap_json || {};
-        this.assets.tilemap_json[key] = tilemap_data;
     };
 
     // preload_tilemap2
