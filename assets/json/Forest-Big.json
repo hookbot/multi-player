@@ -145,7 +145,7 @@
          "imageheight":128,
          "imagewidth":128,
          "margin":0,
-         "name":"flag_atlas_CONFLICT",
+         "name":"flag_atlas_TILED",
          "spacing":0,
          "tilecount":16,
          "tileheight":32,
