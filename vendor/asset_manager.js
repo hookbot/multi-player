@@ -325,10 +325,34 @@ App.AssetManager = (function () {
         var tilemap_data = this.game.cache.getTilemapData(key).data;
         data.parsed = Phaser.TilemapParser.parseTiledJSON(tilemap_data);
         var tilesets = tilemap_data.tilesets || [];
+        data.animations = {};
         for (var tileset in tilesets) {
+            var name = tilesets[tileset].name;
             var fullpath = fn.prototype.dirname(data.json) + tilesets[tileset].image;
             this.mustLoad.image = this.mustLoad.image || {};
-            this.mustLoad.image[tilesets[tileset].name] = {"file":fullpath};
+            this.mustLoad.image[name] = {"file":fullpath};
+            var tiles = tilesets[tileset].tiles;
+            if (tiles) {
+                var f = tilesets[tileset].firstgid;
+                for (var tile_id in tiles) {
+                    var anim = tiles[tile_id].animation;
+                    if (anim) {
+                        var tileset_tileid = Math.floor(tile_id);
+                        var tileset_gid = f + tileset_tileid;
+                        data.animations[tileset_gid] = data.animations[tileset_gid] || [];
+                        console.debug("TILESET WITH ANIMATIONS [" + name + "] TileID " + tileset_tileid + " + " + f + " => " + tileset_gid);
+                        for (var frame in anim) {
+                            var frame_tileid = anim[frame].tileid;
+                            var frame_gid = f + frame_tileid;
+                            console.debug("FRAME[" + frame + "] : TileID " + frame_tileid + " => " + frame_gid + " FOR " + anim[frame].duration + " ms");
+                            data.animations[tileset_gid].push({
+                                gid : frame_gid,
+                                duration : anim[frame].duration,
+                            });
+                        }
+                    }
+                }
+            }
         }
         this.assets[key] = data;
     };
