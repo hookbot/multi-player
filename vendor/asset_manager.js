@@ -329,6 +329,7 @@ App.AssetManager = (function () {
         for (var tileset in tilesets) {
             var name = tilesets[tileset].name;
             var fullpath = fn.prototype.dirname(data.json) + tilesets[tileset].image;
+            var load_atlas = {};
             var tiles = tilesets[tileset].tiles;
             if (tiles) {
                 var f = tilesets[tileset].firstgid;
@@ -353,11 +354,22 @@ App.AssetManager = (function () {
                                 h : tilesets[tinfo[2]].tileheight,
                                 image_key : tilesets[tinfo[2]].name,
                             });
+                            if (tinfo[2] == tileset) load_atlas[tileset_gid]++;
                         }
                     }
                 }
             }
             var frames = {};
+            if (_.keys(load_atlas).length) {
+                // Found animations for this image
+                // Populate the corresponding frames
+                for (var atlas_gid in load_atlas) {
+                    var anims = data.animations[atlas_gid];
+                    for (var i in anims) {
+                        frames["gid_"+atlas_gid+"_frame_"+i] = { frame: anims[i] };
+                    }
+                }
+            }
             // Normal load "image" is a subset of load "atlas"
             // So always use "atlas" just to be safe and clean
             this.mustLoad.atlas = this.mustLoad.atlas || {};
