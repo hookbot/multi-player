@@ -1,11 +1,4 @@
 {
-    "atlas": {
-        "flag_atlas": {
-            "file": "assets/images/flag_atlas.png",
-            "json": "assets/json/flag_atlas.json"
-        }
-    },
-
     "spritesheet": {
         "alienBlue": {
             "file": "assets/images/alienBlue_sheet.png",
@@ -19,6 +12,7 @@
             "json": "assets/json/Forest-Big.json"
         }
     },
+
     "sound": {
         "1_sound": {
             "file": "assets/sounds/1.ogg"
