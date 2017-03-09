@@ -415,11 +415,22 @@ App.AssetManager = (function () {
             else if (tilemap_data.layers[layer].type == "objectgroup") {
                 var objects = tilemap_data.layers[layer].objects;
                 for (var i in objects) {
+                    var object_gid = objects[i].gid;
+                    var image_key = objects[i].properties.key || objects[i].name;
+                    var frame_id = objects[i].properties.frame || 0;
+                    if (object_gid) {
+                        var anims = data.animations[object_gid];
+                        if (anims && anims.length) {
+                            // Just use the first frame of the anims list
+                            image_key = anims[0].image_key;
+                            frame_id = "gid_" + object_gid + "_frame_0";
+                        }
+                    }
                     tilemap.map.createFromObjects(
                         tilemap_data.layers[layer].name,
                         objects[i].name,
-                        objects[i].properties.key,
-                        objects[i].properties.frame,
+                        image_key,
+                        frame_id,
                         true,
                         false,
                         this.game.world,
