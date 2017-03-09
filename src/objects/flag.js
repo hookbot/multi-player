@@ -8,7 +8,6 @@ App.Flag = (function () {
         Phaser.Sprite.call(this, game, x, y, key, frame);
 
         this.frames = this.frames || this.findKeyFrames(key, frame);
-        this.frames = this.frames || this.findFrames(frame);
 
         this.animations.add('wave', this.frames, 4, true);
 
@@ -36,17 +35,6 @@ App.Flag = (function () {
         }
         return matches;
     }
-
-    fn.prototype.getFrameLegend = function () { return this.frame_legend || {}; };
-
-    fn.prototype.findFrames = function (frame) {
-        var frame_legend     = this.getFrameLegend();
-        var frame_legend_key = _.reduce(_.keys(this.getFrameLegend()), (function (final, key) {
-            return frame.match(new RegExp(key, 'i')) ? key : final;
-        }).bind(this));
-
-        return frame_legend[frame_legend_key];
-    };
 
     fn.prototype.update = function () {
         if (this.game.global.player && ! this.following) {
