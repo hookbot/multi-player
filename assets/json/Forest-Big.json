@@ -64,7 +64,7 @@
                  "name":"flag_orange_right",
                  "properties":
                     {
-                     "class":"App.FlagOrange",
+                     "class":"App.Flag",
                      "frame":"flag_orange_right_1",
                      "key":"flag_atlas"
                     },
@@ -88,7 +88,7 @@
                  "name":"flag_green_left",
                  "properties":
                     {
-                     "class":"App.FlagGreen",
+                     "class":"App.Flag",
                      "frame":"flag_green_left_1",
                      "key":"flag_atlas"
                     },
