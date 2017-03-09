@@ -64,15 +64,11 @@
                  "name":"flag_orange_right",
                  "properties":
                     {
-                     "class":"App.Flag",
-                     "frame":"flag_orange_right_1",
-                     "key":"flag_atlas"
+                     "class":"App.Flag"
                     },
                  "propertytypes":
                     {
-                     "class":"string",
-                     "frame":"string",
-                     "key":"string"
+                     "class":"string"
                     },
                  "rotation":0,
                  "type":"",
@@ -88,15 +84,11 @@
                  "name":"flag_green_left",
                  "properties":
                     {
-                     "class":"App.Flag",
-                     "frame":"flag_green_left_1",
-                     "key":"flag_atlas"
+                     "class":"App.Flag"
                     },
                  "propertytypes":
                     {
-                     "class":"string",
-                     "frame":"string",
-                     "key":"string"
+                     "class":"string"
                     },
                  "rotation":0,
                  "type":"",
