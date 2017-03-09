@@ -323,6 +323,7 @@ App.AssetManager = (function () {
     fn.prototype.process_tilemap = function (key, data) {
         console.log("AssetManager.process_tilemap",key,data);
         var tilemap_data = this.game.cache.getTilemapData(key).data;
+        data.parsed = Phaser.TilemapParser.parseTiledJSON(tilemap_data);
         var tilesets = tilemap_data.tilesets || [];
         for (var tileset in tilesets) {
             var fullpath = fn.prototype.dirname(data.json) + tilesets[tileset].image;
