@@ -345,9 +345,15 @@ App.AssetManager = (function () {
                             var frame_tileid = anim[frame].tileid;
                             var frame_gid = f + frame_tileid;
                             console.debug("FRAME[" + frame + "] : TileID " + frame_tileid + " => " + frame_gid + " FOR " + anim[frame].duration + " ms");
+                            var tinfo = data.parsed.tiles[frame_gid];
                             data.animations[tileset_gid].push({
                                 gid : frame_gid,
                                 duration : anim[frame].duration,
+                                x : tinfo[0],
+                                y : tinfo[1],
+                                w : tilesets[tinfo[2]].tilewidth,
+                                h : tilesets[tinfo[2]].tileheight,
+                                image_key : tilesets[tinfo[2]].name,
                             });
                         }
                     }
