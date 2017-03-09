@@ -329,8 +329,6 @@ App.AssetManager = (function () {
         for (var tileset in tilesets) {
             var name = tilesets[tileset].name;
             var fullpath = fn.prototype.dirname(data.json) + tilesets[tileset].image;
-            this.mustLoad.image = this.mustLoad.image || {};
-            this.mustLoad.image[name] = {"file":fullpath};
             var tiles = tilesets[tileset].tiles;
             if (tiles) {
                 var f = tilesets[tileset].firstgid;
@@ -359,6 +357,14 @@ App.AssetManager = (function () {
                     }
                 }
             }
+            var frames = {};
+            // Normal load "image" is a subset of load "atlas"
+            // So always use "atlas" just to be safe and clean
+            this.mustLoad.atlas = this.mustLoad.atlas || {};
+            this.mustLoad.atlas[name] = {
+                file: fullpath,
+                data: { frames: frames },
+            };
         }
         this.assets[key] = data;
     };
