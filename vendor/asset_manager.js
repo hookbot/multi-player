@@ -416,8 +416,9 @@ App.AssetManager = (function () {
                 var objects = tilemap_data.layers[layer].objects;
                 for (var i in objects) {
                     var object_gid = objects[i].gid;
-                    var image_key = objects[i].properties.key || objects[i].name;
-                    var frame_id = objects[i].properties.frame || 0;
+                    var image_key = objects[i].name;
+                    var frame_id = 0;
+                    var type = objects[i].type;
                     if (object_gid) {
                         var anims = data.animations[object_gid];
                         if (anims && anims.length) {
@@ -426,17 +427,19 @@ App.AssetManager = (function () {
                             frame_id = "gid_" + object_gid + "_frame_0";
                         }
                     }
-                    tilemap.map.createFromObjects(
-                        tilemap_data.layers[layer].name,
-                        objects[i].name,
-                        image_key,
-                        frame_id,
-                        true,
-                        false,
-                        this.game.world,
-                        eval(objects[i].properties.class),
-                        true
-                    );
+                    if (type) {
+                        tilemap.map.createFromObjects(
+                            tilemap_data.layers[layer].name,
+                            objects[i].name,
+                            image_key,
+                            frame_id,
+                            true,
+                            false,
+                            this.game.world,
+                            eval(type),
+                            true
+                        );
+                    }
                 }
             }
         }

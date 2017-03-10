@@ -60,18 +60,10 @@
                 {
                  "gid":273,
                  "height":32,
-                 "id":2,
+                 "id":1,
                  "name":"flag_orange_right",
-                 "properties":
-                    {
-                     "class":"App.Flag"
-                    },
-                 "propertytypes":
-                    {
-                     "class":"string"
-                    },
                  "rotation":0,
-                 "type":"",
+                 "type":"App.Flag",
                  "visible":true,
                  "width":32,
                  "x":102,
@@ -80,18 +72,10 @@
                 {
                  "gid":276,
                  "height":32,
-                 "id":3,
+                 "id":2,
                  "name":"flag_green_left",
-                 "properties":
-                    {
-                     "class":"App.Flag"
-                    },
-                 "propertytypes":
-                    {
-                     "class":"string"
-                    },
                  "rotation":0,
-                 "type":"",
+                 "type":"App.Flag",
                  "visible":true,
                  "width":32,
                  "x":1114,
@@ -104,7 +88,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":9,
+ "nextobjectid":3,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
