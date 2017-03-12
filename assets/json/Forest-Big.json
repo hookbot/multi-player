@@ -125,28 +125,6 @@
          "spacing":1,
          "tilecount":16,
          "tileheight":32,
-         "tileproperties":
-            {
-             "12":
-                {
-                 "animation_name":"wave"
-                },
-             "15":
-                {
-                 "animation_name":"wave"
-                }
-            },
-         "tilepropertytypes":
-            {
-             "12":
-                {
-                 "animation_name":"string"
-                },
-             "15":
-                {
-                 "animation_name":"string"
-                }
-            },
          "tiles":
             {
              "12":
