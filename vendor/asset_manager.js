@@ -338,6 +338,12 @@ App.AssetManager = (function () {
                     if (anim) {
                         var tileset_tileid = Math.floor(tile_id);
                         var tileset_gid = f + tileset_tileid;
+                        var animation_name = 'unnamed_animation_for_gid_' + tileset_gid;
+                        if (tilesets[tileset].tileproperties &&
+                            tilesets[tileset].tileproperties[tileset_tileid] &&
+                            tilesets[tileset].tileproperties[tileset_tileid].animation_name) {
+                            animation_name = tilesets[tileset].tileproperties[tileset_tileid].animation_name;
+                        }
                         data.animations[tileset_gid] = data.animations[tileset_gid] || [];
                         console.debug("TILESET WITH ANIMATIONS [" + name + "] TileID " + tileset_tileid + " + " + f + " => " + tileset_gid);
                         for (var frame in anim) {
@@ -353,6 +359,7 @@ App.AssetManager = (function () {
                                 w : tilesets[tinfo[2]].tilewidth,
                                 h : tilesets[tinfo[2]].tileheight,
                                 image_key : tilesets[tinfo[2]].name,
+                                animation_name : animation_name,
                             });
                             if (tinfo[2] == tileset) load_atlas[tileset_gid]++;
                         }
@@ -416,23 +423,41 @@ App.AssetManager = (function () {
                 var objects = tilemap_data.layers[layer].objects;
                 for (var i in objects) {
                     var object_gid = objects[i].gid;
-                    var image_key = objects[i].name;
-                    var frame_id = 0;
                     var type = objects[i].type;
+                    var args = {
+                        image_key   : objects[i].name,
+                        object_name : objects[i].name,
+                        object_gid  : object_gid,
+                        properties  : (objects[i].properties || {}),
+                    };
                     if (object_gid) {
                         var anims = data.animations[object_gid];
                         if (anims && anims.length) {
-                            // Just use the first frame of the anims list
-                            image_key = anims[0].image_key;
-                            frame_id = "gid_" + object_gid + "_frame_0";
+                            // Found animations
+                            args.frames = [];
+                            for (var f in anims) {
+                                args.frames.push("gid_" + object_gid + "_frame_" + f);
+                                args.image_key = anims[f].image_key;
+                                args.animation_name = args.animation_name || anims[f].animation_name;
+                                args.duration = args.duration || anims[f].duration;
+                            }
+                            args.init = function (sprite, a) {
+                                if (a.animation_name && a.frames && a.frames.length) {
+                                    // Convert duration to FramesPerSecond
+                                    var framesPerSecond = 1;
+                                    if (a.duration && a.duration > 0)
+                                        framesPerSecond = 1000 / a.duration;
+                                    sprite.animations.add(a.animation_name, a.frames, framesPerSecond, true);
+                                }
+                            };
                         }
                     }
                     if (type) {
                         tilemap.map.createFromObjects(
                             tilemap_data.layers[layer].name,
                             objects[i].name,
-                            image_key,
-                            frame_id,
+                            args,      // Sprite image key name
+                            undefined, // Sprite frame name
                             true,
                             false,
                             this.game.world,
