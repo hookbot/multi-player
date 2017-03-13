@@ -323,8 +323,17 @@ App.AssetManager = (function () {
     fn.prototype.process_tilemap = function (key, data) {
         console.log("AssetManager.process_tilemap",key,data);
         var tilemap_data = this.game.cache.getTilemapData(key).data;
-        data.parsed = Phaser.TilemapParser.parseTiledJSON(tilemap_data);
         var tilesets = tilemap_data.tilesets || [];
+        for (var tileset in tilesets) {
+            var s = tilesets[tileset];
+            // Tiled App doesn't include "rows" for some reason?
+            // So we can just calculate it from the "tilecount":
+            var rows = s.tilecount/s.columns;
+            // Hack imagewidth and imageheight to match dimensions how the Tiled treats it:
+            s.imagewidth  = s.margin * 2 - s.spacing + (s.tilewidth  + s.spacing) * s.columns;
+            s.imageheight = s.margin * 2 - s.spacing + (s.tileheight + s.spacing) * rows;
+        }
+        data.parsed = Phaser.TilemapParser.parseTiledJSON(tilemap_data);
         data.animations = {};
         for (var tileset in tilesets) {
             var name = tilesets[tileset].name;
