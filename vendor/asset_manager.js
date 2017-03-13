@@ -340,6 +340,7 @@ App.AssetManager = (function () {
                 var objects = data.parsed.objects[objectGroupName];
                 for (var i in objects) {
                     var object = objects[i];
+                    object.properties = object.properties || {};
                     var gid = object.gid;
                     var p = data.parsed.tiles[gid];
                     if (p) {
@@ -460,10 +461,8 @@ App.AssetManager = (function () {
                     var object_gid = objects[i].gid;
                     var type = objects[i].type;
                     var args = {
-                        image_key   : objects[i].name,
-                        object_name : objects[i].name,
-                        object_gid  : object_gid,
-                        properties  : (objects[i].properties || {}),
+                        image_key    : objects[i].name,
+                        tiled_object : objects[i],
                     };
                     if (object_gid) {
                         var anims = data.animations[object_gid];
