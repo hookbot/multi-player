@@ -137,6 +137,44 @@
          "spacing":1,
          "tilecount":12,
          "tileheight":32,
+         "tileproperties":
+            {
+             "0":
+                {
+                 "animation_name":"wave_orange_right"
+                },
+             "2":
+                {
+                 "animation_name":"wave_green_left"
+                },
+             "5":
+                {
+                 "animation_name":"wave_green_right"
+                },
+             "8":
+                {
+                 "animation_name":"wave_orange_left"
+                }
+            },
+         "tilepropertytypes":
+            {
+             "0":
+                {
+                 "animation_name":"string"
+                },
+             "2":
+                {
+                 "animation_name":"string"
+                },
+             "5":
+                {
+                 "animation_name":"string"
+                },
+             "8":
+                {
+                 "animation_name":"string"
+                }
+            },
          "tiles":
             {
              "0":
