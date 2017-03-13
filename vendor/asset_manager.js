@@ -476,6 +476,8 @@ App.AssetManager = (function () {
                                 args.duration = args.duration || anims[f].duration;
                             }
                             args.init = function (sprite, a) {
+                                sprite.width  = a.tiled_object.width;
+                                sprite.height = a.tiled_object.height;
                                 if (a.animation_name && a.frames && a.frames.length) {
                                     // Convert duration to FramesPerSecond
                                     var framesPerSecond = 1;

@@ -59,13 +59,13 @@
          "objects":[
                 {
                  "gid":273,
-                 "height":97,
+                 "height":67,
                  "id":3,
                  "name":"alienBlue",
                  "rotation":0,
                  "type":"App.Player",
                  "visible":true,
-                 "width":66,
+                 "width":46,
                  "x":140,
                  "y":160
                 }, 

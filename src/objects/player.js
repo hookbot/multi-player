@@ -11,7 +11,6 @@ App.Player = (function () {
         this.game.global.player = this;
         this.game.physics.arcade.enable(this);
         this.frame = 0;
-        this.scale.setTo(.7, .7);
         this.animations.add('right', [0, 4, 2], 8, true);
         this.animations.add('left', [1, 5, 3], 8, true);
         this.dpad = this.game.input.keyboard.createCursorKeys();
