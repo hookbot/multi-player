@@ -4,9 +4,11 @@ var App = App || {};
 App.Player = (function () {
     "use strict";
 
-    var fn = function (game, x, y) {
+    var fn = function (game, x, y, args) {
+        Phaser.Sprite.call(this, game, x, y, args.image_key);
+        args.init(this, args);
 
-        Phaser.Sprite.call(this, game, x, y, 'alienBlue');
+        this.game.global.player = this;
         this.game.physics.arcade.enable(this);
         this.frame = 0;
         this.scale.setTo(.7, .7);

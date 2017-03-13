@@ -58,6 +58,18 @@
          "name":"Objects",
          "objects":[
                 {
+                 "gid":273,
+                 "height":97,
+                 "id":3,
+                 "name":"alienBlue",
+                 "rotation":0,
+                 "type":"App.Player",
+                 "visible":true,
+                 "width":66,
+                 "x":140,
+                 "y":160
+                }, 
+                {
                  "gid":261,
                  "height":32,
                  "id":1,
@@ -88,7 +100,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":3,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
@@ -177,6 +189,51 @@
                 }
             },
          "tilewidth":31
+        }, 
+        {
+         "columns":6,
+         "firstgid":273,
+         "image":"..\/images\/alienBlue_sheet.png",
+         "imageheight":97,
+         "imagewidth":402,
+         "margin":0,
+         "name":"alienBlue",
+         "spacing":0,
+         "tilecount":6,
+         "tileheight":97,
+         "tiles":
+            {
+             "0":
+                {
+                 "animation":[
+                        {
+                         "duration":1000,
+                         "tileid":0
+                        }, 
+                        {
+                         "duration":1000,
+                         "tileid":1
+                        }, 
+                        {
+                         "duration":1000,
+                         "tileid":2
+                        }, 
+                        {
+                         "duration":1000,
+                         "tileid":3
+                        }, 
+                        {
+                         "duration":1000,
+                         "tileid":4
+                        }, 
+                        {
+                         "duration":1000,
+                         "tileid":5
+                        }]
+                }
+            },
+         "tilewidth":66,
+         "transparentcolor":"#000000"
         }],
  "tilewidth":32,
  "version":1,

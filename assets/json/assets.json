@@ -1,12 +1,4 @@
 {
-    "spritesheet": {
-        "alienBlue": {
-            "file": "assets/images/alienBlue_sheet.png",
-            "frameWidth": 66,
-            "frameHeight": 96
-        }
-    },
-
     "tilemap" : {
         "forest": {
             "json": "assets/json/Forest-Big.json"
