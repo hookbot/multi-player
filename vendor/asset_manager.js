@@ -335,6 +335,32 @@ App.AssetManager = (function () {
         }
         data.parsed = Phaser.TilemapParser.parseTiledJSON(tilemap_data);
         data.animations = {};
+        if (data.parsed.objects) {
+            for (var objectGroupName in data.parsed.objects) {
+                var objects = data.parsed.objects[objectGroupName];
+                for (var i in objects) {
+                    var object = objects[i];
+                    var gid = object.gid;
+                    var p = data.parsed.tiles[gid];
+                    if (p) {
+                        var map = tilesets[p[2]];
+                        var tileid = gid - map.firstgid;
+                        if (!(tileid in map.tiles) || !map.tiles[tileid].animation) {
+                            console.log("Object " + object.name + " pinned to gid " + gid + " without any animation");
+                            // Spoof gid to pretend like it has an animation of one frame (itself)
+                            map.tiles[tileid] = map.tiles[tileid] || {};
+                            map.tiles[tileid].animation = [{
+                                duration : 1000,
+                                tileid : tileid
+                            }];
+                        }
+                    }
+                    else {
+                        console.warn("Unable to locate tiles object? gid " + gid);
+                    }
+                }
+            }
+        }
         for (var tileset in tilesets) {
             var name = tilesets[tileset].name;
             var fullpath = fn.prototype.dirname(data.json) + tilesets[tileset].image;
