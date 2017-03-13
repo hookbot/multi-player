@@ -201,34 +201,60 @@
          "spacing":0,
          "tilecount":6,
          "tileheight":97,
+         "tileproperties":
+            {
+             "0":
+                {
+                 "animation_name":"right"
+                },
+             "1":
+                {
+                 "animation_name":"left"
+                }
+            },
+         "tilepropertytypes":
+            {
+             "0":
+                {
+                 "animation_name":"string"
+                },
+             "1":
+                {
+                 "animation_name":"string"
+                }
+            },
          "tiles":
             {
              "0":
                 {
                  "animation":[
                         {
-                         "duration":1000,
+                         "duration":125,
                          "tileid":0
                         }, 
                         {
-                         "duration":1000,
-                         "tileid":1
-                        }, 
-                        {
-                         "duration":1000,
-                         "tileid":2
-                        }, 
-                        {
-                         "duration":1000,
-                         "tileid":3
-                        }, 
-                        {
-                         "duration":1000,
+                         "duration":125,
                          "tileid":4
                         }, 
                         {
-                         "duration":1000,
+                         "duration":125,
+                         "tileid":2
+                        }]
+                },
+             "1":
+                {
+                 "animation":[
+                        {
+                         "duration":125,
+                         "tileid":1
+                        }, 
+                        {
+                         "duration":125,
                          "tileid":5
+                        }, 
+                        {
+                         "duration":125,
+                         "tileid":3
                         }]
                 }
             },

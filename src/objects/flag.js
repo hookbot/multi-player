@@ -10,10 +10,6 @@ App.Flag = (function () {
         // Create animation linked to this object
         if (args.init) args.init(this, args);
 
-        // If there exists any animation, then play it.
-        var anim = _.keys(this.animations._anims)[0];
-        if (anim) this.animations.play(anim);
-
         this.game.physics.arcade.enable(this);
 
         this.following = null;

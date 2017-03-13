@@ -9,8 +9,8 @@ App.Mob = (function () {
         this.game.physics.arcade.enable(this);
         this.frame = 0;
         this.scale.setTo(.7, .7);
-        this.animations.add('right', [0, 4, 2], 8, true);
-        this.animations.add('left', [1, 5, 3], 8, true);
+        this.animations.add('right', [0, 1, 2], 8, true);
+        this.animations.add('left', [3, 4, 5], 8, true);
         this.collideWorldBounds = true;
         this.playerName = username;
         this.usernameText = game.add.text(20, 20, username, { font: "16px Arial", fill: "#ffffff", align: "center" });

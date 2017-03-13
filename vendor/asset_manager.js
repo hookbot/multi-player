@@ -463,32 +463,65 @@ App.AssetManager = (function () {
                     var args = {
                         image_key    : objects[i].name,
                         tiled_object : objects[i],
+                        anim         : {},
                     };
-                    if (object_gid) {
-                        var anims = data.animations[object_gid];
-                        if (anims && anims.length) {
-                            // Found animations
-                            args.frames = [];
-                            for (var f in anims) {
-                                args.frames.push("gid_" + object_gid + "_frame_" + f);
-                                args.image_key = anims[f].image_key;
-                                args.animation_name = args.animation_name || anims[f].animation_name;
-                                args.duration = args.duration || anims[f].duration;
-                            }
-                            args.init = function (sprite, a) {
-                                sprite.width  = a.tiled_object.width;
-                                sprite.height = a.tiled_object.height;
-                                if (a.animation_name && a.frames && a.frames.length) {
-                                    // Convert duration to FramesPerSecond
-                                    var framesPerSecond = 1;
-                                    if (a.duration && a.duration > 0)
-                                        framesPerSecond = 1000 / a.duration;
-                                    sprite.animations.add(a.animation_name, a.frames, framesPerSecond, true);
+                    if (object_gid && type) {
+                        var tinfo = data.parsed.tiles[object_gid];
+                        var animation_gids = {};
+                        if (tinfo) {
+                            var tileset = tinfo[2];
+                            args.image_key = tilesets[tileset].name;
+                            var p = tilesets[tileset].tileproperties;
+                            for (var tileid in p) {
+                                if (p[tileid].animation_name) {
+                                    var anim_gid = tilesets[tileset].firstgid + Math.floor(tileid);
+                                    animation_gids[anim_gid] = p[tileid].animation_name;
                                 }
+                            }
+                        }
+                        if (!_.keys(animation_gids).length) {
+                            // No explicitly named animations?
+                            var anims = data.animations[object_gid];
+                            if (anims && anims.length) {
+                                // Just use the main object_gid animation
+                                animation_gids[object_gid] = anims[0].animation_name;
+                            }
+                        }
+                        for (var anim_gid in animation_gids) {
+                            var animation_name = animation_gids[anim_gid];
+                            var anims = data.animations[object_gid];
+                            var duration = anims[0].duration;
+                            var frames = [];
+                            for (var f in anims) {
+                                frames.push("gid_" + anim_gid + "_frame_" + f);
+                            }
+                            args.anim[anim_gid] = {
+                                animation_name : animation_name,
+                                duration       : duration,
+                                frames         : frames,
                             };
                         }
-                    }
-                    if (type) {
+                        args.init = function (sprite, a) {
+                            sprite.width  = a.tiled_object.width;
+                            sprite.height = a.tiled_object.height;
+                            if (a.anim) {
+                                // Initialize animations provided
+                                for (var anim_gid in a.anim) {
+                                    var g = a.anim[anim_gid];
+                                    // Convert duration to FramesPerSecond
+                                    var framesPerSecond = 1;
+                                    if (g.duration && g.duration > 0)
+                                        framesPerSecond = 1000 / g.duration;
+                                    console.debug("INIT (" + a.tiled_object.gid + ":" + anim_gid + ") ANIM (" + framesPerSecond + " fps):",g);
+                                    sprite.animations.add(g.animation_name, g.frames, framesPerSecond, true);
+                                }
+                                if (a.anim[a.tiled_object.gid]) {
+                                    // Automatically fire up if main gid animation
+                                    console.debug("FIRE UP ANIM!",a.tiled_object.gid,a.anim[a.tiled_object.gid].animation_name);
+                                    sprite.animations.play(a.anim[a.tiled_object.gid].animation_name);
+                                }
+                            }
+                        };
                         tilemap.map.createFromObjects(
                             tilemap_data.layers[layer].name,
                             objects[i].name,
