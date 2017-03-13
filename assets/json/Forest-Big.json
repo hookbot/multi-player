@@ -58,7 +58,7 @@
          "name":"Objects",
          "objects":[
                 {
-                 "gid":273,
+                 "gid":261,
                  "height":32,
                  "id":1,
                  "name":"flag_orange_right",
@@ -70,7 +70,7 @@
                  "y":314
                 }, 
                 {
-                 "gid":276,
+                 "gid":263,
                  "height":32,
                  "id":2,
                  "name":"flag_green_left",
@@ -123,11 +123,11 @@
          "margin":0,
          "name":"flag_atlas",
          "spacing":1,
-         "tilecount":16,
+         "tilecount":12,
          "tileheight":32,
          "tiles":
             {
-             "12":
+             "0":
                 {
                  "animation":[
                         {
@@ -139,19 +139,19 @@
                          "tileid":4
                         }]
                 },
-             "13":
+             "2":
                 {
                  "animation":[
                         {
                          "duration":250,
-                         "tileid":6
+                         "tileid":1
                         }, 
                         {
                          "duration":250,
-                         "tileid":8
+                         "tileid":2
                         }]
                 },
-             "14":
+             "5":
                 {
                  "animation":[
                         {
@@ -163,16 +163,16 @@
                          "tileid":9
                         }]
                 },
-             "15":
+             "8":
                 {
                  "animation":[
                         {
                          "duration":250,
-                         "tileid":1
+                         "tileid":6
                         }, 
                         {
                          "duration":250,
-                         "tileid":2
+                         "tileid":8
                         }]
                 }
             },
