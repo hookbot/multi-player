@@ -5,12 +5,17 @@ App.Mob = (function () {
     "use strict";
 
     var fn = function (game, username, x, y) {
-        Phaser.Sprite.call(this, game, x, y, 'alienBlue');
+        // Just steal attributes from App.Player
+        var p = game.global.player;
+        Phaser.Sprite.call(this, game, x, y, p.key);
+        this.width = p.width;
+        this.height = p.height;
+        for (var n in p.animations._anims) {
+            var c = p.animations._anims[n];
+            this.animations.add(n, c._frames, 1000/c.delay, true);
+        }
+        //this.animations.play('right');
         this.game.physics.arcade.enable(this);
-        this.frame = 0;
-        this.scale.setTo(.7, .7);
-        this.animations.add('right', [0, 1, 2], 8, true);
-        this.animations.add('left', [3, 4, 5], 8, true);
         this.collideWorldBounds = true;
         this.playerName = username;
         this.usernameText = game.add.text(20, 20, username, { font: "16px Arial", fill: "#ffffff", align: "center" });
