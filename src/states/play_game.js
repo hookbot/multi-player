@@ -34,7 +34,7 @@ App.PlayGameState = (function () {
         this.game.global.forest.layers.BackGround.resizeWorld();
 
         this.game.world.bringToTop(this.game.global.forest.layers.ForeGroundTop);
-        this.key1 = game.input.keyboard.addKey(Phaser.Keyboard.BACKWARD_SLASH);
+        this.key1 = this.game.input.keyboard.addKey(Phaser.Keyboard.BACKWARD_SLASH);
         this.key1.onDown.add(fn.prototype.enterMessage, this);
 
         /*this.game.add.existing(new App.FlagGreenLeft(this.game, 0, 0));
@@ -48,8 +48,8 @@ App.PlayGameState = (function () {
     };
 
     fn.prototype.doLogin = function (name) {
-        var p = game.global.player;
-        game.global.eurecaServer.login(name,p.body.position.x,p.body.position.y).onReady(function (result) {
+        var p = this.game.global.player;
+        this.game.global.eurecaServer.login(name,p.body.position.x,p.body.position.y).onReady(function (result) {
             //console.log("[DEBUG] server.login(" + name + ") = " + result);
             if (result) {
                 p.playerName = name;
@@ -63,7 +63,7 @@ App.PlayGameState = (function () {
     };
 
     fn.prototype.doChat = function (message) {
-        game.global.eurecaServer.chat(message).onReady(function (result) {
+        this.game.global.eurecaServer.chat(message).onReady(function (result) {
             //console.log("[DEBUG] server.chat(" + message + ") = " + result);
             if (!result) {
                 console.log("Please /login before chatting.");
@@ -78,7 +78,7 @@ App.PlayGameState = (function () {
             var contents = message.split(" ");
             if (contents[0] == '/login') {
                 // XXX: Should we require a password too?
-                fn.prototype.doLogin(contents[1]);
+                this.doLogin(contents[1]);
             }
             else if (contents[0] == '/tell') {
                 var realMessage = message.replace(/^\/tell\s+(\S+)\s*(.+)/gi, '$1');
@@ -94,7 +94,7 @@ App.PlayGameState = (function () {
             }
             else {
                 // Client is speaking. Send message to server.
-                fn.prototype.doChat(message);
+                this.doChat(message);
             }
         }
     }
