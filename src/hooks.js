@@ -33,7 +33,7 @@ exports.setId = function(id) {
         var name = p.playerName;
         if (name) {
             p.playerName = '';
-            App.PlayGameState.prototype.doLogin(name);
+            game.state.states.PlayGame.doLogin(name);
         }
     }
     else {
