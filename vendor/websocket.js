@@ -6,12 +6,12 @@ if (typeof(exports) === 'undefined') {
     // EXAMPLE USAGE:
     // this.game.webSocket = new App.WebSocket(this.game,App.WebSocketClientClass);
     // this.game.webSocket.server.METHOD(args);
+    console.log("WebSocket Client Compiling ...");
     alert("WebSocket Client not implemented");
 }
 else {
     // This must be NodeJS loaded by gulp on the server side
-    // i.e., such as: require("websocket.js");
-
+    // i.e., such as: require("../vendor/websocket.js");
     console.log("WebSocket Server Compiling ...");
 
     exports.EurecaObj = require('eureca.io');
@@ -24,10 +24,7 @@ else {
         this.Server = new this.EurecaObj.Server({allow:allow});
         args.serverhooks = args.serverhooks || {};
         args.serverhooks._internal = args.serverhooks._internal || {};
-        for (var method in args.serverhooks._internal) {
-            console.log("DEBUG: Defining method [" + method + "]: ",args.serverhooks._internal[method]);
-            this.Server[method](args.serverhooks._internal[method]);
-        }
+        for (var method in args.serverhooks._internal) this.Server[method](args.serverhooks._internal[method]);
         delete args.serverhooks._internal;
         this.Server.exports = args.serverhooks;
         // Attach Eureca to express server
