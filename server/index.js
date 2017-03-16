@@ -8,7 +8,6 @@ var path    = require("path");
 var debug   = require("debug")("express:server");
 var http    = require("http");
 var api     = require("./api.js");
-var ws      = require("../vendor/websocket.js");
 
 //get port from environment and store in Express.
 var port = normalizePort(process.env.PORT || 8888);
@@ -45,10 +44,10 @@ server.on("error", onError);
 //start listening on port
 server.on("listening", onListening);
 
-var eurecaServer = ws.init({
+require("../vendor/websocket.js").init({
     server: server,
-    clienthooks: require("../src/hooks.js"), // client callbacks
-    serverhooks: require("./websocket.js" ), // server callbacks
+    clienthooks: require("../src/objects/websocket.js"), // client callbacks
+    serverhooks: require("../server/websocket.js"     ), // server callbacks
 });
 
 /**
