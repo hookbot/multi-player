@@ -26,15 +26,7 @@ App.WebSocketState = (function () {
 
         // Connect to WebSocket server
         console.log("Connecting to WebSocket server...");
-        this.game.global.readyWS = false;
-        this.game.global.eurecaClient = new Eureca.Client();
-        // Defined in objects/websocket.js
-        this.game.global.eurecaClient.exports = exports;
-        this.game.global.eurecaClient.ready(function (proxy) {
-            console.log("WebSocket client is ready!");
-            game.global.eurecaServer = proxy;
-            game.global.readyWS = true;
-        });
+        this.game.ws = new App.WebSocket(this.game,App.WebSocketClientHooks);
     };
 
     return fn;

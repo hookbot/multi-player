@@ -3,7 +3,7 @@
 // Export all Client callback routines here for the WebSocket Server to use.
 // In order for the Server to run these callbacks, they must be defined here.
 // For example:
-// exports.FUNCTION_NAME = function (arg1, arg2) {
+// fn.prototype.FUNCTION_NAME = function (arg1, arg2) {
 //   ...
 //   return result;
 // };
@@ -24,6 +24,7 @@ var App = App || {};
 App.WebSocketClientHooks = (function () {
     "use strict";
 
+    // constructor
     var fn = function (game) {
         this.game = game;
     };
@@ -33,9 +34,9 @@ App.WebSocketClientHooks = (function () {
         game.global.myID = id;
         for (var c in game.global.mob) {
             // Clear out any old mobs before handshake() reloads them all back
-            exports.unspawn(c);
+            game.ws.clientObj.unspawn(c);
         }
-        game.global.eurecaServer.handshake();
+        game.ws.eurecaServer.handshake();
 
         var p = game.global.player;
         if (p) {
@@ -98,17 +99,10 @@ App.WebSocketClientHooks = (function () {
 
 if (typeof(exports) !== 'undefined') {
     console.log("DEBUG: NodeJS Server side is loading Client methods");
-    console.log("App",App);
-    console.log("CLASS",App.WebSocketClientHooks);
     for (var method in App.WebSocketClientHooks.prototype) {
         exports[method] = function () { "dummy" };
     }
 }
 else {
     console.log("DEBUG: Phaser Client side is loading Client methods");
-    var exports = exports || {};
-
-    for (var method in App.WebSocketClientHooks.prototype) {
-        exports[method] = App.WebSocketClientHooks.prototype[method];
-    }
 }

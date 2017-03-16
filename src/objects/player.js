@@ -112,7 +112,7 @@ App.Player = (function () {
             // Inform the server.
             g.vx  = p.velocity.x;
             g.vy  = p.velocity.y;
-            g.eurecaServer.updatePlayer({ x: p.position.x, y: p.position.y, vx: g.vx, vy: g.vy });
+            this.game.ws.eurecaServer.updatePlayer({ x: p.position.x, y: p.position.y, vx: g.vx, vy: g.vy });
         }
     };
 
