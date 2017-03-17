@@ -38,12 +38,10 @@ if (typeof(exports) === 'undefined') {
             this.eurecaClient = new Eureca.Client();
             this.eurecaClient.exports = this.clientObj;
             var WS = this;
-            this.eurecaClient.exports.callback = function (method) {
+            this.eurecaClient.exports.callback = function (method,argsArray) {
                 if (method) {
                     // Wrapper around real method
-                    var args = [];
-                    for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
-                    return WS.clientObj[method]( ...args );
+                    return WS.clientObj[method].apply(WS.clientObj,argsArray);
                 }
             };
             this.eurecaClient._WebSocketObj = this;
