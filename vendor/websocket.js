@@ -67,17 +67,13 @@ if (typeof(exports) === 'undefined') {
 }
 else {
     // This must be NodeJS loaded by gulp on the server side
-    // i.e., such as: require("../vendor/websocket.js").init({server:express,clienthooks:ch,serverhooks:sh});
+    // i.e., such as: require("../vendor/websocket.js").init({server:express,serverhooks:sh});
     console.log("WebSocket Server Compiling ...");
 
     exports.EurecaObj = require('eureca.io');
     exports.init = function(args) {
         var server = args.server;
-        // XXX: Can clienthooks be abstracted out enough NOT to be required by the server?
-        args.clienthooks = args.clienthooks || {};
-        var allow = Object.keys(args.clienthooks);
-        allow.push('callback');
-        this.Server = new this.EurecaObj.Server({allow:allow});
+        this.Server = new this.EurecaObj.Server({allow:['callback']});
         args.serverhooks = args.serverhooks || {};
         args.serverhooks._internal = args.serverhooks._internal || {};
         // Decorate onConnect to import client callback hooks first
