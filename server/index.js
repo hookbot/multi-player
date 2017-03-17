@@ -46,8 +46,7 @@ server.on("listening", onListening);
 
 require("../vendor/websocket.js").init({
     server: server,
-    clienthooks: require("../src/objects/websocket.js"), // client callbacks
-    serverhooks: require("../server/websocket.js"     ), // server callbacks
+    serverhooks: require("../server/websocket.js"), // server callbacks
 });
 
 /**
