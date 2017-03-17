@@ -37,24 +37,22 @@ if (typeof(exports) === 'undefined') {
             this.readyWS = false;
             this.eurecaClient = new Eureca.Client();
             this.eurecaClient.exports = this.clientObj;
-            var WS = this;
-            this.eurecaClient.exports.callback = function (method,argsArray) {
+            this.eurecaClient.exports.callback = (function (method,argsArray) {
                 if (method) {
                     // Wrapper around real method
-                    return WS.clientObj[method].apply(WS.clientObj,argsArray);
+                    return this[method].apply(this,argsArray);
                 }
                 else {
                     // Special invocation to give a list of available Client methods to the Server
                     var methods = [];
-                    for (var m in WS.clientObj) {
-                        if ('function' === typeof WS.clientObj[m]) {
+                    for (var m in this) {
+                        if ('function' === typeof this[m]) {
                             methods.push(m);
                         }
                     }
-                    console.log("About to give methods to WebSocket Server:",methods);
                     return methods;
                 }
-            };
+            }).bind(this.clientObj);
             this.eurecaClient._WebSocketObj = this;
             this.eurecaClient.ready(function (proxy) {
                 console.log("WebSocket client is ready!");
