@@ -37,6 +37,15 @@ if (typeof(exports) === 'undefined') {
             this.readyWS = false;
             this.eurecaClient = new Eureca.Client();
             this.eurecaClient.exports = this.clientObj;
+            var WS = this;
+            this.eurecaClient.exports.callback = function (method) {
+                if (method) {
+                    // Wrapper around real method
+                    var args = [];
+                    for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
+                    return WS.clientObj[method]( ...args );
+                }
+            };
             this.eurecaClient._WebSocketObj = this;
             this.eurecaClient.ready(function (proxy) {
                 console.log("WebSocket client is ready!");
@@ -60,12 +69,14 @@ else {
         // XXX: Can clienthooks be abstracted out enough NOT to be required by the server?
         args.clienthooks = args.clienthooks || {};
         var allow = Object.keys(args.clienthooks);
+        allow.push('callback');
         this.Server = new this.EurecaObj.Server({allow:allow});
         args.serverhooks = args.serverhooks || {};
         args.serverhooks._internal = args.serverhooks._internal || {};
         for (var method in args.serverhooks._internal) this.Server[method](args.serverhooks._internal[method]);
         delete args.serverhooks._internal;
         this.Server.exports = args.serverhooks;
+
         // Attach Eureca to express server
         this.Server.attach(server);
         return this.Server;
