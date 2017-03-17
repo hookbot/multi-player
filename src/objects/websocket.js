@@ -17,7 +17,7 @@
 //   console.log("Got result: FUNCTION_NAME(" + arg1 + ", " + arg2 + ") = " + result);
 // });
 
-// NOTE: You can use "game", but DO NOT try to use the "this" variable!
+// NOTE: You should use this.game to access the main Phaser object.
 
 var App = App || {};
 
@@ -31,26 +31,26 @@ App.WebSocketClientHooks = (function () {
 
     fn.prototype.setId = function(id) {
         console.log("Server assigned myID: " + id);
-        game.global.myID = id;
-        for (var c in game.global.mob) {
+        this.game.global.myID = id;
+        for (var c in this.game.global.mob) {
             // Clear out any old mobs before handshake() reloads them all back
-            game.ws.clientObj.unspawn(c);
+            this.game.ws.clientObj.unspawn(c);
         }
-        game.ws.eurecaServer.handshake();
+        this.game.ws.eurecaServer.handshake();
 
-        var p = game.global.player;
+        var p = this.game.global.player;
         if (p) {
             var name = p.playerName;
             if (name) {
                 p.playerName = '';
-                game.state.states.PlayGame.doLogin(name);
+                this.game.state.states.PlayGame.doLogin(name);
             }
         }
         else {
             // use arcade physics
-            game.physics.startSystem(Phaser.Physics.ARCADE);
+            this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-            game.state.start('PlayGame',false,false);
+            this.game.state.start('PlayGame',false,false);
         }
     };
 
@@ -60,17 +60,17 @@ App.WebSocketClientHooks = (function () {
 
     fn.prototype.spawn = function(username, x, y) {
         console.log("CREATE MOB [" + username + "] @ (" + x + "," + y + ")");
-        game.global.mob = game.global.mob || {};
-        game.global.mob[username] = game.add.existing(new App.Mob(game, username, x, y));
+        this.game.global.mob = this.game.global.mob || {};
+        this.game.global.mob[username] = this.game.add.existing(new App.Mob(this.game, username, x, y));
         return 1;
     };
 
     fn.prototype.unspawn = function(username) {
-        if (game.global.mob[username]) {
-            game.global.mob[username].usernameText.kill();
-            game.global.mob[username].kill();
+        if (this.game.global.mob[username]) {
+            this.game.global.mob[username].usernameText.kill();
+            this.game.global.mob[username].kill();
             console.log("DESTROY MOB [" + username + "] SUCCESS");
-            delete game.global.mob[username];
+            delete this.game.global.mob[username];
         }
         else {
             console.log("DESTROY MOB [" + username + "] FAILED");
@@ -79,8 +79,8 @@ App.WebSocketClientHooks = (function () {
     };
 
     fn.prototype.updateMob = function(username, args) {
-        if (game.global.mob[username]) {
-            var o = game.global.mob[username];
+        if (this.game.global.mob[username]) {
+            var o = this.game.global.mob[username];
             o.x = args.x;
             o.y = args.y;
             o.body.velocity.x = args.vx;
