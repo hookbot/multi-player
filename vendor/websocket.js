@@ -36,7 +36,7 @@ if (typeof(exports) === 'undefined') {
             console.log("Connecting to WebSocket server...");
             this.readyWS = false;
             this.eurecaClient = new Eureca.Client();
-            this.eurecaClient.exports = this.clientObj;
+            this.eurecaClient.exports = {};
             this.eurecaClient.exports.callback = (function (method,argsArray) {
                 if (method) {
                     // Wrapper around real method
@@ -80,6 +80,25 @@ else {
         this.Server = new this.EurecaObj.Server({allow:allow});
         args.serverhooks = args.serverhooks || {};
         args.serverhooks._internal = args.serverhooks._internal || {};
+        // Decorate onConnect to import client callback hooks first
+        var onConnect = args.serverhooks._internal.onConnect || function (connection) {};
+        args.serverhooks._internal.onConnect = function (connection) {
+            var client = connection.clientProxy;
+            client.callback().onReady(function (methods) {
+                // Passing no arguments to "callback" forces it to reveal its methods
+                for (var i in methods) {
+                    var m = methods[i];
+                    if (m !== 'callback') {
+                        // Create fake wrapper to pretend like this is a real Client method
+                        client[m] = (function () {
+                            return client.callback(this.method,[].slice.call(arguments));
+                        }).bind({method: m});
+                    }
+                }
+                // Finally it's safe to run the original onConnect routine
+                return onConnect(connection);
+            });
+        };
         for (var method in args.serverhooks._internal) this.Server[method](args.serverhooks._internal[method]);
         delete args.serverhooks._internal;
         this.Server.exports = args.serverhooks;
