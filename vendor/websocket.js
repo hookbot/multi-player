@@ -43,6 +43,17 @@ if (typeof(exports) === 'undefined') {
                     // Wrapper around real method
                     return WS.clientObj[method].apply(WS.clientObj,argsArray);
                 }
+                else {
+                    // Special invocation to give a list of available Client methods to the Server
+                    var methods = [];
+                    for (var m in WS.clientObj) {
+                        if ('function' === typeof WS.clientObj[m]) {
+                            methods.push(m);
+                        }
+                    }
+                    console.log("About to give methods to WebSocket Server:",methods);
+                    return methods;
+                }
             };
             this.eurecaClient._WebSocketObj = this;
             this.eurecaClient.ready(function (proxy) {
