@@ -16,6 +16,9 @@ App.PlayGameState = (function () {
     fn.prototype.init = function () {
         console.log("PlayGameState.init Running ...");
         this.game.assetManager.spawn(this.game.assetManager.assets.Config);
+        // Connect to WebSocket server
+        console.log("Connecting to WebSocket server...");
+        this.game.ws = new App.WebSocket(this.game,App.WebSocketClientHooks);
     };
 
     fn.prototype.preload = function () {

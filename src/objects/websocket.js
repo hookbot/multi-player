@@ -42,15 +42,11 @@ App.WebSocketClientHooks = (function () {
         if (p) {
             var name = p.playerName;
             if (name) {
+                // Client thought he was already logged in, so force logout
                 p.playerName = '';
+                // Then tell server to login again using the same name as before
                 this.game.state.states.PlayGame.doLogin(name);
             }
-        }
-        else {
-            // use arcade physics
-            this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
-            this.game.state.start('PlayGame',false,false);
         }
     };
 

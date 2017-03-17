@@ -23,9 +23,10 @@ App.LoadingState = (function () {
 
     fn.prototype.create = function () {
         console.log("LoadingState.create Running...");
+        this.game.physics.startSystem(Phaser.Physics.ARCADE);
         this.game.assetManager = new App.AssetManager (this.game,{
-            "assetsConfig":"assets/json/assets.json",
-            "nextState":"WebSocket"
+            assetsConfig: "assets/json/assets.json",
+            nextState: "PlayGame",
         });
     };
 
