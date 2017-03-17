@@ -23,7 +23,7 @@ if (typeof(exports) === 'undefined') {
             else {
                 this.game = game;
                 // Instantiate a real object from the Class
-                this.clientObj = new clientClass(game);
+                this.client = new clientClass(game);
                 // Run One-Time Initialization
                 this.init();
             }
@@ -52,11 +52,11 @@ if (typeof(exports) === 'undefined') {
                     }
                     return methods;
                 }
-            }).bind(this.clientObj);
+            }).bind(this.client);
             this.eurecaClient._WebSocketObj = this;
             this.eurecaClient.ready(function (proxy) {
                 console.log("WebSocket client is ready!");
-                this._WebSocketObj.eurecaServer = proxy;
+                this._WebSocketObj.server = proxy;
                 this._WebSocketObj.readyWS = true;
             });
         };
@@ -73,7 +73,7 @@ else {
     exports.EurecaObj = require('eureca.io');
     exports.init = function(args) {
         var server = args.server;
-        this.Server = new this.EurecaObj.Server({allow:['callback']});
+        this.server = new this.EurecaObj.Server({allow:['callback']});
         args.serverhooks = args.serverhooks || {};
         args.serverhooks._internal = args.serverhooks._internal || {};
         // Decorate onConnect to import client callback hooks first
@@ -95,12 +95,12 @@ else {
                 return onConnect(connection);
             });
         };
-        for (var method in args.serverhooks._internal) this.Server[method](args.serverhooks._internal[method]);
+        for (var method in args.serverhooks._internal) this.server[method](args.serverhooks._internal[method]);
         delete args.serverhooks._internal;
-        this.Server.exports = args.serverhooks;
+        this.server.exports = args.serverhooks;
 
         // Attach Eureca to express server
-        this.Server.attach(server);
-        return this.Server;
+        this.server.attach(server);
+        return this.server;
     };
 }

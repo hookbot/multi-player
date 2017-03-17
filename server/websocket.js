@@ -7,7 +7,7 @@
 // };
 //
 // and can be invoked from the Client:
-// var f = game.global.eurecaServer.FUNCTION_NAME(arg1,arg2);
+// var f = game.global.ws.server.FUNCTION_NAME(arg1,arg2);
 //
 // The Client can (optionally) operate on the return result using the onReady
 // hook, which will be executed once the result is sent back from the Server:
@@ -26,7 +26,7 @@ exports._internal.onConnect = function (connection) {
     var client = connection.clientProxy; //this.getClient(connection.id);
     //console.log("REAL CLIENT",client);
     connections[connection.id] = { name:null, x:0, y:0, client:client };
-    // Run client.exports.setId function
+    // Run game.ws.client.setId function
     client.setId(connection.id);
     exports.broadcast('[DEBUG] NEW connection from [' + connection.eureca.remoteAddress.ip + ']');
 };

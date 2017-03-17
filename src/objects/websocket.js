@@ -34,9 +34,9 @@ App.WebSocketClientHooks = (function () {
         this.game.global.myID = id;
         for (var c in this.game.global.mob) {
             // Clear out any old mobs before handshake() reloads them all back
-            this.game.ws.clientObj.unspawn(c);
+            this.game.ws.client.unspawn(c);
         }
-        this.game.ws.eurecaServer.handshake();
+        this.game.ws.server.handshake();
 
         var p = this.game.global.player;
         if (p) {
