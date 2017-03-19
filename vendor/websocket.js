@@ -70,30 +70,45 @@ else {
     // i.e., such as: require("../vendor/websocket.js").init({server:express,serverhooks:sh});
     console.log("WebSocket Server Compiling ...");
 
-    exports.EurecaObj = require('eureca.io');
+    exports.Eureca = require('eureca.io');
     exports.init = function(args) {
         var server = args.server;
-        this.server = new this.EurecaObj.Server({allow:['callback']});
+        var eurecaServer = new this.Eureca.Server({allow:['callback']});
+        this.server = eurecaServer;
         args.serverhooks = args.serverhooks || {};
+        eurecaServer.importRemoteMethods = function(client,methods) {
+            for (var i in methods) {
+                var m = methods[i];
+                if (m !== 'callback') {
+                    // Create fake wrapper to pretend like this is a real Client method
+                    client[m] = (function () {
+                        return client.callback(this.method,[].slice.call(arguments));
+                    }).bind({method: m});
+                }
+            }
+        };
         args.serverhooks._internal = args.serverhooks._internal || {};
         // Decorate onConnect to import client callback hooks first
         var onConnect = args.serverhooks._internal.onConnect || function (connection) {};
         args.serverhooks._internal.onConnect = function (connection) {
             var client = connection.clientProxy;
+            if (eurecaServer._clientMethodsCache) {
+                // Someone else must have already reveals the Client methods.
+                // Just use that same cached list.
+                eurecaServer.importRemoteMethods(client,eurecaServer._clientMethodsCache);
+                return onConnect(connection);
+            }
+            // This is the first client to connect.
+            // Ask for a list of possible Client methods.
             client.callback().onReady(function (methods) {
                 // Passing no arguments to "callback" forces it to reveal its methods
-                for (var i in methods) {
-                    var m = methods[i];
-                    if (m !== 'callback') {
-                        // Create fake wrapper to pretend like this is a real Client method
-                        client[m] = (function () {
-                            return client.callback(this.method,[].slice.call(arguments));
-                        }).bind({method: m});
-                    }
-                }
+                // Cache this list for later:
+                eurecaServer._clientMethodsCache = methods;
+                eurecaServer.importRemoteMethods(client,methods);
                 // Finally it's safe to run the original onConnect routine
                 return onConnect(connection);
             });
+            return;
         };
         for (var method in args.serverhooks._internal) this.server[method](args.serverhooks._internal[method]);
         delete args.serverhooks._internal;
