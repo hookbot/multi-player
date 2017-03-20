@@ -22,11 +22,10 @@
                 // setup global namespace under game for our global data
                 this.game.global = {};
 
-                // states
-                this.game.state.add('Loading',   App.LoadingState);
-                this.game.state.add('PlayGame',  App.PlayGameState);
-
-                this.game.state.start('Loading');
+                this.game.assetManager = new App.AssetManager (this.game,{
+                    assetsConfig: "assets/json/assets.json",
+                    nextState: "PlayGame",
+                });
             });
         </script>
     </body>
