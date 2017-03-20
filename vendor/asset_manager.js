@@ -44,8 +44,13 @@ App.AssetManager = (function () {
     var fn = function (game, args) {
         console.log("AssetManager.constructor Running...");
         this.game = game;
-        if (!this.game.state.states.LoadAssets) {
-            this.game.state.add('LoadAssets',App.LoadAssetsState);
+        for (var namespace in App) {
+            var s = namespace.match(/^(\w+)State$/);
+            if (s) {
+                var key = s[1];
+                if (key && !this.game.state.states[key])
+                    this.game.state.add(key,App[namespace]);
+            }
         }
         args = args || {};
         if (args.assetsConfig) {
