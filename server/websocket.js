@@ -7,11 +7,12 @@
 // };
 //
 // and can be invoked from the Client:
-// var f = game.global.ws.server.FUNCTION_NAME(arg1,arg2);
+// game.global.ws.server.FUNCTION_NAME(arg1,arg2);
 //
-// The Client can (optionally) operate on the return result using the onReady
-// hook, which will be executed once the result is sent back from the Server:
-// f.onReady(function (result) {
+// The Client can (optionally) operate on the return result by passing any
+// function as the last argument, which will be executed once the result
+// is returned from the Server:
+// game.global.ws.server.FUNCION_NAME(arg1,arg2, function(result){
 //   console.log("Got result: FUNCTION_NAME(" + arg1 + ", " + arg2 + ") = " + result);
 // });
 
