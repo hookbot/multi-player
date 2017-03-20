@@ -52,7 +52,7 @@ exports._internal.onDisconnect = function (connection) {
 // These other callbacks hooks can use "this" to access client Socket object.
 // The this.user.clientId is always the key in the connections[] hash
 // The this.connection.clientProxy object is the same as connections[this.user.clientId].client object
-// which contains all the callback methods (defined in hooks.js) ready to execute on the client
+// which contains all the callback methods (defined in WebSocketClientClass) ready to execute on the client
 
 exports.handshake = function() {
     var id = this.user.clientId;
