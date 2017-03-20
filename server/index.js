@@ -19,6 +19,7 @@ app.use("/assets", express.static(path.join(__dirname, "../assets")));
 app.use("/vendor", express.static(path.join(__dirname, "../vendor")));
 
 //api
+app.get("/include", api.include);
 app.get("/api/test", api.test);
 app.post("/api/create", api.create);
 
