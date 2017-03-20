@@ -56,7 +56,21 @@ if (typeof(exports) === 'undefined') {
             this.eurecaClient._WebSocketObj = this;
             this.eurecaClient.ready(function (proxy) {
                 console.log("WebSocket client is ready!");
-                this._WebSocketObj.server = proxy;
+                this._WebSocketObj.proxy = proxy;
+                var wrappers = {};
+                for (var m in proxy) {
+                    // Create fake wrapper to pretend like this is a real Server method
+                    wrappers[m] = (function() {
+                        var args = [].slice.call(arguments);
+                        var then = null;
+                        if (args.length > 0 && 'function' == typeof args[args.length-1])
+                            then = args.pop;
+                        var run = this.func.apply(this, args);
+                        if (then) run.then(then);
+                        return run;
+                    }).bind({func: proxy[m]});
+                }
+                this._WebSocketObj.server = wrappers;
                 this._WebSocketObj.readyWS = true;
             });
         };
@@ -82,7 +96,13 @@ else {
                 if (m !== 'callback') {
                     // Create fake wrapper to pretend like this is a real Client method
                     client[m] = (function () {
-                        return client.callback(this.method,[].slice.call(arguments));
+                        var args = [].slice.call(arguments);
+                        var then = null;
+                        if (args.length > 0 && 'function' == typeof args[args.length-1])
+                            then = args.pop;
+                        var run = client.callback(this.method,args);
+                        if (then) run.then(then);
+                        return run;
                     }).bind({method: m});
                 }
             }
@@ -100,9 +120,9 @@ else {
             }
             // This is the first client to connect.
             // Ask for a list of possible Client methods.
-            client.callback().onReady(function (methods) {
+            client.callback().then(function (methods) {
                 // Passing no arguments to "callback" forces it to reveal its methods
-                // Cache this list for later:
+                // Cache this list before creating the remote method hooks:
                 eurecaServer._clientMethodsCache = methods;
                 eurecaServer.importRemoteMethods(client,methods);
                 // Finally it's safe to run the original onConnect routine
