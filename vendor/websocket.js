@@ -1,15 +1,65 @@
 // This is the scaffling glue for the websocket protocol.
 // This file is intended to be loaded by both the client and the server.
 
-var App = App || {};
+// ==== CLIENT SYNTAX ====
+//
+// EXAMPLE HTML:
+// <script src="vendor/phaser.js"></script>
+// <script src="vendor/websocket.js"></script>
+// <script src="eureca.js"></script>
+// <script src="src/objects/websocket.js"></script>
+//
+// EXAMPLE PHASER STATE INITIALIZATION:
+// fn.prototype.init = function () { // Phaser.State.init runs once
+//     this.game.webSocket = new App.WebSocket(this.game,App.WebSocketClientClass);
+// };
+//
+// EXAMPLE WebSocketClientClass HOOK (such as src/objects/websocket.js):
+// App.WebSocketClientClass = function (game) {
+//     this.game = game;
+// };
+// App.WebSocketClientClass.prototype.setClientID = function(id) {
+//     console.log("Server assigned my ID: " + id);
+//     this.game.webSocket.server.handshake(); // Run Server Side Hook
+// };
+// App.WebSocketClientClass.prototype.message = function(msg) {
+//     console.log("Server Says: " + msg);
+// };
+// NOTE: You can use "this" to correspond to the instance of the WebSocketClientClass object
+
+// ==== SERVER SYNTAX ====
+//
+// EXAMPLE GULP INITIALIZATION (such as server/index.js):
+// var server = http.createServer(app);
+// server.listen(port);
+// require("../vendor/websocket.js").init({
+//     server: server,
+//     serverhooks: require("../server/websocket.js"),
+// });
+//
+// EXAMPLE serverhooks HOOK (such as server/websocket.js):
+// var connections = {};
+// exports._internal = {};
+// exports._internal.onConnect = function (connection) {
+//     console.log('NEW Connection ', connection.id, connection.eureca.remoteAddress);
+//     connections[connection.id] = { client:connection.clientProxy };
+//     connection.clientProxy.setClientID(connection.id); // Run Client Side Hook
+// };
+// exports.handshake = function() {
+//     console.log('HANDSHAKE from Client ID ' + this.user.clientId);
+//     connection[this.user.clientId].client.message("Handshake complete"); // Run Client Side Hook
+// };
+// NOTE: The _internal methods can use "this" to access the main eurecaServer object
+// NOTE: The other callbacks hooks can use "this" to access the client Socket object.
+// The this.user.clientId is always the key in the connections[] hash
+// The this.connection.clientProxy object is the same as connections[this.user.clientId].client object
+// which contains all the callback methods (defined in WebSocketClientClass) ready to execute on the client
 
 if (typeof(exports) === 'undefined') {
-    // This must be Phaser client side
+    // This appears to be HTML loaded by Phaser on the Client side
     // i.e., such as: <script src="vendor/websocket.js"></script>
 
-    // EXAMPLE USAGE:
-    // this.game.webSocket = new App.WebSocket(this.game,App.WebSocketClientClass);
-    // this.game.webSocket.eurecaServer.METHOD(args);
+    var App = App || {};
     App.WebSocket = (function () {
         "use strict";
 
@@ -80,8 +130,8 @@ if (typeof(exports) === 'undefined') {
 
 }
 else {
-    // This must be NodeJS loaded by gulp on the server side
-    // i.e., such as: require("../vendor/websocket.js").init({server:express,serverhooks:sh});
+    // This appears to be NodeJS loaded by gulp on the Server side
+    // i.e., such as: require("../vendor/websocket.js");
     console.log("WebSocket Server Compiling ...");
 
     exports.Eureca = require('eureca.io');
