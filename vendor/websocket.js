@@ -64,7 +64,7 @@ if (typeof(exports) === 'undefined') {
                         var args = [].slice.call(arguments);
                         var then = null;
                         if (args.length > 0 && 'function' == typeof args[args.length-1])
-                            then = args.pop;
+                            then = args.pop();
                         var run = this.func.apply(this, args);
                         if (then) run.then(then);
                         return run;
@@ -99,7 +99,7 @@ else {
                         var args = [].slice.call(arguments);
                         var then = null;
                         if (args.length > 0 && 'function' == typeof args[args.length-1])
-                            then = args.pop;
+                            then = args.pop();
                         var run = client.callback(this.method,args);
                         if (then) run.then(then);
                         return run;
