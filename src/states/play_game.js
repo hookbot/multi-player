@@ -52,7 +52,7 @@ App.PlayGameState = (function () {
 
     fn.prototype.doLogin = function (name) {
         var p = this.game.global.player;
-        this.game.ws.server.login(name,p.body.position.x,p.body.position.y).onReady(function (result) {
+        this.game.ws.server.login(name,p.body.position.x,p.body.position.y, function (result) {
             //console.log("[DEBUG] server.login(" + name + ") = " + result);
             if (result) {
                 p.playerName = name;
@@ -66,7 +66,7 @@ App.PlayGameState = (function () {
     };
 
     fn.prototype.doChat = function (message) {
-        this.game.ws.server.chat(message).onReady(function (result) {
+        this.game.ws.server.chat(message, function (result) {
             //console.log("[DEBUG] server.chat(" + message + ") = " + result);
             if (!result) {
                 console.log("Please /login before chatting.");
