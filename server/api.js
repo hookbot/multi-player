@@ -1,5 +1,3 @@
-var express = require('express');
-var app = express();
 var fb  = require("./firebaselogin.js");
 var db  = fb.database();
 var ref = db.ref();
