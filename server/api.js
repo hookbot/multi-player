@@ -23,7 +23,9 @@ exports.create = function(req, res) {
 };
 
 exports.include = function(req, res) {
-    if (req.query.files) {
+    if (req.query.files &&
+        req.query.files.match(/^src\//) &&
+        !req.query.files.match(/\.\./)) {
         glob(req.query.files, function( err, files ) {
             var html = '';
             for (var f in files) {
@@ -34,6 +36,6 @@ exports.include = function(req, res) {
         });
     }
     else {
-        res.send("alert('Missing (files) input');");
+        res.send("alert('Broken (files) input');");
     }
 };
