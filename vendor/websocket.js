@@ -163,7 +163,7 @@ else {
         args.serverhooks._internal.onConnect = function (connection) {
             var client = connection.clientProxy;
             if (eurecaServer._clientMethodsCache) {
-                // Someone else must have already reveals the Client methods.
+                // Someone else must have already revealed the Client methods.
                 // Just use that same cached list.
                 eurecaServer.importRemoteMethods(client,eurecaServer._clientMethodsCache);
                 return onConnect(connection);
