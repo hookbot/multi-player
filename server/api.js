@@ -22,7 +22,7 @@ exports.create = function(req, res) {
 
 exports.include = function(req, res) {
     if (req.query.files &&
-        req.query.files.match(/^src\//) &&
+        req.query.files.match(/^(?:src|vendor)\//) &&
         !req.query.files.match(/\.\./)) {
         glob(req.query.files, function( err, files ) {
             var html = '';
